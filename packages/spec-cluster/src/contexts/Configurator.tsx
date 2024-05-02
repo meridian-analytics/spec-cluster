@@ -43,10 +43,10 @@ const defaultContext: Context = {
 const Context = React.createContext(defaultContext)
 
 export const Provider = (props: ProviderProps) => {
-  const [renderMode, setRenderMode] = React.useState(0)
-  const [scaleX, setScaleX] = React.useState(1)
-  const [scaleY, setScaleY] = React.useState(1)
-  const [scaleZ, setScaleZ] = React.useState(1)
+  const [renderMode, setRenderMode] = React.useState(defaultContext.renderMode)
+  const [scaleX, setScaleX] = React.useState(defaultContext.scaleX)
+  const [scaleY, setScaleY] = React.useState(defaultContext.scaleY)
+  const [scaleZ, setScaleZ] = React.useState(defaultContext.scaleZ)
 
   return (
     <Context.Provider
