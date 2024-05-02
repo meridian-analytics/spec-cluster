@@ -34,47 +34,43 @@ export type SceneProps = {
 export default function Scene(props: SceneProps) {
   const { renderMode, scaleX, scaleY, scaleZ } = useContext()
   return (
-    <>
-      <Three.Canvas
-        camera={{ position: props.camera?.position ?? [0, 0, 100] }}
-      >
-        <Suspense fallback={null}>
-          <directionalLight position={props.light?.position ?? [0, 0, 2]} />
-          <ambientLight />
-          {renderMode === 0 &&
-            props.spectrograms.map((point, index) => (
-              <Spec
-                key={point.filename}
-                url={`/spectrogram_plots/${point.filename}_spectrogram.png`}
-                position={[
-                  point.dim1 * scaleX,
-                  point.dim2 * scaleY,
-                  point.dim3 * scaleZ,
-                ]}
-              />
-            ))}
-          {renderMode === 1 &&
-            props.spectrograms.map((point, index) => (
-              <Sphere
-                key={point.filename}
-                position={[
-                  point.dim1 * scaleX,
-                  point.dim2 * scaleY,
-                  point.dim3 * scaleZ,
-                ]}
-                size={props.renderDotSize ?? [1, 1, 1]}
-              />
-            ))}
-          <OrbitControls
-            minAzimuthAngle={props.controls?.minAzimuthAngle}
-            maxAzimuthAngle={props.controls?.maxAzimuthAngle}
-            minPolarAngle={props.controls?.minPolarAngle}
-            maxPolarAngle={props.controls?.maxPolarAngle}
-            maxDistance={props.controls?.maxDistance}
-            minDistance={props.controls?.minDistance}
-          />
-        </Suspense>
-      </Three.Canvas>
-    </>
+    <Three.Canvas camera={{ position: props.camera?.position ?? [0, 0, 100] }}>
+      <Suspense fallback={null}>
+        <directionalLight position={props.light?.position ?? [0, 0, 2]} />
+        <ambientLight />
+        {renderMode === 0 &&
+          props.spectrograms.map(point => (
+            <Spec
+              key={point.filename}
+              url={`/spectrogram_plots/${point.filename}_spectrogram.png`}
+              position={[
+                point.dim1 * scaleX,
+                point.dim2 * scaleY,
+                point.dim3 * scaleZ,
+              ]}
+            />
+          ))}
+        {renderMode === 1 &&
+          props.spectrograms.map(point => (
+            <Sphere
+              key={point.filename}
+              position={[
+                point.dim1 * scaleX,
+                point.dim2 * scaleY,
+                point.dim3 * scaleZ,
+              ]}
+              size={props.renderDotSize ?? [1, 1, 1]}
+            />
+          ))}
+        <OrbitControls
+          minAzimuthAngle={props.controls?.minAzimuthAngle}
+          maxAzimuthAngle={props.controls?.maxAzimuthAngle}
+          minPolarAngle={props.controls?.minPolarAngle}
+          maxPolarAngle={props.controls?.maxPolarAngle}
+          maxDistance={props.controls?.maxDistance}
+          minDistance={props.controls?.minDistance}
+        />
+      </Suspense>
+    </Three.Canvas>
   )
 }
