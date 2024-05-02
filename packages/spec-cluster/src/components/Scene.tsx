@@ -1,7 +1,7 @@
 import { OrbitControls } from "@react-three/drei"
 import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
-import { useContext } from "../contexts/Configurator.js"
+import * as Configurator from "../contexts/Configurator.js"
 import Spec from "./Spec.js"
 import Sphere, { type SphereProps } from "./Sphere.js"
 
@@ -32,13 +32,13 @@ export type SceneProps = {
 }
 
 export default function Scene(props: SceneProps) {
-  const { renderMode, scaleX, scaleY, scaleZ } = useContext()
+  const { renderMode, scaleX, scaleY, scaleZ } = Configurator.useContext()
   return (
     <Three.Canvas camera={{ position: props.camera?.position ?? [0, 0, 100] }}>
       <Suspense fallback={null}>
         <directionalLight position={props.light?.position ?? [0, 0, 2]} />
         <ambientLight />
-        {renderMode === 0 &&
+        {renderMode === Configurator.RenderMode.image &&
           props.spectrograms.map(point => (
             <Spec
               key={point.filename}
@@ -50,7 +50,7 @@ export default function Scene(props: SceneProps) {
               ]}
             />
           ))}
-        {renderMode === 1 &&
+        {renderMode === Configurator.RenderMode.dot &&
           props.spectrograms.map(point => (
             <Sphere
               key={point.filename}

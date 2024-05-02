@@ -21,6 +21,9 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "imports": {
+    "#util": "./src/util.ts"
+  },
   "scripts": {
     "tsc": "tsc"
   }

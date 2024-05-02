@@ -1,7 +1,13 @@
 import * as React from "react"
+import * as Util from "#util"
+
+export enum RenderMode {
+  image = 0,
+  dot = 1,
+}
 
 export type Context = {
-  renderMode: number
+  renderMode: RenderMode
   scaleX: number
   scaleY: number
   scaleZ: number
@@ -16,7 +22,7 @@ export type ProviderProps = {
 }
 
 const defaultContext: Context = {
-  renderMode: 0,
+  renderMode: RenderMode.image,
   scaleX: 1,
   scaleY: 1,
   scaleZ: 1,
@@ -46,7 +52,10 @@ export const Provider = (props: ProviderProps) => {
     <Context.Provider
       value={{
         renderMode,
-        setRenderMode,
+        setRenderMode: (value: number) => {
+          Util.invariantEnum(value, RenderMode, "RenderMode")
+          setRenderMode(value)
+        },
         scaleX,
         setScaleX,
         scaleY,
