@@ -1,9 +1,11 @@
 import * as M from "@mui/material"
 import * as ConfigContext from "../contexts/Configurator"
 
-export type InterfaceProps = unknown // todo
+export type InterfaceProps = {
+  sx?: M.StackProps["sx"]
+}
 
-export default function Interface() {
+export default function Interface(props: InterfaceProps) {
   const {
     renderMode,
     setRenderMode,
@@ -16,12 +18,16 @@ export default function Interface() {
   } = ConfigContext.useContext()
   return (
     <M.Stack
-      spacing={3}
       sx={{
+        backgroundColor: M.colors.grey[800],
+        borderRadius: 3,
+        color: "white",
         padding: 3,
         position: "absolute",
-        top: 0,
         right: 0,
+        spacing: 3,
+        top: 0,
+        ...props.sx,
       }}
     >
       <M.FormControl>
