@@ -1,9 +1,9 @@
 import { OrbitControls } from "@react-three/drei"
-import { Canvas } from "@react-three/fiber"
+import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
 import { useContext } from "../contexts/Configurator.js"
 import Spec from "./Spec.js"
-import Sphere from "./Sphere.js"
+import Sphere, { type SphereProps } from "./Sphere.js"
 
 type Spectrogram = {
   filename: string
@@ -14,15 +14,32 @@ type Spectrogram = {
 
 export type SceneProps = {
   spectrograms: Spectrogram[]
+  camera?: {
+    position?: Three.Vector3
+  }
+  controls?: {
+    minAzimuthAngle?: number
+    maxAzimuthAngle?: number
+    minPolarAngle?: number
+    maxPolarAngle?: number
+    maxDistance?: number
+    minDistance?: number
+  }
+  light?: {
+    position?: Three.Vector3
+  }
+  renderDotSize?: SphereProps["size"]
 }
 
 export default function Scene(props: SceneProps) {
   const { renderMode, scaleX, scaleY, scaleZ } = useContext()
   return (
     <>
-      <Canvas camera={{ position: [0, 0, 100] }}>
+      <Three.Canvas
+        camera={{ position: props.camera?.position ?? [0, 0, 100] }}
+      >
         <Suspense fallback={null}>
-          <directionalLight position={[0, 0, 2]} />
+          <directionalLight position={props.light?.position ?? [0, 0, 2]} />
           <ambientLight />
           {renderMode === 0 &&
             props.spectrograms.map((point, index) => (
@@ -45,20 +62,19 @@ export default function Scene(props: SceneProps) {
                   point.dim2 * scaleY,
                   point.dim3 * scaleZ,
                 ]}
-                size={[0.3, 30, 30]}
+                size={props.renderDotSize ?? [1, 1, 1]}
               />
             ))}
-
           <OrbitControls
-            minAzimuthAngle={-Math.PI / 4}
-            maxAzimuthAngle={Math.PI / 4}
-            minPolarAngle={Math.PI / 6}
-            maxPolarAngle={Math.PI - Math.PI / 6}
-            maxDistance={120}
-            minDistance={5}
+            minAzimuthAngle={props.controls?.minAzimuthAngle}
+            maxAzimuthAngle={props.controls?.maxAzimuthAngle}
+            minPolarAngle={props.controls?.minPolarAngle}
+            maxPolarAngle={props.controls?.maxPolarAngle}
+            maxDistance={props.controls?.maxDistance}
+            minDistance={props.controls?.minDistance}
           />
         </Suspense>
-      </Canvas>
+      </Three.Canvas>
     </>
   )
 }
