@@ -7,9 +7,9 @@ import data from "./data/small.json"
 
 const Spectrogram = Z.object({
   filename: Z.string(),
-  dim1: Z.string(),
-  dim2: Z.string(),
-  dim3: Z.string(),
+  dim1: Z.coerce.number(),
+  dim2: Z.coerce.number(),
+  dim3: Z.coerce.number(),
 })
 
 function parser(value: unknown) {

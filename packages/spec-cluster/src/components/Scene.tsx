@@ -7,9 +7,9 @@ import Sphere from "./Sphere.js"
 
 type Spectrogram = {
   filename: string
-  dim1: string
-  dim2: string
-  dim3: string
+  dim1: number
+  dim2: number
+  dim3: number
 }
 
 export type SceneProps = {
@@ -30,9 +30,9 @@ export default function Scene(props: SceneProps) {
                 key={point.filename}
                 url={`/spectrogram_plots/${point.filename}_spectrogram.png`}
                 position={[
-                  Number.parseFloat(point.dim1) * scaleX,
-                  Number.parseFloat(point.dim2) * scaleY,
-                  Number.parseFloat(point.dim3) * scaleZ,
+                  point.dim1 * scaleX,
+                  point.dim2 * scaleY,
+                  point.dim3 * scaleZ,
                 ]}
               />
             ))}
@@ -41,9 +41,9 @@ export default function Scene(props: SceneProps) {
               <Sphere
                 key={point.filename}
                 position={[
-                  Number.parseFloat(point.dim1) * scaleX,
-                  Number.parseFloat(point.dim2) * scaleY,
-                  Number.parseFloat(point.dim3) * scaleZ,
+                  point.dim1 * scaleX,
+                  point.dim2 * scaleY,
+                  point.dim3 * scaleZ,
                 ]}
                 size={[0.3, 30, 30]}
               />
