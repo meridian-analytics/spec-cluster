@@ -2,6 +2,21 @@ import * as React from "react"
 import * as ReactDOM from "react-dom/client"
 import * as Reb from "react-error-boundary"
 import { Configurator, Interface, Scene } from "spec-cluster"
+import * as Z from "zod"
+import data from "./data/small.json"
+
+const Spectrogram = Z.object({
+  filename: Z.string(),
+  dim1: Z.string(),
+  dim2: Z.string(),
+  dim3: Z.string(),
+})
+
+function parser(value: unknown) {
+  const result = Z.array(Spectrogram).safeParse(value)
+  if (result.success) return result.data
+  throw new Error(result.error.message)
+}
 
 function Fallback(props: Reb.FallbackProps) {
   return (
@@ -20,7 +35,7 @@ function Fallback(props: Reb.FallbackProps) {
 function DemoApp() {
   return (
     <Configurator.Provider>
-      <Scene />
+      <Scene spectrograms={parser(data)} />
       <Interface />
     </Configurator.Provider>
   )
