@@ -2,15 +2,22 @@ import { OrbitControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import { Suspense } from "react"
 import { useContext } from "../contexts/Configurator.js"
-import Spectrograms from "../data.json"
 import Spec from "./Spec.js"
 import Sphere from "./Sphere.js"
 
-export type SceneProps = unknown // todo
+type Spectrogram = {
+  filename: string
+  dim1: string
+  dim2: string
+  dim3: string
+}
 
-export default function Scene() {
+export type SceneProps = {
+  spectrograms: Spectrogram[]
+}
+
+export default function Scene(props: SceneProps) {
   const { renderMode, scaleX, scaleY, scaleZ } = useContext()
-
   return (
     <>
       <Canvas camera={{ position: [0, 0, 100] }}>
@@ -18,9 +25,9 @@ export default function Scene() {
           <directionalLight position={[0, 0, 2]} />
           <ambientLight />
           {renderMode === 0 &&
-            Spectrograms.map((point, index) => (
+            props.spectrograms.map((point, index) => (
               <Spec
-                key={String(index)}
+                key={point.filename}
                 url={`/spectrogram_plots/${point.filename}_spectrogram.png`}
                 position={[
                   Number.parseFloat(point.dim1) * scaleX,
@@ -30,9 +37,9 @@ export default function Scene() {
               />
             ))}
           {renderMode === 1 &&
-            Spectrograms.map((point, index) => (
+            props.spectrograms.map((point, index) => (
               <Sphere
-                key={String(index)}
+                key={point.filename}
                 position={[
                   Number.parseFloat(point.dim1) * scaleX,
                   Number.parseFloat(point.dim2) * scaleY,
