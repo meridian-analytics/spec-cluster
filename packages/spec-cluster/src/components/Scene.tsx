@@ -1,13 +1,15 @@
-import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import Spectrograms from "../data.json";
-import Spec from "./Spec.js";
-import Sphere from "./Sphere";
-import { useConfigurator } from "../contexts/Configurator.js";
+import { OrbitControls } from "@react-three/drei"
+import { Canvas } from "@react-three/fiber"
+import { Suspense } from "react"
+import { useContext } from "../contexts/Configurator.js"
+import Spectrograms from "../data.json"
+import Spec from "./Spec.js"
+import Sphere from "./Sphere.js"
 
-function Scene() {
-  const { renderMode, scaleX, scaleY, scaleZ } = useConfigurator();
+export type SceneProps = unknown // todo
+
+export default function Scene() {
+  const { renderMode, scaleX, scaleY, scaleZ } = useContext()
 
   return (
     <>
@@ -18,23 +20,23 @@ function Scene() {
           {renderMode === 0 &&
             Spectrograms.map((point, index) => (
               <Spec
-                key={index}
+                key={String(index)}
                 url={`/spectrogram_plots/${point.filename}_spectrogram.png`}
                 position={[
-                  point.dim1 * scaleX,
-                  point.dim2 * scaleY,
-                  point.dim3 * scaleZ,
+                  Number.parseFloat(point.dim1) * scaleX,
+                  Number.parseFloat(point.dim2) * scaleY,
+                  Number.parseFloat(point.dim3) * scaleZ,
                 ]}
               />
             ))}
           {renderMode === 1 &&
             Spectrograms.map((point, index) => (
               <Sphere
-                key={index}
+                key={String(index)}
                 position={[
-                  point.dim1 * scaleX,
-                  point.dim2 * scaleY,
-                  point.dim3 * scaleZ,
+                  Number.parseFloat(point.dim1) * scaleX,
+                  Number.parseFloat(point.dim2) * scaleY,
+                  Number.parseFloat(point.dim3) * scaleZ,
                 ]}
                 size={[0.3, 30, 30]}
               />
@@ -45,13 +47,11 @@ function Scene() {
             maxAzimuthAngle={Math.PI / 4}
             minPolarAngle={Math.PI / 6}
             maxPolarAngle={Math.PI - Math.PI / 6}
-            maxDistance={[120]}
-            minDistance={[5]}
+            maxDistance={120}
+            minDistance={5}
           />
         </Suspense>
       </Canvas>
     </>
-  );
+  )
 }
-
-export default Scene;

@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# spec-cluster
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Environment
 
-## Available Scripts
+This project uses the [Bun](https://bun.sh) runtime for JavaScript. If you do not already have Bun, you will need to [install](https://bun.sh/docs/installation) it:
 
-In the project directory, you can run:
+```sh
+curl -fsSL https://bun.sh/install | bash
+```
 
-### `npm start`
+## Example App
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Download and install the project dependencies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+cd spec-cluster
+bun install
+```
 
-### `npm test`
+Start the development example:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+cd packages/example
+bun start
+```
 
-### `npm run build`
+The webserver will reply with the listening address and port:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```none
+  VITE v5.2.11  ready in 263 ms
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Development
 
-### `npm run eject`
+This project is using [@biomejs/biome](https://biomejs.dev) for linting, correctness, and automatic source code formatting and organization. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Choosing to [integrate Biome in your editor](https://biomejs.dev/guides/integrate-in-editor/) will greatly improve your developer experience.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* `check` - performs automatic formatting and organization
+* `lint` - perform ONLY lint check
+* `format` - perform ONLY automatic formatting
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Before committing code, run the `check` script:
 
-## Learn More
+```sh
+bun check
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```none
+$ biome check --apply .
+Checked 17 files in 14ms. No fixes needed.
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### TypeScript
 
-### Code Splitting
+Before committing code, manually run the typescript compiler:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```sh
+bun tsc
+```
 
-### Analyzing the Bundle Size
+If everything is correct, there will be no errors:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```none
+$ bun --filter '*' tsc
+spec-cluster tsc $ tsc
+└─ Done in 1.18 s
+spec-cluster-example tsc $ tsc
+└─ Done in 1.25 s
+```
