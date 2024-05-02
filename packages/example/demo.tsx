@@ -35,7 +35,18 @@ function Fallback(props: Reb.FallbackProps) {
 function DemoApp() {
   return (
     <Configurator.Provider>
-      <Scene spectrograms={parser(data)} />
+      <Scene
+        spectrograms={parser(data)}
+        controls={{
+          minAzimuthAngle: -Math.PI / 4,
+          maxAzimuthAngle: Math.PI / 4,
+          minPolarAngle: Math.PI / 6,
+          maxPolarAngle: Math.PI - Math.PI / 6,
+          maxDistance: 120,
+          minDistance: 5,
+        }}
+        renderDotSize={[0.3, 10, 10]}
+      />
       <Interface />
     </Configurator.Provider>
   )
