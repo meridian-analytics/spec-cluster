@@ -29,6 +29,7 @@ export type SceneProps = {
     position?: Three.Vector3
   }
   renderDotSize?: SphereProps["size"]
+  dotColor?: SphereProps["color"]
 }
 
 export default function Scene(props: SceneProps) {
@@ -48,6 +49,7 @@ export default function Scene(props: SceneProps) {
                 point.dim2 * scaleY,
                 point.dim3 * scaleZ,
               ]}
+              id={point.filename}
             />
           ))}
         {renderMode === Configurator.RenderMode.dot &&
@@ -60,6 +62,8 @@ export default function Scene(props: SceneProps) {
                 point.dim3 * scaleZ,
               ]}
               size={props.renderDotSize ?? [1, 1, 1]}
+              color={props.dotColor ?? "lightblue"}
+              id={point.filename}
             />
           ))}
         <OrbitControls
