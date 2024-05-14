@@ -46,6 +46,7 @@ function DemoApp() {
           minDistance: 5,
         }}
         renderDotSize={[0.3, 10, 10]}
+        dotColor={"blue"}
       />
       <Interface />
     </Configurator.Provider>
