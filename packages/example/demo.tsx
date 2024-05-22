@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom/client"
 import * as Reb from "react-error-boundary"
-import { Configurator, Interface, Scene } from "spec-cluster"
+import { Configurator, Interface, Scene, Selection } from "spec-cluster"
 import * as Z from "zod"
 import data from "./data/small.json"
 
@@ -35,20 +35,22 @@ function Fallback(props: Reb.FallbackProps) {
 function DemoApp() {
   return (
     <Configurator.Provider>
-      <Scene
-        spectrograms={parser(data)}
-        controls={{
-          minAzimuthAngle: -Math.PI / 4,
-          maxAzimuthAngle: Math.PI / 4,
-          minPolarAngle: Math.PI / 6,
-          maxPolarAngle: Math.PI - Math.PI / 6,
-          maxDistance: 120,
-          minDistance: 5,
-        }}
-        renderDotSize={[0.3, 10, 10]}
-        dotColor={"blue"}
-      />
-      <Interface />
+      <Selection.Provider>
+        <Scene
+          spectrograms={parser(data)}
+          controls={{
+            minAzimuthAngle: -Math.PI / 4,
+            maxAzimuthAngle: Math.PI / 4,
+            minPolarAngle: Math.PI / 6,
+            maxPolarAngle: Math.PI - Math.PI / 6,
+            maxDistance: 120,
+            minDistance: 5,
+          }}
+          renderDotSize={[0.3, 10, 10]}
+          dotColor={"blue"}
+        />
+        <Interface />
+      </Selection.Provider>
     </Configurator.Provider>
   )
 }

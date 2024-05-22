@@ -6,22 +6,18 @@ export type SpecProps = {
   position: ThreeFiber.MeshProps["position"]
   url: string
   id: string
+  onClick?: ThreeFiber.MeshProps["onClick"]
+  showID?: boolean
 }
 
 export default function Spec(props: SpecProps) {
-  const [isClicked, setIsClicked] = React.useState(false)
   const texture = useTexture(props.url)
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-    <mesh
-      position={props.position}
-      onClick={() => {
-        setIsClicked(prevState => !prevState)
-      }}
-    >
+    <mesh position={props.position} onClick={props.onClick}>
       <planeGeometry args={[3, 3, 64, 64]} />
       <meshStandardMaterial map={texture} />
-      {isClicked && (
+      {props.showID && (
         <Html>
           <div>{props.id}</div>
         </Html>

@@ -2,10 +2,11 @@ import { OrbitControls } from "@react-three/drei"
 import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
 import * as Configurator from "../contexts/Configurator.js"
+import * as Selection from "../contexts/Selection.js"
 import Spec from "./Spec.js"
 import Sphere, { type SphereProps } from "./Sphere.js"
 
-type Spectrogram = {
+export type Spectrogram = {
   filename: string
   dim1: number
   dim2: number
@@ -34,6 +35,7 @@ export type SceneProps = {
 
 export default function Scene(props: SceneProps) {
   const { renderMode, scaleX, scaleY, scaleZ } = Configurator.useContext()
+  const { selection, updateSelection } = Selection.useContext()
   return (
     <Three.Canvas camera={{ position: props.camera?.position ?? [0, 0, 100] }}>
       <Suspense fallback={null}>
@@ -50,6 +52,8 @@ export default function Scene(props: SceneProps) {
                 point.dim3 * scaleZ,
               ]}
               id={point.filename}
+              showID={selection.has(point.filename)}
+              onClick={() => updateSelection(point.filename)}
             />
           ))}
         {renderMode === Configurator.RenderMode.dot &&
