@@ -11,7 +11,7 @@ export type Context = {
   scaleX: number
   scaleY: number
   scaleZ: number
-  setRenderMode: (value: number) => void
+  setRenderMode: (value: RenderMode) => void
   setScaleX: (value: number) => void
   setScaleY: (value: number) => void
   setScaleZ: (value: number) => void
