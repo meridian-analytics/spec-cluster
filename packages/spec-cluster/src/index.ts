@@ -19,3 +19,5 @@ export {
 } from "./components/Sphere"
 
 export * as Configurator from "./contexts/Configurator"
+
+export * as Selection from "./contexts/Selection"
