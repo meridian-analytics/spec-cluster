@@ -19,6 +19,9 @@ function parser(value: unknown) {
 }
 
 function Fallback(props: Reb.FallbackProps) {
+  React.useEffect(() => {
+    console.error(props.error)
+  }, [props.error])
   return (
     <div role="alert">
       <p>Something went wrong:</p>
