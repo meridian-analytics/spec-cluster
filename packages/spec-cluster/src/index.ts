@@ -21,3 +21,5 @@ export {
 export * as Configurator from "./contexts/Configurator"
 
 export * as Selection from "./contexts/Selection"
+
+export * as Focus from "./contexts/Focus"
