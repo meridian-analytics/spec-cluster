@@ -31,11 +31,12 @@ export type SceneProps = {
   }
   renderDotSize?: SphereProps["size"]
   dotColor?: SphereProps["color"]
+  onSpecClick?: (point: Spectrogram) => void
 }
 
 export default function Scene(props: SceneProps) {
   const { renderMode, scaleX, scaleY, scaleZ } = Configurator.useContext()
-  const { selection, updateSelection } = Selection.useContext()
+  const { selection } = Selection.useContext()
   return (
     <Three.Canvas camera={{ position: props.camera?.position ?? [0, 0, 100] }}>
       <Suspense fallback={null}>
@@ -53,7 +54,7 @@ export default function Scene(props: SceneProps) {
               ]}
               id={point.filename}
               showID={selection.has(point.filename)}
-              onClick={() => updateSelection(point.filename)}
+              onClick={() => props.onSpecClick?.(point)}
             />
           ))}
         {renderMode === Configurator.RenderMode.dot &&
