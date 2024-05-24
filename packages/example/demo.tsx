@@ -1,8 +1,9 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom/client"
 import * as Reb from "react-error-boundary"
-import { Configurator, Interface, Scene, Selection } from "spec-cluster"
+import { Configurator, Focus, Interface, Scene, Selection } from "spec-cluster"
 import * as Z from "zod"
+import FocusModal from "./FocusModal"
 import data from "./data/small.json"
 
 const Spectrogram = Z.object({
@@ -39,8 +40,10 @@ function DemoApp() {
   return (
     <Configurator.Provider>
       <Selection.Provider>
-        <DemoScene />
-        <Interface />
+        <Focus.Provider>
+          <DemoScene />
+          <Interface />
+        </Focus.Provider>
       </Selection.Provider>
     </Configurator.Provider>
   )
@@ -48,28 +51,31 @@ function DemoApp() {
 
 function DemoScene() {
   const { updateSelection } = Selection.useContext()
+  const { setFocusedItem } = Focus.useContext()
   return (
     <>
-        <Scene
-          spectrograms={parser(data)}
-          controls={{
-            minAzimuthAngle: -Math.PI / 4,
-            maxAzimuthAngle: Math.PI / 4,
-            minPolarAngle: Math.PI / 6,
-            maxPolarAngle: Math.PI - Math.PI / 6,
-            maxDistance: 120,
-            minDistance: 5,
-          }}
-          renderDotSize={[0.3, 10, 10]}
-          dotColor={"blue"}
-        onSpecClick={point => {
-          updateSelection(point.filename)
+      <FocusModal />
+      <Scene
+        spectrograms={parser(data)}
+        controls={{
+          minAzimuthAngle: -Math.PI / 4,
+          maxAzimuthAngle: Math.PI / 4,
+          minPolarAngle: Math.PI / 6,
+          maxPolarAngle: Math.PI - Math.PI / 6,
+          maxDistance: 120,
+          minDistance: 5,
         }}
-        />
+        renderDotSize={[0.3, 10, 10]}
+        dotColor={"blue"}
+        onSpecClick={point => {
+          setFocusedItem(point)
+          //todo: add a tool to switch between modes
+          // updateSelection(point.filename)
+        }}
+      />
     </>
   )
 }
-
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Reb.ErrorBoundary FallbackComponent={Fallback}>
