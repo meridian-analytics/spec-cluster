@@ -36,6 +36,17 @@ function DemoApp() {
   return (
     <Configurator.Provider>
       <Selection.Provider>
+        <DemoScene />
+        <Interface />
+      </Selection.Provider>
+    </Configurator.Provider>
+  )
+}
+
+function DemoScene() {
+  const { updateSelection } = Selection.useContext()
+  return (
+    <>
         <Scene
           spectrograms={parser(data)}
           controls={{
@@ -48,10 +59,11 @@ function DemoApp() {
           }}
           renderDotSize={[0.3, 10, 10]}
           dotColor={"blue"}
+        onSpecClick={point => {
+          updateSelection(point.filename)
+        }}
         />
-        <Interface />
-      </Selection.Provider>
-    </Configurator.Provider>
+    </>
   )
 }
 
