@@ -1,5 +1,6 @@
 import * as M from "@mui/material"
 import * as ConfigContext from "../contexts/Configurator"
+import * as ClickModeContext from "../contexts/ClickMode"
 
 export type InterfaceProps = {
   sx?: M.StackProps["sx"]
@@ -16,6 +17,8 @@ export default function Interface(props: InterfaceProps) {
     scaleZ,
     setScaleZ,
   } = ConfigContext.useContext()
+
+  const { clickMode, setClickMode } = ClickModeContext.useContext()
   return (
     <M.Stack
       sx={{
@@ -91,6 +94,25 @@ export default function Interface(props: InterfaceProps) {
             value={1}
             control={<M.Radio sx={{ color: "white" }} />}
             label="Points"
+          />
+        </M.RadioGroup>
+      </M.FormControl>
+      <M.FormControl>
+        <M.FormLabel sx={{ color: "white" }}>Click Mode</M.FormLabel>
+        <M.RadioGroup
+          row
+          value={clickMode}
+          onChange={e => setClickMode(e.target.value)}
+        >
+          <M.FormControlLabel
+            value={ClickModeContext.ClickMode.detailed}
+            control={<M.Radio sx={{ color: "white" }} />}
+            label="Detailed"
+          />
+          <M.FormControlLabel
+            value={ClickModeContext.ClickMode.selection}
+            control={<M.Radio sx={{ color: "white" }} />}
+            label="Selection"
           />
         </M.RadioGroup>
       </M.FormControl>
