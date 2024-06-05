@@ -1,7 +1,14 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom/client"
 import * as Reb from "react-error-boundary"
-import { Configurator, Focus, Interface, Scene, Selection } from "spec-cluster"
+import {
+  Configurator,
+  Focus,
+  Interface,
+  Scene,
+  Selection,
+  ClickMode,
+} from "spec-cluster"
 import * as Z from "zod"
 import FocusModal from "./FocusModal"
 import data from "./data/small.json"
@@ -41,8 +48,10 @@ function DemoApp() {
     <Configurator.Provider>
       <Selection.Provider>
         <Focus.Provider>
-          <DemoScene />
-          <Interface />
+          <ClickMode.Provider>
+            <DemoScene />
+            <Interface />
+          </ClickMode.Provider>
         </Focus.Provider>
       </Selection.Provider>
     </Configurator.Provider>
@@ -52,6 +61,7 @@ function DemoApp() {
 function DemoScene() {
   const { updateSelection } = Selection.useContext()
   const { setFocusedItem } = Focus.useContext()
+  const { clickMode } = ClickMode.useContext()
   return (
     <>
       <FocusModal />
@@ -68,9 +78,9 @@ function DemoScene() {
         renderDotSize={[0.3, 10, 10]}
         dotColor={"blue"}
         onSpecClick={point => {
-          setFocusedItem(point)
-          //todo: add a tool to switch between modes
-          // updateSelection(point.filename)
+          clickMode === ClickMode.ClickMode.detailed
+            ? setFocusedItem(point)
+            : updateSelection(point.filename)
         }}
       />
     </>
