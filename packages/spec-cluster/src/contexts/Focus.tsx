@@ -6,8 +6,6 @@ export type Context = {
   focusedItem: Spectrogram | null
   setFocusedItem: (point: Spectrogram | null) => void
   unsetFocus: () => void
-  // scaleItem: number
-  // setScaleItem: (value: number) => void
 }
 
 export type ProviderProps = {
@@ -17,16 +15,12 @@ export type ProviderProps = {
 const defaultContext: Context = {
   hasFocus: false,
   focusedItem: null,
-  // scaleItem: 1,
   setFocusedItem: () => {
     throw Error("setFocusedItem called outside of context provider")
   },
   unsetFocus: () => {
     throw Error("unsetFocus called outside of context provider")
   },
-  // setScaleItem: () => {
-  //   throw Error("setScaleItem called outside of context provider")
-  // },
 }
 
 const Context = React.createContext(defaultContext)
@@ -35,7 +29,6 @@ export const Provider = (props: ProviderProps) => {
   const [focusedItem, setFocusedItem] = React.useState(
     defaultContext.focusedItem,
   )
-  // const [scaleItem, setScaleItem] = React.useState(defaultContext.scaleItem)
   const unsetFocus: Context["unsetFocus"] = () => {
     setFocusedItem(null)
   }
@@ -48,8 +41,6 @@ export const Provider = (props: ProviderProps) => {
         focusedItem,
         setFocusedItem,
         unsetFocus,
-        // scaleItem,
-        // setScaleItem,
       }}
     >
       {props.children}
