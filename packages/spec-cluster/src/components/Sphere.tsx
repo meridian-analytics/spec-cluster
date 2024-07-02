@@ -7,21 +7,17 @@ export type SphereProps = {
   size: ThreeFiber.SphereGeometryProps["args"]
   color: ThreeFiber.MeshStandardMaterialProps["color"]
   id: string
+  onClick?: ThreeFiber.MeshProps["onClick"]
+  showID?: boolean
 }
 
 export default function Sphere(props: SphereProps) {
-  const [isClicked, setIsClicked] = React.useState(false)
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-    <mesh
-      position={props.position}
-      onClick={() => {
-        setIsClicked(prevState => !prevState)
-      }}
-    >
+    <mesh position={props.position} onClick={props.onClick}>
       <sphereGeometry args={props.size} />
       <meshStandardMaterial color={props.color} />
-      {isClicked && (
+      {props.showID && (
         <Html>
           <div>{props.id}</div>
         </Html>
