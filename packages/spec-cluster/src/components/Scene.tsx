@@ -1,4 +1,4 @@
-import { OrbitControls } from "@react-three/drei"
+import { OrbitControls, Select } from "@react-three/drei"
 import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
 import * as Configurator from "../contexts/Configurator.js"
@@ -36,42 +36,48 @@ export type SceneProps = {
 
 export default function Scene(props: SceneProps) {
   const { renderMode, scaleX, scaleY, scaleZ } = Configurator.useContext()
-  const { selection } = Selection.useContext()
+  const { selection, updateSelection } = Selection.useContext()
+
   return (
     <Three.Canvas camera={{ position: props.camera?.position ?? [0, 0, 100] }}>
       <Suspense fallback={null}>
         <directionalLight position={props.light?.position ?? [0, 0, 2]} />
         <ambientLight />
-        {renderMode === Configurator.RenderMode.image &&
-          props.spectrograms.map(point => (
-            <Spec
-              key={point.filename}
-              url={`/spectrogram_plots/${point.filename}_spectrogram.png`}
-              position={[
-                point.dim1 * scaleX,
-                point.dim2 * scaleY,
-                point.dim3 * scaleZ,
-              ]}
-              id={point.filename}
-              showID={selection.has(point.filename)}
-              onClick={() => props.onSpecClick?.(point)}
-            />
-          ))}
-        {renderMode === Configurator.RenderMode.dot &&
-          props.spectrograms.map(point => (
-            <Sphere
-              key={point.filename}
-              position={[
-                point.dim1 * scaleX,
-                point.dim2 * scaleY,
-                point.dim3 * scaleZ,
-              ]}
-              size={props.renderDotSize ?? [1, 1, 1]}
-              color={props.dotColor ?? "lightblue"}
-              id={point.filename}
-            />
-          ))}
+        <Select box multiple onChange={console.log}>
+          {renderMode === Configurator.RenderMode.image &&
+            props.spectrograms.map(point => (
+              <Spec
+                key={point.filename}
+                url={`/spectrogram_plots/${point.filename}_spectrogram.png`}
+                position={[
+                  point.dim1 * scaleX,
+                  point.dim2 * scaleY,
+                  point.dim3 * scaleZ,
+                ]}
+                id={point.filename}
+                showID={selection.has(point.filename)}
+                onClick={() => props.onSpecClick?.(point)}
+              />
+            ))}
+          {renderMode === Configurator.RenderMode.dot &&
+            props.spectrograms.map(point => (
+              <Sphere
+                key={point.filename}
+                position={[
+                  point.dim1 * scaleX,
+                  point.dim2 * scaleY,
+                  point.dim3 * scaleZ,
+                ]}
+                size={props.renderDotSize ?? [1, 1, 1]}
+                color={props.dotColor ?? "lightblue"}
+                id={point.filename}
+                showID={selection.has(point.filename)}
+                onClick={() => props.onSpecClick?.(point)}
+              />
+            ))}
+        </Select>
         <OrbitControls
+          makeDefault
           minAzimuthAngle={props.controls?.minAzimuthAngle}
           maxAzimuthAngle={props.controls?.maxAzimuthAngle}
           minPolarAngle={props.controls?.minPolarAngle}
