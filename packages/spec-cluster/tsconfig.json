@@ -18,5 +18,9 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src", "../example/FocusModal.tsx"]
+  "include": [
+    "src",
+    "../example/FocusModal.tsx",
+    "../example/MultiSelectEditor.tsx"
+  ]
 }
