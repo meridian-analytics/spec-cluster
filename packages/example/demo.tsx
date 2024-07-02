@@ -12,6 +12,7 @@ import {
 import * as Z from "zod"
 import FocusModal from "./FocusModal"
 import data from "./data/small.json"
+import MultiSelectEditor from "./MultiSelectEditor"
 
 const Spectrogram = Z.object({
   filename: Z.string(),
@@ -65,6 +66,7 @@ function DemoScene() {
   return (
     <>
       <FocusModal />
+      <MultiSelectEditor />
       <Scene
         spectrograms={parser(data)}
         controls={{
