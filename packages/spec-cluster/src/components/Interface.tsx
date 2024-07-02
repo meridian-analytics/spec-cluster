@@ -30,6 +30,7 @@ export default function Interface(props: InterfaceProps) {
         right: 0,
         spacing: 3,
         top: 0,
+        margin: 2,
         ...props.sx,
       }}
     >
