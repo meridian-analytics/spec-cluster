@@ -25,3 +25,5 @@ export * as Selection from "./contexts/Selection"
 export * as Focus from "./contexts/Focus"
 
 export * as ClickMode from "./contexts/ClickMode"
+
+export * as Customisation from "./contexts/Customisation"
