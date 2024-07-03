@@ -14,7 +14,11 @@ export default function Spec(props: SpecProps) {
   const texture = useTexture(props.url)
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-    <mesh position={props.position} onClick={props.onClick}>
+    <mesh
+      position={props.position}
+      onClick={props.onClick}
+      userData={{ id: props.id }}
+    >
       <planeGeometry args={[3, 3, 64, 64]} />
       <meshStandardMaterial map={texture} />
       {props.showID && (
