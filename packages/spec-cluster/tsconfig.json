@@ -21,6 +21,7 @@
   "include": [
     "src",
     "../example/FocusModal.tsx",
-    "../example/MultiSelectEditor.tsx"
+    "../example/MultiSelectEditor.tsx",
+    "../example/SingleSelectEditor.tsx"
   ]
 }
