@@ -8,17 +8,20 @@ import {
   Scene,
   Selection,
   ClickMode,
+  UserData,
 } from "spec-cluster"
 import * as Z from "zod"
 import FocusModal from "./FocusModal"
 import data from "./data/small.json"
-import MultiSelectEditor from "./MultiSelectEditor"
+import SingleSelectEditor from "./SingleSelectEditor"
 
 const Spectrogram = Z.object({
   filename: Z.string(),
   dim1: Z.coerce.number(),
   dim2: Z.coerce.number(),
   dim3: Z.coerce.number(),
+  radius: Z.number().optional().default(0.9),
+  color: Z.string().optional().default("blue"),
 })
 
 function parser(value: unknown) {
@@ -46,29 +49,34 @@ function Fallback(props: Reb.FallbackProps) {
 
 function DemoApp() {
   return (
-    <Configurator.Provider>
-      <Selection.Provider>
-        <Focus.Provider>
-          <ClickMode.Provider>
-            <DemoScene />
-            <Interface />
-          </ClickMode.Provider>
-        </Focus.Provider>
-      </Selection.Provider>
-    </Configurator.Provider>
+    <UserData.Provider data={parser(data)}>
+      <Configurator.Provider>
+        <Selection.Provider>
+          {/* <Select box multiple onChange={console.log}> */}
+          <Focus.Provider>
+            <ClickMode.Provider>
+              <DemoScene />
+              <Interface />
+            </ClickMode.Provider>
+          </Focus.Provider>
+          {/* </Select> */}
+        </Selection.Provider>
+      </Configurator.Provider>
+    </UserData.Provider>
   )
 }
 
 function DemoScene() {
-  const { updateSelection } = Selection.useContext()
+  const { spectrograms } = UserData.useContext()
+  const { selection, updateSelection } = Selection.useContext()
   const { setFocusedItem } = Focus.useContext()
   const { clickMode } = ClickMode.useContext()
   return (
     <>
       <FocusModal />
-      <MultiSelectEditor />
+      {selection.size == 1 && <SingleSelectEditor />}
       <Scene
-        spectrograms={parser(data)}
+        spectrograms={Array.from(spectrograms.values())}
         controls={{
           minAzimuthAngle: -Math.PI / 4,
           maxAzimuthAngle: Math.PI / 4,
@@ -77,12 +85,10 @@ function DemoScene() {
           maxDistance: 120,
           minDistance: 5,
         }}
-        renderDotSize={[0.3, 10, 10]}
-        dotColor={"blue"}
         onSpecClick={point => {
           clickMode === ClickMode.ClickMode.detailed
             ? setFocusedItem(point)
-            : updateSelection(point.filename)
+            : updateSelection([point.filename])
         }}
       />
     </>
