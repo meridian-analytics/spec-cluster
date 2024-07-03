@@ -11,6 +11,10 @@ export type Spectrogram = {
   dim1: number
   dim2: number
   dim3: number
+  radius: number
+  /**
+   * Spectrogram.color: Hex code or English color name such as blue or red*/
+  color: string
 }
 
 export type SceneProps = {
@@ -43,7 +47,13 @@ export default function Scene(props: SceneProps) {
       <Suspense fallback={null}>
         <directionalLight position={props.light?.position ?? [0, 0, 2]} />
         <ambientLight />
-        <Select box multiple onChange={console.log}>
+        <Select
+          box
+          multiple
+          onChangePointerUp={meshes => {
+            updateSelection(meshes.map(mesh => mesh.userData.id ?? ""))
+          }}
+        >
           {renderMode === Configurator.RenderMode.image &&
             props.spectrograms.map(point => (
               <Spec
@@ -68,8 +78,8 @@ export default function Scene(props: SceneProps) {
                   point.dim2 * scaleY,
                   point.dim3 * scaleZ,
                 ]}
-                size={props.renderDotSize ?? [1, 1, 1]}
-                color={props.dotColor ?? "lightblue"}
+                size={[point.radius, 64, 32]}
+                color={point.color}
                 id={point.filename}
                 showID={selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}
