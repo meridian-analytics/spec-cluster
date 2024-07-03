@@ -1,13 +1,20 @@
 import * as M from "@mui/material"
 import { MuiColorInput } from "mui-color-input"
 import React from "react"
+import { Selection, UserData } from "spec-cluster"
 
 export default function MultiSelectEditor() {
   const [value, setValue] = React.useState("#0000ff")
-
+  const { spectrograms } = UserData.useContext()
+  const { selection } = Selection.useContext()
   const handleChange = (newValue: React.SetStateAction<string>) => {
     setValue(newValue)
   }
+  React.useEffect(() => {
+    for (const id of selection) {
+      console.log(spectrograms.get(id))
+    }
+  })
   return (
     <M.Stack
       sx={{

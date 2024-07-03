@@ -4,7 +4,7 @@ import type { Spectrogram } from "../components/Scene"
 export type Context = {
   selection: Set<Spectrogram["filename"]>
   setSelection: (value: Set<Spectrogram["filename"]>) => void
-  updateSelection: (value: Spectrogram["filename"]) => void
+  updateSelection: (value: Array<Spectrogram["filename"]>) => void
 }
 
 export type ProviderProps = {
@@ -25,10 +25,12 @@ const Context = React.createContext(defaultContext)
 
 export const Provider = (props: ProviderProps) => {
   const [selection, setSelection] = React.useState(defaultContext.selection)
-  const updateSelection: Context["updateSelection"] = filename => {
+  const updateSelection: Context["updateSelection"] = filenames => {
     const next = new Set(selection)
-    if (next.has(filename)) next.delete(filename)
-    else next.add(filename)
+    for (const filename of filenames) {
+      if (next.has(filename)) next.delete(filename)
+      else next.add(filename)
+    }
     setSelection(next)
   }
   return (
