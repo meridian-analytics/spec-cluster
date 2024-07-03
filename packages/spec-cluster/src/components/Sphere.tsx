@@ -14,7 +14,11 @@ export type SphereProps = {
 export default function Sphere(props: SphereProps) {
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-    <mesh position={props.position} onClick={props.onClick}>
+    <mesh
+      position={props.position}
+      onClick={props.onClick}
+      userData={{ id: props.id }}
+    >
       <sphereGeometry args={props.size} />
       <meshStandardMaterial color={props.color} />
       {props.showID && (
