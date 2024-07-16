@@ -42,11 +42,23 @@ export const Provider = (props: ProviderProps) => {
     //     }),
     //   ),
     // )
-    const prev = spectrograms.get(id)
-    if (prev == null) {
-      throw Error(`updateSpectrogram could not find id: ${id}`)
-    }
-    setSpectrograms(new Map(spectrograms).set(id, updateFn(prev)))
+    // const prev = spectrograms.get(id)
+    // if (prev == null) {
+    //   throw Error(`updateSpectrogram could not find id: ${id}`)
+    // }
+    // setSpectrograms(new Map(spectrograms).set(id, updateFn(prev)))
+    setSpectrograms(prevSpectrograms => {
+      const updatedSpectrograms = new Map(prevSpectrograms)
+
+      const prev = updatedSpectrograms.get(id)
+      if (prev == null) {
+        throw new Error(`updateSpectrogram could not find id: ${id}`)
+      }
+
+      updatedSpectrograms.set(id, updateFn(prev))
+
+      return updatedSpectrograms
+    })
   }
 
   return (
