@@ -1,6 +1,5 @@
 import * as M from "@mui/material"
 import { MuiColorInput } from "mui-color-input"
-import React from "react"
 import { Selection, UserData } from "spec-cluster"
 
 export default function SingleSelectEditor() {
@@ -28,7 +27,21 @@ export default function SingleSelectEditor() {
       return { ...prev, color: newColor }
     })
   }
+  function setWidth(newWidth: number) {
+    updateSpectrogram(selectedId, prev => {
+      return { ...prev, width: newWidth }
+    })
+  }
+  function setHeight(newHeight: number) {
+    updateSpectrogram(selectedId, prev => {
+      return { ...prev, height: newHeight }
+    })
+  }
 
+  //TODO: setWidth, setHeight functions
+  // put in width and height props in demo & scene spec type
+  //implement them in textfield.
+  //Figure out how to display labels**
   return (
     <M.Stack
       sx={{
@@ -79,8 +92,8 @@ export default function SingleSelectEditor() {
             type="number"
             variant="standard"
             sx={{ color: "white" }}
-            //   value={label}
-            //   onChange={e => setLabel(e.target.value)}
+            value={spectrogram.height.toFixed(2)}
+            onChange={e => setHeight(Number.parseFloat(e.target.value))}
           />
           <M.TextField
             id="standard-basic"
@@ -88,8 +101,8 @@ export default function SingleSelectEditor() {
             type="number"
             variant="standard"
             sx={{ color: "white" }}
-            //   value={label}
-            //   onChange={e => setLabel(e.target.value)}
+            value={spectrogram.width.toFixed(2)}
+            onChange={e => setWidth(Number.parseFloat(e.target.value))}
           />
         </div>
       </M.FormControl>

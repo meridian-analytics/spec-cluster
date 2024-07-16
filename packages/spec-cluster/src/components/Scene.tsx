@@ -1,4 +1,4 @@
-import { OrbitControls, Select } from "@react-three/drei"
+import { OrbitControls, Select, Text } from "@react-three/drei"
 import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
 import * as Configurator from "../contexts/Configurator.js"
@@ -15,6 +15,8 @@ export type Spectrogram = {
   /**
    * Spectrogram.color: Hex code or English color name such as blue or red*/
   color: string
+  width: number
+  height: number
 }
 
 export type SceneProps = {
@@ -65,6 +67,7 @@ export default function Scene(props: SceneProps) {
                   point.dim3 * scaleZ,
                 ]}
                 id={point.filename}
+                size={[point.width, point.height, 64, 64]}
                 showID={selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}
               />
