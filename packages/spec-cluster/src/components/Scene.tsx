@@ -17,6 +17,7 @@ export type Spectrogram = {
   color: string
   width: number
   height: number
+  label: string
 }
 
 export type SceneProps = {
@@ -68,6 +69,7 @@ export default function Scene(props: SceneProps) {
                 ]}
                 id={point.filename}
                 size={[point.width, point.height, 64, 64]}
+                label={point.label}
                 showID={selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}
               />
@@ -83,6 +85,7 @@ export default function Scene(props: SceneProps) {
                 ]}
                 size={[point.radius, 64, 32]}
                 color={point.color}
+                label={point.label}
                 id={point.filename}
                 showID={selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}

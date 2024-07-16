@@ -9,6 +9,7 @@ export type SpecProps = {
   onClick?: ThreeFiber.MeshProps["onClick"]
   showID?: boolean
   size: ThreeFiber.PlaneGeometryProps["args"]
+  label: string
 }
 
 export default function Spec(props: SpecProps) {
@@ -24,7 +25,7 @@ export default function Spec(props: SpecProps) {
       <meshStandardMaterial map={texture} />
       {props.showID && (
         <Html>
-          <div>{props.id}</div>
+          <div>{props.label}</div>
         </Html>
       )}
     </mesh>
