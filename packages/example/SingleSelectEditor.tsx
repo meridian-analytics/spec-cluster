@@ -6,7 +6,7 @@ export default function SingleSelectEditor() {
   const { spectrograms, updateSpectrogram } = UserData.useContext()
   const { selection } = Selection.useContext()
   const selectedIds = Array.from(selection)
-  console.log(selectedIds)
+
   if (selectedIds.length != 1) {
     throw Error("SingleSelectEditor expects selection size of 1")
   }
@@ -17,17 +17,19 @@ export default function SingleSelectEditor() {
       `SingleSelectEditor could not find spectrogram by id: ${selectedId}`,
     )
   }
+
   function setRadius(newRadius: number) {
     updateSpectrogram(selectedId, prev => {
       return { ...prev, radius: newRadius }
     })
   }
-  //for loop for multi select
+
   function setColor(newColor: string) {
     updateSpectrogram(selectedId, prev => {
       return { ...prev, color: newColor }
     })
   }
+
   function setWidth(newWidth: number) {
     updateSpectrogram(selectedId, prev => {
       return { ...prev, width: newWidth }
