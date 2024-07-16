@@ -22,6 +22,7 @@ export default function SingleSelectEditor() {
       return { ...prev, radius: newRadius }
     })
   }
+  //for loop for multi select
   function setColor(newColor: string) {
     updateSpectrogram(selectedId, prev => {
       return { ...prev, color: newColor }
@@ -37,42 +38,42 @@ export default function SingleSelectEditor() {
       return { ...prev, height: newHeight }
     })
   }
+  function setLabel(newLabel: string) {
+    updateSpectrogram(selectedId, prev => {
+      return { ...prev, label: newLabel }
+    })
+  }
 
-  //TODO: setWidth, setHeight functions
-  // put in width and height props in demo & scene spec type
-  //implement them in textfield.
-  //Figure out how to display labels**
   return (
     <M.Stack
       sx={{
-        // position: "fixed",
-        // top: "50%",
-        right: 0,
+        position: "absolute",
+        top: "20px",
+        left: 0,
         width: 250,
         bgcolor: "lightblue",
         color: "white",
         borderRadius: 2,
         p: 3,
-        transform: "translateY(-50%)",
         margin: 2,
-        marginTop: 20,
+        zIndex: 1000,
       }}
     >
       <M.FormControl>
-        <M.Typography>Editor</M.Typography>
+        <M.FormLabel sx={{ color: "white" }}>Editor</M.FormLabel>
         <MuiColorInput
           format="hex"
           value={spectrogram.color}
           onChange={setColor}
-          sx={{ marginTop: 2 }}
+          sx={{ marginTop: 1 }}
         />
         <M.TextField
           id="standard-basic"
           label="Label"
           variant="standard"
           sx={{ color: "white" }}
-          //   value={label}
-          //   onChange={e => setLabel(e.target.value)}
+          value={spectrogram.label}
+          onChange={e => setLabel(e.target.value)}
         />
       </M.FormControl>
       <M.FormControl>

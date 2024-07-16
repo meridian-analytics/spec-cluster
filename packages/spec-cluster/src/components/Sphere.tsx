@@ -9,6 +9,7 @@ export type SphereProps = {
   id: string
   onClick?: ThreeFiber.MeshProps["onClick"]
   showID?: boolean
+  label: string
 }
 
 export default function Sphere(props: SphereProps) {
@@ -23,7 +24,7 @@ export default function Sphere(props: SphereProps) {
       <meshStandardMaterial color={props.color} />
       {props.showID && (
         <Html>
-          <div>{props.id}</div>
+          <div>{props.label}</div>
         </Html>
       )}
     </mesh>

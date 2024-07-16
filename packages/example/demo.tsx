@@ -24,6 +24,7 @@ const Spectrogram = Z.object({
   color: Z.string().optional().default("blue"),
   width: Z.number().optional().default(3),
   height: Z.number().optional().default(3),
+  label: Z.string().optional().default(""),
 })
 
 function parser(value: unknown) {
