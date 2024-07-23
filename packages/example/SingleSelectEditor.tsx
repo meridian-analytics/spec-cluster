@@ -79,7 +79,14 @@ export default function SingleSelectEditor() {
         />
       </M.FormControl>
       <M.FormControl>
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 7,
+          }}
+        >
           <M.TextField
             id="standard-basic"
             label="Radius"
