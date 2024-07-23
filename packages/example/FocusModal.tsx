@@ -40,7 +40,10 @@ export default function FocusModal() {
             borderRadius: "4px",
           }}
         >
-          {JSON.stringify(focusedItem, null, 2)}
+          {`filename: ${focusedItem.filename}
+dim1: ${focusedItem.dim1}
+dim2: ${focusedItem.dim2}
+dim3: ${focusedItem.dim3}`}
         </pre>
       </M.Box>
     </M.Modal>
