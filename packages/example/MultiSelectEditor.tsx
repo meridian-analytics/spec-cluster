@@ -6,7 +6,7 @@ export default function MultiSelectEditor() {
   const { spectrograms, updateSpectrogram } = UserData.useContext()
   const { selection } = Selection.useContext()
   const selectedIds = Array.from(selection)
-
+  console.log(selectedIds)
   // need to include this error
   // if (selectedIds.length != 1) {
   //   throw Error("MultiSelectEditor expects selection size of 1")
