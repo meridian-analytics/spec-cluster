@@ -79,7 +79,7 @@ export default function Interface(props: InterfaceProps) {
           }
         />
       </M.FormControl>
-      <M.FormControl>
+      {/* <M.FormControl>
         <M.FormLabel sx={{ color: "white" }}>Display</M.FormLabel>
         <M.RadioGroup
           row
@@ -97,8 +97,8 @@ export default function Interface(props: InterfaceProps) {
             label="Points"
           />
         </M.RadioGroup>
-      </M.FormControl>
-      <M.FormControl>
+      </M.FormControl> */}
+      {/* <M.FormControl>
         <M.FormLabel sx={{ color: "white" }}>Click Mode</M.FormLabel>
         <M.RadioGroup
           row
@@ -116,7 +116,7 @@ export default function Interface(props: InterfaceProps) {
             label="Selection"
           />
         </M.RadioGroup>
-      </M.FormControl>
+      </M.FormControl> */}
     </M.Stack>
   )
 }
