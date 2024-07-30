@@ -52,10 +52,11 @@ export default function MultiSelectEditor() {
     <M.Stack
       sx={{
         position: "absolute",
-        top: "20px",
-        left: 0,
+        top: "50%",
+        right: 0,
+        transform: "translateY(-50%)",
         width: 250,
-        bgcolor: "lightblue",
+        bgcolor: M.colors.lightBlue[100],
         color: "white",
         borderRadius: 2,
         p: 3,
@@ -63,14 +64,19 @@ export default function MultiSelectEditor() {
         zIndex: 1000,
       }}
     >
-      <M.FormControl>
-        <M.FormLabel sx={{ color: "white" }}>Editor</M.FormLabel>
-        <MuiColorInput
-          format="hex"
+      <M.FormLabel sx={{ color: "white" }}>Editor</M.FormLabel>
+      <M.FormControl fullWidth sx={{ marginTop: 2 }}>
+        <M.InputLabel>Color</M.InputLabel>
+        <M.Select
           value={spectrogram.color}
-          onChange={setColor}
-          sx={{ marginTop: 1 }}
-        />
+          label="Color"
+          onChange={e => setColor(e.target.value)}
+        >
+          <M.MenuItem value={"green"}>Green</M.MenuItem>
+          <M.MenuItem value={"red"}>Red</M.MenuItem>
+          <M.MenuItem value={"yellow"}>Yellow</M.MenuItem>
+          <M.MenuItem value={"brown"}>Brown</M.MenuItem>
+        </M.Select>
         <M.TextField
           id="standard-basic"
           label="Label"
@@ -81,24 +87,24 @@ export default function MultiSelectEditor() {
         />
       </M.FormControl>
       <M.FormControl>
-        <div
+        {/* <div
           style={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
             marginTop: 7,
           }}
-        >
-          <M.TextField
-            id="standard-basic"
-            label="Radius"
-            type="number"
-            variant="standard"
-            sx={{ color: "white" }}
-            value={spectrogram.radius.toFixed(2)}
-            onChange={e => setRadius(Number.parseFloat(e.target.value))}
-          />
-          <M.TextField
+        > */}
+        <M.TextField
+          id="standard-basic"
+          label="Radius"
+          type="number"
+          variant="standard"
+          sx={{ color: "white", marginTop: 2 }}
+          value={spectrogram.radius.toFixed(2)}
+          onChange={e => setRadius(Number.parseFloat(e.target.value))}
+        />
+        {/* <M.TextField
             id="standard-basic"
             label="Height"
             type="number"
@@ -115,8 +121,8 @@ export default function MultiSelectEditor() {
             sx={{ color: "white" }}
             value={spectrogram.width.toFixed(2)}
             onChange={e => setWidth(Number.parseFloat(e.target.value))}
-          />
-        </div>
+          /> */}
+        {/* </div> */}
       </M.FormControl>
     </M.Stack>
   )
