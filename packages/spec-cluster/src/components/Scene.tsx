@@ -43,10 +43,13 @@ export type SceneProps = {
 
 export default function Scene(props: SceneProps) {
   const { renderMode, scaleX, scaleY, scaleZ } = Configurator.useContext()
-  const { selection, updateSelection } = Selection.useContext()
+  const { selection, updateSelection, clearSelection } = Selection.useContext()
 
   return (
-    <Three.Canvas camera={{ position: props.camera?.position ?? [0, 0, 100] }}>
+    <Three.Canvas
+      camera={{ position: props.camera?.position ?? [0, 0, 100] }}
+      onPointerMissed={clearSelection}
+    >
       <Suspense fallback={null}>
         <directionalLight position={props.light?.position ?? [0, 0, 2]} />
         <ambientLight />
