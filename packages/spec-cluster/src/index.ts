@@ -26,6 +26,4 @@ export * as Focus from "./contexts/Focus"
 
 export * as ClickMode from "./contexts/ClickMode"
 
-export * as Customisation from "./contexts/Customisation"
-
 export * as UserData from "./contexts/UserData"
