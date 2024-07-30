@@ -5,6 +5,7 @@ export type Context = {
   selection: Set<Spectrogram["filename"]>
   setSelection: (value: Set<Spectrogram["filename"]>) => void
   updateSelection: (value: Array<Spectrogram["filename"]>) => void
+  clearSelection: () => void
 }
 
 export type ProviderProps = {
@@ -18,6 +19,9 @@ const defaultContext: Context = {
   },
   updateSelection: () => {
     throw Error("updateSelection called outside of context provider")
+  },
+  clearSelection: () => {
+    throw Error("clearSelection called outside of context provider")
   },
 }
 
@@ -33,12 +37,17 @@ export const Provider = (props: ProviderProps) => {
     }
     setSelection(next)
   }
+  const clearSelection: Context["clearSelection"] = () => {
+    setSelection(new Set())
+  }
+
   return (
     <Context.Provider
       value={{
         selection,
         setSelection,
         updateSelection,
+        clearSelection,
       }}
     >
       {props.children}
