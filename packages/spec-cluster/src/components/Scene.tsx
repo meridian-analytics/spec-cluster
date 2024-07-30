@@ -60,7 +60,7 @@ export default function Scene(props: SceneProps) {
             updateSelection(meshes.map(mesh => mesh.userData.id ?? ""))
           }}
         >
-          {renderMode === Configurator.RenderMode.image &&
+          {/* {renderMode === Configurator.RenderMode.image &&
             props.spectrograms.map(point => (
               <Spec
                 key={point.filename}
@@ -77,24 +77,24 @@ export default function Scene(props: SceneProps) {
                 onClick={() => props.onSpecClick?.(point)}
               />
             ))}
-          {renderMode === Configurator.RenderMode.dot &&
-            props.spectrograms.map(point => (
-              <Sphere
-                key={point.filename}
-                position={[
-                  point.dim1 * scaleX,
-                  point.dim2 * scaleY,
-                  point.dim3 * scaleZ,
-                ]}
-                size={[point.radius, 64, 32]}
-                color={point.color}
-                label={point.label}
-                id={point.filename}
-                showID={selection.has(point.filename)}
-                onClick={() => props.onSpecClick?.(point)}
+          {renderMode === Configurator.RenderMode.dot && */}
+          {props.spectrograms.map(point => (
+            <Sphere
+              key={point.filename}
+              position={[
+                point.dim1 * scaleX,
+                point.dim2 * scaleY,
+                point.dim3 * scaleZ,
+              ]}
+              size={[point.radius, 64, 32]}
+              color={point.color}
+              label={point.label}
+              id={point.filename}
+              showID={selection.has(point.filename)}
+              onClick={() => props.onSpecClick?.(point)}
               isSelected={selection.has(point.filename)}
-              />
-            ))}
+            />
+          ))}
         </Select>
         <OrbitControls
           makeDefault
