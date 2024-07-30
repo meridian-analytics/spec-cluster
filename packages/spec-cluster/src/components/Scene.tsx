@@ -92,6 +92,7 @@ export default function Scene(props: SceneProps) {
                 id={point.filename}
                 showID={selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}
+              isSelected={selection.has(point.filename)}
               />
             ))}
         </Select>
