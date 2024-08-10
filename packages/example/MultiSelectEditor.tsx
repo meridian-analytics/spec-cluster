@@ -1,12 +1,11 @@
 import * as M from "@mui/material"
-import { MuiColorInput } from "mui-color-input"
 import { Selection, UserData } from "spec-cluster"
 
 export default function MultiSelectEditor() {
   const { spectrograms, updateSpectrogram } = UserData.useContext()
   const { selection } = Selection.useContext()
   const selectedIds = Array.from(selection)
-  console.log(selectedIds)
+  // console.log(selectedIds)
   // need to include this error
   // if (selectedIds.length != 1) {
   //   throw Error("MultiSelectEditor expects selection size of 1")
@@ -56,7 +55,7 @@ export default function MultiSelectEditor() {
         right: 0,
         transform: "translateY(-50%)",
         width: 250,
-        bgcolor: M.colors.lightBlue[100],
+        bgcolor: M.colors.grey[300],
         color: "white",
         borderRadius: 2,
         p: 3,
@@ -64,7 +63,7 @@ export default function MultiSelectEditor() {
         zIndex: 1000,
       }}
     >
-      <M.FormLabel sx={{ color: "white" }}>Editor</M.FormLabel>
+      <M.FormLabel sx={{ color: "Black" }}>Editor</M.FormLabel>
       <M.FormControl fullWidth sx={{ marginTop: 2 }}>
         <M.InputLabel>Color</M.InputLabel>
         <M.Select
@@ -81,8 +80,8 @@ export default function MultiSelectEditor() {
           id="standard-basic"
           label="Label"
           variant="standard"
-          sx={{ color: "white" }}
           value={spectrogram.label}
+          // inputProps={{style: {color: "white"}}}
           onChange={e => setLabel(e.target.value)}
         />
       </M.FormControl>
