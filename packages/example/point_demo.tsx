@@ -15,6 +15,7 @@ import FocusModal from "./FocusModal"
 import data from "./data/small.json"
 import SingleSelectEditor from "./SingleSelectEditor"
 import MultiSelectEditor from "./MultiSelectEditor"
+import TableView from "./TableView"
 
 const Spectrogram = Z.object({
   filename: Z.string(),
@@ -76,8 +77,12 @@ function DemoScene() {
   return (
     <>
       <FocusModal />
-      {/* {selection.size == 1 && <SingleSelectEditor />} */}
-      {selection.size >= 1 && <MultiSelectEditor />}
+      {selection.size >= 1 && (
+        <>
+          <TableView />
+          <MultiSelectEditor />
+        </>
+      )}
       <Scene
         spectrograms={Array.from(spectrograms.values())}
         controls={{
