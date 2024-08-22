@@ -3,60 +3,70 @@
     "filename": "A_1019.wav",
     "dim1": "8.806847",
     "dim2": "7.8649745",
-    "dim3": "-3.6867962"
+    "dim3": "-3.6867962",
+    "flocation": "mediterranean"
   },
   {
     "filename": "A_239.wav",
     "dim1": "2.244459",
     "dim2": "-9.016553",
-    "dim3": "-3.0456424"
+    "dim3": "-3.0456424",
+    "flocation": "mediterranean"
   },
   {
     "filename": "A_748.wav",
     "dim1": "8.224354",
     "dim2": "8.291854",
-    "dim3": "-4.2379107"
+    "dim3": "-4.2379107",
+    "flocation": "mediterranean"
   },
   {
     "filename": "A_530.wav",
     "dim1": "0.27919412",
     "dim2": "13.747222",
-    "dim3": "-0.5143788"
+    "dim3": "-0.5143788",
+    "flocation": "pacific"
   },
   {
     "filename": "A_1385.wav",
     "dim1": "6.5439515",
     "dim2": "7.1407275",
-    "dim3": "-1.268021"
+    "dim3": "-1.268021",
+    "flocation": "pacific"
   },
   {
     "filename": "A_100.wav",
     "dim1": "6.350834",
     "dim2": "-1.6831475",
-    "dim3": "-7.348477"
+    "dim3": "-7.348477",
+    "flocation": "pacific"
   },
   {
     "filename": "A_385.wav",
     "dim1": "-1.8902831",
     "dim2": "-10.495517",
-    "dim3": "2.0196745"
+    "dim3": "2.0196745",
+    "flocation": "pacific"
   },
   {
     "filename": "A_1156.wav",
     "dim1": "-8.455516",
     "dim2": "-9.71007",
-    "dim3": "-0.16416316"
+    "dim3": "-0.16416316",
+    "flocation": "atlantic-ocean"
   },
   {
     "filename": "A_877.wav",
     "dim1": "9.780004",
     "dim2": "1.8381903",
-    "dim3": "-2.1159284"
+    "dim3": "-2.1159284",
+    "flocation": "atlantic-ocean"
   },
   {
     "filename": "A_697.wav",
     "dim1": "11.868487",
     "dim2": "-0.5531068",
-    "dim3": "-3.9780738"
+    "dim3": "-3.9780738",
+    "flocation": "atlantic-ocean"
   }
 ]

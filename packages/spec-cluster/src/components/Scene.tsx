@@ -18,6 +18,7 @@ export type Spectrogram = {
   width: number
   height: number
   label: string
+  flocation: string
 }
 
 export type SceneProps = {

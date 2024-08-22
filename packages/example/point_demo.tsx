@@ -23,10 +23,11 @@ const Spectrogram = Z.object({
   dim2: Z.coerce.number(),
   dim3: Z.coerce.number(),
   radius: Z.number().optional().default(0.9),
-  color: Z.string().optional().default("blue"),
+  color: Z.string().optional().default("Blue"),
   width: Z.number().optional().default(3),
   height: Z.number().optional().default(3),
   label: Z.string().optional().default(""),
+  flocation: Z.string(),
 })
 
 function parser(value: unknown) {
@@ -77,9 +78,10 @@ function DemoScene() {
   return (
     <>
       <FocusModal />
+      <TableView />
       {selection.size >= 1 && (
         <>
-          <TableView />
+          {/* <TableView /> */}
           <MultiSelectEditor />
         </>
       )}
