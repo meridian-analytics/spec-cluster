@@ -71,6 +71,7 @@ function DemoScene() {
     <>
       <FocusModal />
       <Scene
+        renderMode="image"
         spectrograms={Array.from(spectrograms.values())}
         controls={{
           minAzimuthAngle: -Math.PI / 4,

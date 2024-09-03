@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import * as Configurator from "../contexts/Configurator.js"
 import * as Selection from "../contexts/Selection.js"
 import Sphere, { type SphereProps } from "./Sphere.js"
+import Spec from "./Spec.js"
 
 export type Spectrogram = {
   filename: string
@@ -39,6 +40,7 @@ export type SceneProps = {
   renderDotSize?: SphereProps["size"]
   dotColor?: SphereProps["color"]
   onSpecClick?: (point: Spectrogram) => void
+  renderMode: "image" | "dot"
 }
 
 export default function Scene(props: SceneProps) {
@@ -60,7 +62,7 @@ export default function Scene(props: SceneProps) {
             updateSelection(meshes.map(mesh => mesh.userData.id ?? ""))
           }}
         >
-          {/* {renderMode === Configurator.RenderMode.image &&
+          {props.renderMode === "image" &&
             props.spectrograms.map(point => (
               <Spec
                 key={point.filename}
@@ -77,24 +79,24 @@ export default function Scene(props: SceneProps) {
                 onClick={() => props.onSpecClick?.(point)}
               />
             ))}
-          {renderMode === Configurator.RenderMode.dot && */}
-          {props.spectrograms.map(point => (
-            <Sphere
-              key={point.filename}
-              position={[
-                point.dim1 * scaleX,
-                point.dim2 * scaleY,
-                point.dim3 * scaleZ,
-              ]}
-              size={[point.radius, 64, 32]}
-              color={point.color}
-              label={point.label}
-              id={point.filename}
-              showID={selection.has(point.filename)}
-              onClick={() => props.onSpecClick?.(point)}
-              isSelected={selection.has(point.filename)}
-            />
-          ))}
+          {props.renderMode === "dot" &&
+            props.spectrograms.map(point => (
+              <Sphere
+                key={point.filename}
+                position={[
+                  point.dim1 * scaleX,
+                  point.dim2 * scaleY,
+                  point.dim3 * scaleZ,
+                ]}
+                size={[point.radius, 64, 32]}
+                color={point.color}
+                label={point.label}
+                id={point.filename}
+                showID={selection.has(point.filename)}
+                onClick={() => props.onSpecClick?.(point)}
+                isSelected={selection.has(point.filename)}
+              />
+            ))}
         </Select>
         <OrbitControls
           makeDefault

@@ -73,6 +73,7 @@ function DemoScene() {
       <TableView />
       {selection.size >= 1 && <MultiSelectEditor />}
       <Scene
+        renderMode="dot"
         spectrograms={Array.from(spectrograms.values())}
         controls={{
           minAzimuthAngle: -Math.PI / 4,
