@@ -77,19 +77,10 @@ export default function MultiSelectEditor() {
           label="Label"
           variant="standard"
           value={spectrogram.label}
-          // inputProps={{style: {color: "white"}}}
           onChange={e => setLabel(e.target.value)}
         />
       </M.FormControl>
       <M.FormControl>
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: 7,
-          }}
-        > */}
         <M.TextField
           id="standard-basic"
           label="Radius"
@@ -99,25 +90,6 @@ export default function MultiSelectEditor() {
           value={spectrogram.radius.toFixed(2)}
           onChange={e => setRadius(Number.parseFloat(e.target.value))}
         />
-        {/* <M.TextField
-            id="standard-basic"
-            label="Height"
-            type="number"
-            variant="standard"
-            sx={{ color: "white" }}
-            value={spectrogram.height.toFixed(2)}
-            onChange={e => setHeight(Number.parseFloat(e.target.value))}
-          />
-          <M.TextField
-            id="standard-basic"
-            label="Width"
-            type="number"
-            variant="standard"
-            sx={{ color: "white" }}
-            value={spectrogram.width.toFixed(2)}
-            onChange={e => setWidth(Number.parseFloat(e.target.value))}
-          /> */}
-        {/* </div> */}
       </M.FormControl>
     </M.Stack>
   )
