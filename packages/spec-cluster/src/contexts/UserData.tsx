@@ -34,19 +34,6 @@ export const Provider = (props: ProviderProps) => {
     ),
   )
   const updateSpectrogram: Context["updateSpectrogram"] = (id, updateFn) => {
-    // setSpectrograms(
-    //   new Map(
-    //     Array.from(spectrograms.entries()).map(([key, value]) => {
-    //       if (key == id) return [key, updateFn(value)]
-    //       return [key, value]
-    //     }),
-    //   ),
-    // )
-    // const prev = spectrograms.get(id)
-    // if (prev == null) {
-    //   throw Error(`updateSpectrogram could not find id: ${id}`)
-    // }
-    // setSpectrograms(new Map(spectrograms).set(id, updateFn(prev)))
     setSpectrograms(prevSpectrograms => {
       const updatedSpectrograms = new Map(prevSpectrograms)
 

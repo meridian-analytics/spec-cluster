@@ -1,6 +1,5 @@
 import { Html, useTexture } from "@react-three/drei"
 import type * as ThreeFiber from "@react-three/fiber"
-import * as React from "react"
 
 export type SpecProps = {
   position: ThreeFiber.MeshProps["position"]
