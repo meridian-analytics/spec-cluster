@@ -1,9 +1,8 @@
-import { OrbitControls, Select, Text } from "@react-three/drei"
+import { OrbitControls, Select } from "@react-three/drei"
 import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
 import * as Configurator from "../contexts/Configurator.js"
 import * as Selection from "../contexts/Selection.js"
-import Spec from "./Spec.js"
 import Sphere, { type SphereProps } from "./Sphere.js"
 
 export type Spectrogram = {
@@ -43,7 +42,7 @@ export type SceneProps = {
 }
 
 export default function Scene(props: SceneProps) {
-  const { renderMode, scaleX, scaleY, scaleZ } = Configurator.useContext()
+  const { scaleX, scaleY, scaleZ } = Configurator.useContext()
   const { selection, updateSelection, clearSelection } = Selection.useContext()
 
   return (

@@ -1,24 +1,14 @@
 import * as M from "@mui/material"
 import * as ConfigContext from "../contexts/Configurator"
-import * as ClickModeContext from "../contexts/ClickMode"
 
 export type InterfaceProps = {
   sx?: M.StackProps["sx"]
 }
 
 export default function Interface(props: InterfaceProps) {
-  const {
-    renderMode,
-    setRenderMode,
-    scaleX,
-    setScaleX,
-    scaleY,
-    setScaleY,
-    scaleZ,
-    setScaleZ,
-  } = ConfigContext.useContext()
+  const { scaleX, setScaleX, scaleY, setScaleY, scaleZ, setScaleZ } =
+    ConfigContext.useContext()
 
-  const { clickMode, setClickMode } = ClickModeContext.useContext()
   return (
     <M.Stack
       sx={{
@@ -79,44 +69,6 @@ export default function Interface(props: InterfaceProps) {
           }
         />
       </M.FormControl>
-      {/* <M.FormControl>
-        <M.FormLabel sx={{ color: "white" }}>Display</M.FormLabel>
-        <M.RadioGroup
-          row
-          value={renderMode}
-          onChange={e => setRenderMode(Number.parseInt(e.target.value))}
-        >
-          <M.FormControlLabel
-            value={0}
-            control={<M.Radio sx={{ color: "white" }} />}
-            label="Spectrograms"
-          />
-          <M.FormControlLabel
-            value={1}
-            control={<M.Radio sx={{ color: "white" }} />}
-            label="Points"
-          />
-        </M.RadioGroup>
-      </M.FormControl> */}
-      {/* <M.FormControl>
-        <M.FormLabel sx={{ color: "white" }}>Click Mode</M.FormLabel>
-        <M.RadioGroup
-          row
-          value={clickMode}
-          onChange={e => setClickMode(e.target.value)}
-        >
-          <M.FormControlLabel
-            value={ClickModeContext.ClickMode.detailed}
-            control={<M.Radio sx={{ color: "white" }} />}
-            label="Detailed"
-          />
-          <M.FormControlLabel
-            value={ClickModeContext.ClickMode.selection}
-            control={<M.Radio sx={{ color: "white" }} />}
-            label="Selection"
-          />
-        </M.RadioGroup>
-      </M.FormControl> */}
     </M.Stack>
   )
 }
