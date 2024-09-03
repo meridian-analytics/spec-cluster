@@ -3,7 +3,6 @@ import * as ReactDOM from "react-dom/client"
 import * as Reb from "react-error-boundary"
 import {
   Configurator,
-  Focus,
   Interface,
   Scene,
   Selection,
@@ -11,9 +10,7 @@ import {
   UserData,
 } from "spec-cluster"
 import * as Z from "zod"
-import FocusModal from "./FocusModal"
-import data from "./data/small.json"
-import SingleSelectEditor from "./SingleSelectEditor"
+import data from "../data/small.json"
 import MultiSelectEditor from "./MultiSelectEditor"
 import TableView from "./TableView"
 
@@ -58,12 +55,10 @@ function DemoApp() {
     <UserData.Provider data={parser(data)}>
       <Configurator.Provider>
         <Selection.Provider>
-          {/* <Focus.Provider> */}
           <ClickMode.Provider>
             <DemoScene />
             <Interface />
           </ClickMode.Provider>
-          {/* </Focus.Provider> */}
         </Selection.Provider>
       </Configurator.Provider>
     </UserData.Provider>
@@ -73,18 +68,10 @@ function DemoApp() {
 function DemoScene() {
   const { spectrograms } = UserData.useContext()
   const { selection, updateSelection } = Selection.useContext()
-  //   const { setFocusedItem } = Focus.useContext()
-  //   const { clickMode } = ClickMode.useContext()
   return (
     <>
-      <FocusModal />
       <TableView />
-      {selection.size >= 1 && (
-        <>
-          {/* <TableView /> */}
-          <MultiSelectEditor />
-        </>
-      )}
+      {selection.size >= 1 && <MultiSelectEditor />}
       <Scene
         spectrograms={Array.from(spectrograms.values())}
         controls={{
