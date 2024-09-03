@@ -7,12 +7,11 @@ import {
   Interface,
   Scene,
   Selection,
-  ClickMode,
   UserData,
 } from "spec-cluster"
 import * as Z from "zod"
 import FocusModal from "./FocusModal"
-import data from "./data/small.json"
+import data from "../data/small.json"
 
 const Spectrogram = Z.object({
   filename: Z.string(),
@@ -56,10 +55,8 @@ function SpecDemoApp() {
       <Configurator.Provider>
         <Selection.Provider>
           <Focus.Provider>
-            {/* <ClickMode.Provider> */}
             <DemoScene />
             <Interface />
-            {/* </ClickMode.Provider> */}
           </Focus.Provider>
         </Selection.Provider>
       </Configurator.Provider>
@@ -70,7 +67,6 @@ function SpecDemoApp() {
 function DemoScene() {
   const { spectrograms } = UserData.useContext()
   const { setFocusedItem } = Focus.useContext()
-  //   const { clickMode } = ClickMode.useContext()
   return (
     <>
       <FocusModal />
