@@ -16,12 +16,12 @@ This repo contains two example packages to demostrate various features and confi
 * `example-point-visualization`
 
 
-To run the examples, change to the package's directory, install the dependecies, and run the `dev` script.
+To run the examples, change to the package's directory, install the dependecies, and run the `start` script.
 
 ```sh
 > cd packages/example-spec-visualization
 > bun install
-> bun dev
+> bun start
 ```
 
 The example webserver will display the connection URL. In the default case, [http://localhost:5173](http://localhost:5173).
