@@ -1,76 +1,40 @@
-# spec-cluster
+## <a name="top"></a> spec-cluster
+* [intro](#intro)
+* [examples](#examples)
+* [docs](#docs)
 
-## Environment
+## <a name="intro"></a> intro
 
-This project uses the [Bun](https://bun.sh) runtime for JavaScript. If you do not already have Bun, you will need to [install](https://bun.sh/docs/installation) it:
+SpecCluster is a React package designed for generating cluster visualizations of spectrograms. Visualizing acoustic samples is essential for understanding complex audio data, enabling users to identify patterns, detect anomalies, and analyze relationships between sound samples. With SpecCluster, you can simply visualize spectrogram data to easily interpret the information and draw meaningful conclusions.
+
+<small>[back to top](#top)</small>
+## <a name="examples"></a> examples
+
+This repo contains two example packages to demostrate various features and configurations of SpecCluster.
+
+* `example-spec-visualisation`
+* `example-point-visualisation`
+
+
+To run the examples, change to the package's directory, install the dependecies, and run the `dev` script.
 
 ```sh
-curl -fsSL https://bun.sh/install | bash
+> cd packages/example-spec-visualisation
+> bun install
+> bun dev
 ```
 
-## Example App
-
-Download and install the project dependencies:
-
-```sh
-cd spec-cluster
-bun install
-```
-
-Start the development example:
-
-```sh
-cd packages/example
-bun start
-```
-
-The webserver will reply with the listening address and port:
+The example webserver will display the connection URL. In the default case, [http://localhost:5173](http://localhost:5173).
 
 ```none
-  VITE v5.2.11  ready in 263 ms
+VITE v4.5.2  ready in 205 ms
 
-  ➜  Local:   http://localhost:5173/
-  ➜  Network: use --host to expose
-  ➜  press h + enter to show help
+➜  Local:   http://localhost:5173/
+➜  Network: use --host to expose
+➜  press h to show help
 ```
 
-## Development
+<small>[back to top](#top)</small>
+## <a name="docs"></a> docs
 
-This project is using [@biomejs/biome](https://biomejs.dev) for linting, correctness, and automatic source code formatting and organization. 
-
-Choosing to [integrate Biome in your editor](https://biomejs.dev/guides/integrate-in-editor/) will greatly improve your developer experience.
-
-### Scripts
-
-* `check` - performs automatic formatting and organization
-* `lint` - perform ONLY lint check
-* `format` - perform ONLY automatic formatting
-
-Before committing code, run the `check` script:
-
-```sh
-bun check
-```
-
-```none
-$ biome check --apply .
-Checked 17 files in 14ms. No fixes needed.
-```
-
-### TypeScript
-
-Before committing code, manually run the typescript compiler:
-
-```sh
-bun tsc
-```
-
-If everything is correct, there will be no errors:
-
-```none
-$ bun --filter '*' tsc
-spec-cluster tsc $ tsc
-└─ Done in 1.18 s
-spec-cluster-example tsc $ tsc
-└─ Done in 1.25 s
-```
+See `packages/spec-cluster/readme.md`.
