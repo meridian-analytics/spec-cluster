@@ -5,21 +5,21 @@
 
 ## <a name="intro"></a> intro
 
-SpecCluster is a React package designed for generating cluster visualizations of spectrograms. Visualizing acoustic samples is essential for understanding complex audio data, enabling users to identify patterns, detect anomalies, and analyze relationships between sound samples. With SpecCluster, you can simply visualize spectrogram data to easily interpret the information and draw meaningful conclusions.
+`SpecCluster` is a react package designed for generating cluster visualizations of spectrograms. Visualizing acoustic samples is essential for understanding complex audio data, enabling users to identify patterns, detect anomalies, and analyze relationships between sound samples. With `SpecCluster`, you can simply visualize spectrogram data to easily interpret the information and draw meaningful conclusions.
 
-<small>[back to top](#top)</small>
+
 ## <a name="examples"></a> examples
 
 This repo contains two example packages to demostrate various features and configurations of SpecCluster.
 
-* `example-spec-visualisation`
-* `example-point-visualisation`
+* `example-spec-visualization`
+* `example-point-visualization`
 
 
 To run the examples, change to the package's directory, install the dependecies, and run the `dev` script.
 
 ```sh
-> cd packages/example-spec-visualisation
+> cd packages/example-spec-visualization
 > bun install
 > bun dev
 ```
