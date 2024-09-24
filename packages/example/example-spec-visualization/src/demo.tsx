@@ -11,7 +11,7 @@ import {
 } from "spec-cluster"
 import * as Z from "zod"
 import FocusModal from "./FocusModal"
-import data from "../data/small.json"
+import data from "../../data/small.json"
 
 const Spectrogram = Z.object({
   filename: Z.string(),
