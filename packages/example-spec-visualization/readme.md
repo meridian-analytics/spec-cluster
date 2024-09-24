@@ -1,2 +1,2 @@
 # Spec Visualization
-to-do: add details of example
+This example demonstrates how clustered spectrogram images can be rendered in the 3D space. It uses the `FocusModal` module to display detailed information about the currently focused spectrogram.
