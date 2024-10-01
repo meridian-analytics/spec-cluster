@@ -12,10 +12,17 @@ The **Focus Context** manages which spectrogram is in focus when the user intera
 - The focus context is provided via `Focus.Provider` and handles which item is focused by setting the clicked spectrogram as the **focused item**:
 
   ```tsx
-  const { setFocusedItem } = Focus.useContext()
-  ```
+  export const Provider = (props: ProviderProps) => {
+  const [focusedItem, setFocusedItem] = React.useState(defaultContext.focusedItem)
 
-- Once clicked, the spectrogram's details are displayed in a custom UI component, `FocusModal`.
+  const unsetFocus: Context["unsetFocus"] = () => {
+    setFocusedItem(null)
+  }
+
+  const hasFocus: Context["hasFocus"] = focusedItem != null}
+    ```
+
+- Once clicked, the spectrogram's details are displayed through a custom UI component, `FocusModal`.
 
 
 ### Custom UI: FocusModal
