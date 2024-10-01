@@ -25,7 +25,7 @@ The **Focus Context** manages which spectrogram is in focus when the user intera
 - Once clicked, the spectrogram's details are displayed through a custom UI component, `FocusModal`.
 
 
-### Custom UI: FocusModal
+### FocusModal
 
 The **FocusModal** is a custom component created specifically for this demo. It displays detailed information about a spectrogram when it is clicked. The modal retrieves data from the focused item in the focus context and dynamically updates whenever a new spectrogram is selected.
 
