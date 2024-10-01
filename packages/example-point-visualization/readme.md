@@ -11,7 +11,28 @@ The **Selection Context** tracks which spectrogram points are selected when a us
 1. **Single Select:** Clicking on a single point selects it.
 2. **Multi-Select:** Holding the `Shift` key while dragging creates a marquee, selecting all points within that marquee.
 
-The selection is managed by the `Selection.Provider`, which tracks the selected points in a `Set`. These selected points can be further manipulated via the custom **MultiSelectEditor**.
+The selection is managed by the `Selection.Provider`, which tracks the selected points in a `Set`. 
+
+```tsx
+  export const Provider = (props: ProviderProps) => {
+  const [selection, setSelection] = React.useState(defaultContext.selection)
+
+  const updateSelection: Context["updateSelection"] = filenames => {
+    const next = new Set(selection)
+    for (const filename of filenames) {
+      if (next.has(filename)) next.delete(filename)
+      else next.add(filename)
+    }
+    setSelection(next)
+  }
+
+  const clearSelection: Context["clearSelection"] = () => {
+    setSelection(new Set())
+  }
+}
+  ```
+
+These selected points can be further manipulated via the custom **MultiSelectEditor**.
 
 ### MultiSelectEditor
 
