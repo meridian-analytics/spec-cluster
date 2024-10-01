@@ -2,6 +2,8 @@
 
 This example demonstrates how spectrogram data can be visualized as interactive spheres (or points) in a 3D space using the `spec-cluster` package. The user can select individual or multiple points and interact with them through the custom UI components.
 
+![point-demo](packages/example-png/point-demo.png)
+
 ## Key Features
 
 ### Selection Context
@@ -34,6 +36,7 @@ The selection is managed by the `Selection.Provider`, which tracks the selected 
 
 These selected points can be further manipulated via the custom **MultiSelectEditor**.
 
+
 ### MultiSelectEditor
 
 The **MultiSelectEditor** is a local UI component that allows users to modify the properties of selected points. Once points are selected, this editor provides options to adjust:
@@ -43,6 +46,20 @@ The **MultiSelectEditor** is a local UI component that allows users to modify th
 - **Label:** Add or modify the label for the selected points.
 
 This component is displayed only when one or more points are selected.
+
+
+### Table View
+
+The **TableView** component is another local UI element that displays a list of selected points in a table format. It provides detailed metadata about the selected points, including:
+
+- **Filename**
+- **Dimensions**
+- **Optional metadata** like color, radius, and label
+
+This gives users a comprehensive overview of all selected points and their properties.
+
+![point-demo-selected](packages/example-png/point-demo-selected.png)
+
 
 ### Scene Component
 
@@ -70,21 +87,13 @@ The **Scene Component** renders the spectrograms as spheres (or points) in a 3D 
 
 Users can modify these controls to suit their preferences for how they interact with the 3D environment.
 
-### Table View
-
-The **TableView** component is another local UI element that displays a list of selected points in a table format. It provides detailed metadata about the selected points, including:
-
-- **Filename**
-- **Dimensions**
-- **Optional metadata** like color, radius, and label
-
-This gives users a comprehensive overview of all selected points and their properties.
 
 ### Configurator Context and Interface Component
 
 The `Configurator` context works with the `Interface` component to allow users to adjust the position of the spectrograms in the 3D space using sliders. These sliders modify the x, y, and z axes.
 
 For more details, refer to the [Configurator context doc] and [Interface component doc].
+
 
 ### Error Handling
 
