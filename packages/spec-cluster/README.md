@@ -19,9 +19,90 @@ Most components within the `spec-cluster` package are built using `@react-three/
 For more information on these libraries, refer to the [React Three Fiber Docs](https://r3f.docs.pmnd.rs/getting-started/introduction)
 ### <a name="spec"></a> spec
 ### <a name="sphere"></a> sphere
-The `Sphere` component is responsible for rendering individual spheres in the 3D space and is utilized by the `Scene` component.
+The `Sphere` component is responsible for rendering individual spheres in the 3D space and is utilized by the `Scene` component. This component allows customization of its position, size, color, and click interaction behavior.
+
+#### `SphereProps`
+
+The `Sphere` component accepts the following props:
+
+- `position`: Defines the position of the sphere in 3D space.
+- `size`: Specifies the size of the sphere using the arguments for the `SphereGeometry`.
+- `color`: Sets the color of the sphere using the properties of `MeshStandardMaterial`.
+- `id`: A unique identifier for the sphere, stored in `userData`.
+- `onClick` (optional): An event handler function triggered when the sphere is clicked.
+- `showID` (optional): A boolean that determines whether to display the ID label.
+- `label`: The text label to display if `showID` is true.
+- `isSelected` (optional): A boolean that indicates if the sphere is currently selected.
+
+```typescript
+export type SphereProps = {
+  position: ThreeFiber.MeshProps["position"];
+  size: ThreeFiber.SphereGeometryProps["args"];
+  color: ThreeFiber.MeshStandardMaterialProps["color"];
+  id: string;
+  onClick?: ThreeFiber.MeshProps["onClick"];
+  showID?: boolean;
+  label: string;
+  isSelected?: boolean;
+}
+```
+
+#### Component Structure
+* Main Mesh: Displays the sphere with `meshStandardMaterial`, defined by the specified color and size props.
+```javascript
+    <mesh userData={{ id: props.id }}>
+      <sphereGeometry args={props.size} />
+      <meshStandardMaterial color={props.color} />
+    </mesh>
+```
+* Selected Mesh: Renders when `isSelected` is true, using a slightly larger scale and a black ring around the selected sphere.
+```javascript
+    {props.isSelected && (
+      <mesh scale={[1.3, 1.3, 1.3]}>
+        <sphereGeometry args={props.size} />
+        <meshBasicMaterial color="black" side={BackSide} />
+      </mesh>
+    )}
+```
+* The sphere can respond to click events via the `onClick` prop, allowing for user interaction.
+
+#### Usage
+
+To use the `Sphere` component, import it and include it in your Three.js scene. Customize it by passing the necessary props.
+Below is an example of how it is used in the `Scene` component.
+```javascript
+import Sphere from './path/to/Sphere';
+
+<Sphere
+position={[
+    point.dim1 * scaleX,
+    point.dim2 * scaleY,
+    point.dim3 * scaleZ,
+]}
+size={[point.radius, 64, 32]}
+color={point.color}
+label={point.label}
+id={point.filename}
+showID={selection.has(point.filename)}
+onClick={() => props.onSpecClick?.(point)}
+isSelected={selection.has(point.filename)}
+/>
+```
+
 ### <a name="scene"></a> scene
+TODO
+
 ### <a name="interface"></a> interface
+The `Interface` component utilizes Material-UI (MUI) to provide a user interface for adjusting scale values along three axes (x, y, and z). It integrates with the `configuration` context to manage the scale states.
+
+#### Usage
+To use the `Interface` component, simply import it and include it in your component tree. You can also pass additional styles via the `sx` prop if needed.
+
+```javascript
+import Interface from './path/to/Interface';
+
+<Interface sx={{ customStyle }} />
+```
 
 <small>[back to top](#top)</small>
 
