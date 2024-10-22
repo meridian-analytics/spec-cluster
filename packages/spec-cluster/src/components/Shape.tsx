@@ -2,7 +2,7 @@ import { Html } from "@react-three/drei"
 import type * as ThreeFiber from "@react-three/fiber"
 import { BackSide } from "three"
 
-export type SphereProps = {
+export type ShapeProps = {
   position: ThreeFiber.MeshProps["position"]
   // size: ThreeFiber.SphereGeometryProps["args"]
   size: ThreeFiber.BoxGeometryProps["args"]
@@ -16,7 +16,7 @@ export type SphereProps = {
 }
 //todo: need to rename this component to 'shape' or something else
 // adjsut sizing issue
-export default function Sphere(props: SphereProps) {
+export default function Shape(props: ShapeProps) {
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
     <group position={props.position} onClick={props.onClick}>

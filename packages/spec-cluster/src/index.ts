@@ -14,9 +14,9 @@ export {
 } from "./components/Spec"
 
 export {
-  type SphereProps,
-  default as Sphere,
-} from "./components/Sphere"
+  type ShapeProps,
+  default as Shape,
+} from "./components/Shape"
 
 export * as Configurator from "./contexts/Configurator"
 
