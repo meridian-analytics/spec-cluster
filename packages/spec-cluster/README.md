@@ -2,7 +2,7 @@
 
 * [components](#components)
     * [spec](#spec)
-    * [sphere](#sphere)
+    * [shape](#shape)
     * [scene](#scene)
     * [interface](#interface)
 * [contexts](#contexts)
@@ -13,12 +13,12 @@
     * [clickmode](#clickmode)
 * [dev](#dev)
 
-## <a name="components"></a> components
+# <a name="components"></a> components
 Most components within the `spec-cluster` package are built using `@react-three/fiber` and `@react-three/drei`, which are popular libraries for integrating `Three.js` with React. Having a basic understanding of `Three.js` will greatly enhance your experience with `spec-cluster` and help you navigate its 3D visualization capabilities more effectively.
 
 For more information on these libraries, refer to the [React Three Fiber Docs](https://r3f.docs.pmnd.rs/getting-started/introduction)
 
-### <a name="spec"></a> spec
+## <a name="spec"></a> spec
 The `Spec` component is a React component built with `@react-three/fiber` and `@react-three/drei`. It renders a 3D plane with a texture loaded from a provided URL and supports interaction through a click event.
 
 #### `SpecProps`
@@ -87,21 +87,22 @@ import Spec from './path/to/Spec';
 />
 ```
 
-### <a name="sphere"></a> sphere
-The `Sphere` component is responsible for rendering individual spheres in the 3D space and is utilized by the `Scene` component. This component allows customization of its position, size, color, and click interaction behavior.
+## <a name="shape"></a> shape
+The `Shape` component is responsible for rendering individual spectrogram entities as shapes, with **spheres** as the default, in the 3D space and is utilized by the `Scene` component. This component allows customization of its position, size, color, shape and click interaction behavior.
 
-#### `SphereProps`
+#### `ShapeProps`
 
-The `Sphere` component accepts the following props:
+The `Shape` component accepts the following props:
 
-- `position`: Defines the position of the sphere in 3D space.
-- `size`: Specifies the size of the sphere using the arguments for the `SphereGeometry`.
-- `color`: Sets the color of the sphere using the properties of `MeshStandardMaterial`.
-- `id`: A unique identifier for the sphere, stored in `userData`.
-- `onClick` (optional): An event handler function triggered when the sphere is clicked.
+- `position`: Defines the position of the entity in 3D space.
+- `size`: Specifies the size of the entity using the arguments for the `SphereGeometry`.
+- `color`: Sets the color of the entity using the properties of `MeshStandardMaterial`.
+- `id`: A unique identifier for the entity, stored in `userData`.
+- `onClick` (optional): An event handler function triggered when the entity is clicked.
 - `showID` (optional): A boolean that determines whether to display the ID label.
 - `label`: The text label to display if `showID` is true.
-- `isSelected` (optional): A boolean that indicates if the sphere is currently selected.
+- `isSelected` (optional): A boolean that indicates if the entity is currently selected.
+- `shape`: Defines the shape of the entity using the respective geometry.
 
 ```typescript
 export type SphereProps = {
@@ -113,36 +114,41 @@ export type SphereProps = {
   showID?: boolean;
   label: string;
   isSelected?: boolean;
+  shape: string
 }
 ```
 
 #### Component Structure
-* Main Mesh: Displays the sphere with `meshStandardMaterial`, defined by the specified color and size props.
+* Main Mesh: Renders a geometric shape based on the `props.shape` value, using `meshStandardMaterial` with the specified color.
 ```javascript
     <mesh userData={{ id: props.id }}>
-      <sphereGeometry args={props.size} />
-      <meshStandardMaterial color={props.color} />
+        {props.shape === "Sphere" && <sphereGeometry />}
+        {props.shape === "Cube" && <boxGeometry />}
+        {props.shape === "Pyramid" && <coneGeometry args={[1, 1.5, 3]} />}
+        <meshStandardMaterial color={props.color} />
     </mesh>
 ```
-* Selected Mesh: Renders when `isSelected` is true, using a slightly larger scale and a black ring around the selected sphere.
+* Selected Mesh: Renders when `isSelected` is true, using a slightly larger scale and a black ring around the selected entity.
 ```javascript
     {props.isSelected && (
-      <mesh scale={[1.3, 1.3, 1.3]}>
-        <sphereGeometry args={props.size} />
-        <meshBasicMaterial color="black" side={BackSide} />
-      </mesh>
+        <mesh scale={[1.3, 1.3, 1.3]}>
+          {props.shape === "Sphere" && <sphereGeometry />}
+          {props.shape === "Cube" && <boxGeometry />}
+          {props.shape === "Pyramid" && <coneGeometry args={[1, 1.5, 3]} />}
+          <meshBasicMaterial color="black" side={BackSide} />
+        </mesh>
     )}
 ```
-* The sphere can respond to click events via the `onClick` prop, allowing for user interaction.
+* The entity can respond to click events via the `onClick` prop, allowing for user interaction.
 
 #### Usage
 
-To use the `Sphere` component, import it and include it in your Three.js scene. Customize it by passing the necessary props.
+To use the `Shape` component, import it and include it in your Three.js scene. Customize it by passing the necessary props.
 Below is an example of how it is used in the `Scene` component.
 ```javascript
-import Sphere from './path/to/Sphere';
+import Shape from './path/to/Shape';
 
-<Sphere
+<Shape
 position={[
     point.dim1 * scaleX,
     point.dim2 * scaleY,
@@ -151,6 +157,7 @@ position={[
 size={[point.radius, 64, 32]}
 color={point.color}
 label={point.label}
+shape={point.shape}
 id={point.filename}
 showID={selection.has(point.filename)}
 onClick={() => props.onSpecClick?.(point)}
@@ -158,13 +165,13 @@ isSelected={selection.has(point.filename)}
 />
 ```
 
-### <a name="scene"></a> scene
+## <a name="scene"></a> scene
 The `Scene` component renders a 3D visualization of the provided spectrograms, allowing user interaction and selection. It manages the following:
 
 1. **Canvas Setup**: Initializes a Three.js canvas with a specified camera position and event handling for selection clearing.
 2. **Lighting**: Configures ambient and directional lighting in the scene.
-3. **Rendering Spectrograms**: Based on the `renderMode`, it either renders the spectrograms as images using the `Spec` component or as spheres using the `Sphere` component.
-4. **Selection Handling**: Allows multiple spectrograms to be selected through mouse interactions when displayed as spheres.
+3. **Rendering Spectrograms**: Based on the `renderMode`, it either renders the spectrograms as images using the `Spec` component or as shapes using the `Shape` component.
+4. **Selection Handling**: Allows multiple spectrograms to be selected through mouse interactions when displayed as shapes.
 5. **Camera Controls**: Implements orbit controls to navigate around the scene.
 
 #### Spectrogram Type
@@ -190,6 +197,7 @@ export type Spectrogram = {
 - **width**, **height**: Dimensions for rendering the image.
 - **label**: A descriptive label for the spectrogram.
 - **flocation**: A fake location made up for the spectrogram data.
+- **shape**: The shape of the spectrogram
 
 #### SceneProps
 
@@ -222,7 +230,7 @@ export type SceneProps = {
 - **controls**: Optional camera control settings to constrain camera movement.
 - **light**: Optional lighting settings including the position of directional light.
 - **renderDotSize**: Size of the rendered spheres (if using dot mode).
-- **dotColor**: Color of the rendered spheres.
+- **dotColor**: Color of the rendered spheres (if using dot mode).
 - **onSpecClick**: Callback function triggered when a spectrogram is clicked.
 - **renderMode**: Determines how the spectrograms are rendered - as "image" or "dot".
 
@@ -248,7 +256,7 @@ Below is an example of how it is used in the spec visualization demo.
 />
 ```
 
-### <a name="interface"></a> interface
+## <a name="interface"></a> interface
 The `Interface` component utilizes Material-UI (MUI) to provide a user interface for adjusting scale values along three axes (x, y, and z). It integrates with the `Configurator` context to manage the scale states.
 
 #### Usage
@@ -266,7 +274,7 @@ import Interface from './path/to/Interface';
 ### <a name="user-data"></a> user-data
 This module provides a context for managing `Spectrogram` objects in a React application. It includes a context provider that allows components to access and update spectrogram data efficiently.
 
-See `example-point-visualization` for how it's implemented.
+See `example-shape-visualization` for how it's implemented.
 <details> 
 <summary>More details</summary>
 
@@ -322,10 +330,10 @@ const { spectrograms, updateSpectrogram } = useContext();
 ```
 </details>
 
-### <a name="selection"></a> selection
+## <a name="selection"></a> selection
 This module provides a context for managing the selection of `Spectrogram` objects in a React application.
 
-See `example-point-visualization` for how it's implemented.
+See `example-shape-visualization` for how it's implemented.
 
 <details> 
 <summary>More details</summary>
@@ -372,7 +380,7 @@ const { selection, updateSelection, clearSelection } = useContext();
 ```
 </details>
 
-### <a name="focus"></a> focus
+## <a name="focus"></a> focus
 This module provides a context for managing focus on `Spectrogram` objects in a React application.
 
 See `example-spec-visualization` for how it's implemented.
@@ -422,7 +430,7 @@ const { hasFocus, focusedItem, setFocusedItem, unsetFocus } = useContext();
 ```
 </details>
 
-### <a name="configurator"></a> configurator
+## <a name="configurator"></a> configurator
 This module provides a context for adjusting the axes position in a React application.
 
 See `example-spec-visualization` for how it's implemented.
@@ -441,7 +449,7 @@ An enumeration that defines the rendering modes:
 - `image`: Renders as an image.
 - `dot`: Renders as dots.
 
-This allows for a feature where the user can toggle between a point visualisation or a spectrogram image visualisation on the UI in a single demo.
+This allows for a feature where the user can toggle between a shape visualisation or a spectrogram image visualisation on the UI in a single demo.
 
 #### `Context`
 ```typescript
@@ -494,7 +502,7 @@ const { renderMode, setRenderMode, scaleX, setScaleX } = useContext();
 ```
 </details>
 
-### <a name="clickmode"></a> clickmode
+## <a name="clickmode"></a> clickmode
 This module provides a context for managing click modes in a React application. This allows for a feature that enables the user to choose between a detailed mode of selection or a single select mode.
 
 <details> 

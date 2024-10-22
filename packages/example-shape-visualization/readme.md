@@ -1,6 +1,6 @@
 # Shape Visualization
 
-This example demonstrates how spectrogram data can be visualized as interactive shapes(spheres as default) in a 3D space using the `spec-cluster` package. The user can select individual or multiple entities and interact with them through the custom UI components.
+This example demonstrates how spectrogram data can be visualized as interactive shapes, with spheres as the default, in a 3D space using the `spec-cluster` package. The user can select individual or multiple entities and interact with them through the custom UI components.
 
 ![shape-demo](packages/example-png/shape-demo.png)
 
@@ -44,6 +44,7 @@ The **MultiSelectEditor** is a local UI component that allows users to modify th
 - **Color:** Change the color of selected entities.
 - **Radius:** Adjust the size of selected entities.
 - **Label:** Add or modify the label for the selected entities.
+- **Shape:** Change the shape of selected entities, with the default shape being a sphere.
 
 This component is displayed only when one or more entities are selected.
 
