@@ -270,8 +270,9 @@ import Interface from './path/to/Interface';
 
 <small>[back to top](#top)</small>
 
-## <a name="contexts"></a> contexts
-### <a name="user-data"></a> user-data
+# <a name="contexts"></a> contexts
+
+## <a name="user-data"></a> user-data
 This module provides a context for managing `Spectrogram` objects in a React application. It includes a context provider that allows components to access and update spectrogram data efficiently.
 
 See `example-shape-visualization` for how it's implemented.
