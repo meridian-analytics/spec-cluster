@@ -37,7 +37,7 @@ The **FocusModal** is a custom component created specifically for this demo. It 
 
 The **Scene Component** renders the spectrograms in 3D space and handles user interactions with the scene. In this demo, the spectrograms are displayed as images by setting `renderMode` to `"image"`.
 
-- **`renderMode`:** Set to `"image"` for this demo to render spectrograms visually as images. The `"dot"` mode is covered in a separate demo [link to point-viz doc].
+- **`renderMode`:** Set to `"image"` for this demo to render spectrograms visually as images. The `"dot"` mode is covered in a separate demo [link to shape-viz doc].
 - **`onSpecClick`:** When a user clicks a spectrogram, this event is tied to the focus functionality, triggering the focus on the clicked item.
 - **`controls`:** Adjustable camera and navigation controls allow users to zoom, pan, and rotate the 3D view. These controls can be modified by altering the `controls` prop:
 
