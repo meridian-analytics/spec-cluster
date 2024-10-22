@@ -19,7 +19,6 @@ export type ShapeProps = {
   shape: string
 }
 
-// adjsut sizing issue
 export default function Shape(props: ShapeProps) {
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
