@@ -1,19 +1,19 @@
-# Point Visualization
+# Shape Visualization
 
-This example demonstrates how spectrogram data can be visualized as interactive spheres (or points) in a 3D space using the `spec-cluster` package. The user can select individual or multiple points and interact with them through the custom UI components.
+This example demonstrates how spectrogram data can be visualized as interactive shapes(spheres as default) in a 3D space using the `spec-cluster` package. The user can select individual or multiple entities and interact with them through the custom UI components.
 
-![point-demo](packages/example-png/point-demo.png)
+![shape-demo](packages/example-png/shape-demo.png)
 
 ## Key Features
 
 ### Selection Context
 
-The **Selection Context** tracks which spectrogram points are selected when a user clicks on them. It supports two modes of selection:
+The **Selection Context** tracks which spectrogram entities are selected when a user clicks on them. It supports two modes of selection:
 
-1. **Single Select:** Clicking on a single point selects it.
-2. **Multi-Select:** Holding the `Shift` key while dragging creates a marquee, selecting all points within that marquee.
+1. **Single Select:** Clicking on a single entity selects it.
+2. **Multi-Select:** Holding the `Shift` key while dragging creates a marquee, selecting all entities within that marquee.
 
-The selection is managed by the `Selection.Provider`, which tracks the selected points in a `Set`. 
+The selection is managed by the `Selection.Provider`, which tracks the selected entities in a `Set`. 
 
 ```tsx
   export const Provider = (props: ProviderProps) => {
@@ -34,39 +34,39 @@ The selection is managed by the `Selection.Provider`, which tracks the selected 
 }
   ```
 
-These selected points can be further manipulated via the custom **MultiSelectEditor**.
+These selected entities can be further manipulated via the custom **MultiSelectEditor**.
 
 
 ### MultiSelectEditor
 
-The **MultiSelectEditor** is a local UI component that allows users to modify the properties of selected points. Once points are selected, this editor provides options to adjust:
+The **MultiSelectEditor** is a local UI component that allows users to modify the properties of selected entities. Once an entity is selected, this editor provides options to adjust:
 
-- **Color:** Change the color of the selected points.
-- **Radius:** Adjust the size of the spheres.
-- **Label:** Add or modify the label for the selected points.
+- **Color:** Change the color of selected entities.
+- **Radius:** Adjust the size of selected entities.
+- **Label:** Add or modify the label for the selected entities.
 
-This component is displayed only when one or more points are selected.
+This component is displayed only when one or more entities are selected.
 
 
 ### Table View
 
-The **TableView** component is another local UI element that displays a list of selected points in a table format. It provides detailed metadata about the selected points, including:
+The **TableView** component is another local UI element that displays a list of selected entities in a table format. It provides detailed metadata about the selected entities, including:
 
 - **Filename**
 - **Dimensions**
 - **Optional metadata** like color, radius, and label
 
-This gives users a comprehensive overview of all selected points and their properties.
+This gives users a comprehensive overview of all selected entities and their properties.
 
-![point-demo-selected](packages/example-png/point-demo-selected.png)
+![shape-demo-selected](packages/example-png/shape-demo-selected.png)
 
 
 ### Scene Component
 
-The **Scene Component** renders the spectrograms as spheres (or points) in a 3D space, using the `renderMode` prop set to `"dot"` for this demo.
+The **Scene Component** renders the spectrograms as spheres (by default) in a 3D space, using the `renderMode` prop set to `"dot"` for this demo.
 
-- **`renderMode`:** Set to `"dot"` to display spectrograms as points or spheres. The `"image"` mode is covered in another demo [link to spec viz doc].
-- **`onSpecClick`:** Handles point selection by updating the `Selection` context. When a point is clicked, its filename is added to or removed from the selection.
+- **`renderMode`:** Set to `"dot"` to display spectrograms as spheres (default shape). The `"image"` mode is covered in another demo [link to spec viz doc].
+- **`onSpecClick`:** Handles entity selection by updating the `Selection` context. When an entity is clicked, its filename is added to or removed from the selection.
   
 - **`controls`:** These allow for adjusting the camera view of the 3D scene, offering flexibility for users to pan, zoom, and rotate:
 
