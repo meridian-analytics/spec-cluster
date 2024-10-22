@@ -24,6 +24,7 @@ const Spectrogram = Z.object({
   height: Z.number().optional().default(5),
   label: Z.string().optional().default(""),
   flocation: Z.string(),
+  shape: Z.string().optional().default("Sphere"),
 })
 
 function parser(value: unknown) {
