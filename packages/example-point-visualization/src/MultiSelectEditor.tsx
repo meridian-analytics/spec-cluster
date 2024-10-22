@@ -42,6 +42,11 @@ export default function MultiSelectEditor() {
       updateSpectrogram(id, prev => ({ ...prev, label: newLabel }))
     }
   }
+  function setShape(newShape: string) {
+    for (const id of selectedIds) {
+      updateSpectrogram(id, prev => ({ ...prev, shape: newShape }))
+    }
+  }
 
   return (
     <M.Stack
@@ -90,6 +95,18 @@ export default function MultiSelectEditor() {
           value={spectrogram.radius.toFixed(2)}
           onChange={e => setRadius(Number.parseFloat(e.target.value))}
         />
+      </M.FormControl>
+      <M.FormControl fullWidth sx={{ marginTop: 2 }}>
+        <M.InputLabel>Shape</M.InputLabel>
+        <M.Select
+          value={spectrogram.shape}
+          label="Shape"
+          onChange={e => setShape(e.target.value)}
+        >
+          <M.MenuItem value={"Sphere"}>Sphere</M.MenuItem>
+          <M.MenuItem value={"Pyramid"}>Pyramid</M.MenuItem>
+          <M.MenuItem value={"Cube"}>Cube</M.MenuItem>
+        </M.Select>
       </M.FormControl>
     </M.Stack>
   )
