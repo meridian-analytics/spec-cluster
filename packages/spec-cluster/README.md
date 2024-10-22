@@ -95,7 +95,7 @@ The `Shape` component is responsible for rendering individual spectrogram entiti
 The `Shape` component accepts the following props:
 
 - `position`: Defines the position of the entity in 3D space.
-- `size`: Specifies the size of the entity using the arguments for the `SphereGeometry`.
+- `size`: Specifies the size of the entity using the arguments for the specified shape.
 - `color`: Sets the color of the entity using the properties of `MeshStandardMaterial`.
 - `id`: A unique identifier for the entity, stored in `userData`.
 - `onClick` (optional): An event handler function triggered when the entity is clicked.
@@ -117,14 +117,23 @@ export type SphereProps = {
   shape: string
 }
 ```
+#### `ShapeGeometryProps`
+Defines the different geometries for the shapes already provided by Three Fiber.
+
+```typescript
+export type ShapeGeometryProps =
+  | { type: "Sphere"; args: ThreeFiber.SphereGeometryProps["args"] }
+  | { type: "Box"; args: ThreeFiber.BoxGeometryProps["args"] }
+  | { type: "Cone"; args: ThreeFiber.ConeGeometryProps["args"] }
+```
 
 #### Component Structure
 * Main Mesh: Renders a geometric shape based on the `props.shape` value, using `meshStandardMaterial` with the specified color.
 ```javascript
     <mesh userData={{ id: props.id }}>
-        {props.shape === "Sphere" && <sphereGeometry />}
-        {props.shape === "Cube" && <boxGeometry />}
-        {props.shape === "Pyramid" && <coneGeometry args={[1, 1.5, 3]} />}
+        {props.shape === "Sphere" && <sphereGeometry args={props.size} />}
+        {props.shape === "Cube" && <boxGeometry args={props.size} />}
+        {props.shape === "Pyramid" && <coneGeometry args={props.size} />}
         <meshStandardMaterial color={props.color} />
     </mesh>
 ```
@@ -132,9 +141,9 @@ export type SphereProps = {
 ```javascript
     {props.isSelected && (
         <mesh scale={[1.3, 1.3, 1.3]}>
-          {props.shape === "Sphere" && <sphereGeometry />}
-          {props.shape === "Cube" && <boxGeometry />}
-          {props.shape === "Pyramid" && <coneGeometry args={[1, 1.5, 3]} />}
+          {props.shape === "Sphere" && <sphereGeometry args={props.size} />}
+          {props.shape === "Cube" && <boxGeometry args={props.size} />}
+          {props.shape === "Pyramid" && <coneGeometry args={props.size} />}
           <meshBasicMaterial color="black" side={BackSide} />
         </mesh>
     )}
@@ -154,7 +163,17 @@ position={[
     point.dim2 * scaleY,
     point.dim3 * scaleZ,
 ]}
-size={[point.radius, 64, 32]}
+size={
+      point.shape === "Cube"
+        ? [
+            point.size * 1.5,
+            point.size * 1.5,
+            point.size * 1.5,
+          ]
+        : point.shape === "Pyramid"
+          ? [point.size, 2 * point.size, 4]
+          : [point.size, 64, 32]
+}
 color={point.color}
 label={point.label}
 shape={point.shape}
@@ -187,6 +206,7 @@ export type Spectrogram = {
   height: number
   label: string
   flocation: string
+  shape: string
 }
 ```
 
