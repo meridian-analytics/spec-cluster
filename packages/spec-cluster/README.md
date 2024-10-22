@@ -105,15 +105,15 @@ The `Shape` component accepts the following props:
 - `shape`: Defines the shape of the entity using the respective geometry.
 
 ```typescript
-export type SphereProps = {
-  position: ThreeFiber.MeshProps["position"];
-  size: ThreeFiber.SphereGeometryProps["args"];
-  color: ThreeFiber.MeshStandardMaterialProps["color"];
-  id: string;
-  onClick?: ThreeFiber.MeshProps["onClick"];
-  showID?: boolean;
-  label: string;
-  isSelected?: boolean;
+export type ShapeProps = {
+  position: ThreeFiber.MeshProps["position"]
+  size: ShapeGeometryProps
+  color: ThreeFiber.MeshStandardMaterialProps["color"]
+  id: string
+  onClick?: ThreeFiber.MeshProps["onClick"]
+  showID?: boolean
+  label: string
+  isSelected?: boolean
   shape: string
 }
 ```
@@ -200,7 +200,7 @@ export type Spectrogram = {
   dim1: number
   dim2: number
   dim3: number
-  radius: number
+  size: number
   color: string
   width: number
   height: number
@@ -212,7 +212,7 @@ export type Spectrogram = {
 
 - **filename**: The name of the spectrogram file.
 - **dim1**, **dim2**, **dim3**: Spatial dimensions of the spectrogram used for positioning in 3D space.
-- **radius**: The radius of the sphere representation (if applicable).
+- **size**: The size of the entity representation (if applicable).
 - **color**: The color of the spectrogram, specified as a hex code or English color name.
 - **width**, **height**: Dimensions for rendering the image.
 - **label**: A descriptive label for the spectrogram.
@@ -238,8 +238,8 @@ export type SceneProps = {
   light?: {
     position?: Three.Vector3
   }
-  renderDotSize?: SphereProps["size"]
-  dotColor?: SphereProps["color"]
+  renderDotSize?: ShapeProps["size"]
+  dotColor?: ShapeProps["color"]
   onSpecClick?: (point: Spectrogram) => void
   renderMode: "image" | "dot"
 }
@@ -249,8 +249,8 @@ export type SceneProps = {
 - **camera**: Optional camera settings including the position in 3D space.
 - **controls**: Optional camera control settings to constrain camera movement.
 - **light**: Optional lighting settings including the position of directional light.
-- **renderDotSize**: Size of the rendered spheres (if using dot mode).
-- **dotColor**: Color of the rendered spheres (if using dot mode).
+- **renderDotSize**: Size of the rendered entities (if using dot mode).
+- **dotColor**: Color of the rendered entities (if using dot mode).
 - **onSpecClick**: Callback function triggered when a spectrogram is clicked.
 - **renderMode**: Determines how the spectrograms are rendered - as "image" or "dot".
 

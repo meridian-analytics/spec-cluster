@@ -15,9 +15,9 @@ export default function MultiSelectEditor() {
     )
   }
 
-  function setRadius(newRadius: number) {
+  function setSize(newSize: number) {
     for (const id of selectedIds) {
-      updateSpectrogram(id, prev => ({ ...prev, radius: newRadius }))
+      updateSpectrogram(id, prev => ({ ...prev, size: newSize }))
     }
   }
 
@@ -88,12 +88,12 @@ export default function MultiSelectEditor() {
       <M.FormControl>
         <M.TextField
           id="standard-basic"
-          label="Radius"
+          label="Size"
           type="number"
           variant="standard"
           sx={{ color: "white", marginTop: 2 }}
-          value={spectrogram.radius.toFixed(2)}
-          onChange={e => setRadius(Number.parseFloat(e.target.value))}
+          value={spectrogram.size.toFixed(2)}
+          onChange={e => setSize(Number.parseFloat(e.target.value))}
         />
       </M.FormControl>
       <M.FormControl fullWidth sx={{ marginTop: 2 }}>

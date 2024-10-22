@@ -18,7 +18,7 @@ const Spectrogram = Z.object({
   dim1: Z.coerce.number(),
   dim2: Z.coerce.number(),
   dim3: Z.coerce.number(),
-  radius: Z.number().optional().default(0.9),
+  size: Z.number().optional().default(0.9),
   color: Z.string().optional().default("Blue"),
   width: Z.number().optional().default(5),
   height: Z.number().optional().default(5),
