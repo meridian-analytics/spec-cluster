@@ -19,6 +19,7 @@ export type Spectrogram = {
   height: number
   label: string
   flocation: string
+  shape: string
 }
 
 export type SceneProps = {
@@ -92,6 +93,7 @@ export default function Scene(props: SceneProps) {
                 color={point.color}
                 label={point.label}
                 id={point.filename}
+                shape={point.shape}
                 showID={selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}
                 isSelected={selection.has(point.filename)}
