@@ -11,7 +11,7 @@ export type Spectrogram = {
   dim1: number
   dim2: number
   dim3: number
-  radius: number
+  size: number
   /**
    * Spectrogram.color: Hex code or English color name such as blue or red*/
   color: string
@@ -91,14 +91,10 @@ export default function Scene(props: SceneProps) {
                 ]}
                 size={
                   point.shape === "Cube"
-                    ? [
-                        point.radius * 1.5,
-                        point.radius * 1.5,
-                        point.radius * 1.5,
-                      ]
+                    ? [point.size * 1.5, point.size * 1.5, point.size * 1.5]
                     : point.shape === "Pyramid"
-                      ? [point.radius, 2 * point.radius, 4]
-                      : [point.radius, 64, 32]
+                      ? [point.size, 2 * point.size, 4]
+                      : [point.size, 64, 32]
                 }
                 color={point.color}
                 label={point.label}
