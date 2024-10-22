@@ -3,7 +3,7 @@ import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
 import * as Configurator from "../contexts/Configurator.js"
 import * as Selection from "../contexts/Selection.js"
-import Sphere, { type SphereProps } from "./Sphere.js"
+import Shape, { type ShapeProps } from "./Shape.js"
 import Spec from "./Spec.js"
 
 export type Spectrogram = {
@@ -38,8 +38,8 @@ export type SceneProps = {
   light?: {
     position?: Three.Vector3
   }
-  renderDotSize?: SphereProps["size"]
-  dotColor?: SphereProps["color"]
+  renderDotSize?: ShapeProps["size"]
+  dotColor?: ShapeProps["color"]
   onSpecClick?: (point: Spectrogram) => void
   renderMode: "image" | "dot"
 }
@@ -82,7 +82,7 @@ export default function Scene(props: SceneProps) {
             ))}
           {props.renderMode === "dot" &&
             props.spectrograms.map(point => (
-              <Sphere
+              <Shape
                 key={point.filename}
                 position={[
                   point.dim1 * scaleX,
