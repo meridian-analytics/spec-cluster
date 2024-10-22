@@ -89,7 +89,17 @@ export default function Scene(props: SceneProps) {
                   point.dim2 * scaleY,
                   point.dim3 * scaleZ,
                 ]}
-                size={[point.radius, 64, 32]}
+                size={
+                  point.shape === "Cube"
+                    ? [
+                        point.radius * 1.5,
+                        point.radius * 1.5,
+                        point.radius * 1.5,
+                      ]
+                    : point.shape === "Pyramid"
+                      ? [point.radius, 2 * point.radius, 4]
+                      : [point.radius, 64, 32]
+                }
                 color={point.color}
                 label={point.label}
                 id={point.filename}
