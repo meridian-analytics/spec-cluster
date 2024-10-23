@@ -38,7 +38,7 @@ export type SceneProps = {
   light?: {
     position?: Three.Vector3
   }
-  renderDotSize?: ShapeProps["size"]
+  renderDotSize?: ShapeProps["shape"]
   dotColor?: ShapeProps["color"]
   onSpecClick?: (point: Spectrogram) => void
   renderMode: "image" | "dot"
@@ -89,17 +89,23 @@ export default function Scene(props: SceneProps) {
                   point.dim2 * scaleY,
                   point.dim3 * scaleZ,
                 ]}
-                size={
+                shape={
                   point.shape === "Cube"
-                    ? [point.size * 1.5, point.size * 1.5, point.size * 1.5]
+                    ? {
+                        type: "Box",
+                        args: [
+                          point.size * 1.5,
+                          point.size * 1.5,
+                          point.size * 1.5,
+                        ],
+                      }
                     : point.shape === "Pyramid"
-                      ? [point.size, 2 * point.size, 4]
-                      : [point.size, 64, 32]
+                      ? { type: "Cone", args: [point.size, 2 * point.size, 4] }
+                      : { type: "Sphere", args: [point.size, 64, 32] }
                 }
                 color={point.color}
                 label={point.label}
                 id={point.filename}
-                shape={point.shape}
                 showID={selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}
                 isSelected={selection.has(point.filename)}
