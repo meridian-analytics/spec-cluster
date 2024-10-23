@@ -72,6 +72,7 @@ export default function MultiSelectEditor() {
           label="Color"
           onChange={e => setColor(e.target.value)}
         >
+          <M.MenuItem value={"Blue"}>Blue (default) </M.MenuItem>
           <M.MenuItem value={"Green"}>Green</M.MenuItem>
           <M.MenuItem value={"Red"}>Red</M.MenuItem>
           <M.MenuItem value={"Yellow"}>Yellow</M.MenuItem>
