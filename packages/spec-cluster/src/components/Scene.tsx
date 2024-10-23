@@ -89,20 +89,8 @@ export default function Scene(props: SceneProps) {
                   point.dim2 * scaleY,
                   point.dim3 * scaleZ,
                 ]}
-                shape={
-                  point.shape === "Cube"
-                    ? {
-                        type: "Box",
-                        args: [
-                          point.size * 1.5,
-                          point.size * 1.5,
-                          point.size * 1.5,
-                        ],
-                      }
-                    : point.shape === "Pyramid"
-                      ? { type: "Cone", args: [point.size, 2 * point.size, 4] }
-                      : { type: "Sphere", args: [point.size, 64, 32] }
-                }
+                shape={point.shape}
+                size={point.size}
                 color={point.color}
                 label={point.label}
                 id={point.filename}
