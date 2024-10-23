@@ -18,9 +18,9 @@ export default function SingleSelectEditor() {
     )
   }
 
-  function setRadius(newRadius: number) {
+  function setSize(newSize: number) {
     updateSpectrogram(selectedId, prev => {
-      return { ...prev, radius: newRadius }
+      return { ...prev, size: newSize }
     })
   }
 
@@ -93,8 +93,8 @@ export default function SingleSelectEditor() {
             type="number"
             variant="standard"
             sx={{ color: "white" }}
-            value={spectrogram.radius.toFixed(2)}
-            onChange={e => setRadius(Number.parseFloat(e.target.value))}
+            value={spectrogram.size.toFixed(2)}
+            onChange={e => setSize(Number.parseFloat(e.target.value))}
           />
           <M.TextField
             id="standard-basic"
