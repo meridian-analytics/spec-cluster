@@ -37,7 +37,7 @@ const themeConfig: Preset.ThemeConfig = {
         label: "Docs",
       },
       {
-        href: "https://github.com/meridianCFI/specviz", //need to change to speccluster repo
+        href: "https://github.com/meridian-analytics/spec-cluster",
         label: "GitHub",
         position: "right",
       },
@@ -51,16 +51,7 @@ const themeConfig: Preset.ThemeConfig = {
         items: [
           {
             label: "Get started",
-            to: "/docs/get-started.md",
-          },
-        ],
-      },
-      {
-        title: "Examples",
-        items: [
-          {
-            label: "Shape Visualization",
-            to: "docs/examples/basic-spectrogram",
+            to: "docs/get-started",
           },
         ],
       },
@@ -69,7 +60,7 @@ const themeConfig: Preset.ThemeConfig = {
         items: [
           {
             label: "GitHub",
-            href: "https://github.com/meridianCFI/specviz",
+            href: "https://github.com/meridian-analytics/spec-cluster",
           },
         ],
       },
@@ -86,9 +77,9 @@ const config: Config = {
   title: "SpecCluster",
   tagline: "From Soundwaves to Insights: Visualize Your Audio Data.",
   favicon: "img/favicon.ico",
-  url: "https://meridiancfi.github.io",
-  baseUrl: "/",
-  organizationName: "meridiancfi",
+  url: "https://meridian-analytics.github.io",
+  baseUrl: "/spec-cluster/",
+  organizationName: "meridian-analytics",
   projectName: "spec-cluster",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
