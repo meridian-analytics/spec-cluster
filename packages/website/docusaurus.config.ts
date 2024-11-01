@@ -34,7 +34,7 @@ const themeConfig: Preset.ThemeConfig = {
         type: "docSidebar",
         sidebarId: "mainSidebar",
         position: "left",
-        label: "Tutorial",
+        label: "Docs",
       },
       {
         href: "https://github.com/meridianCFI/specviz", //need to change to speccluster repo
@@ -50,8 +50,8 @@ const themeConfig: Preset.ThemeConfig = {
         title: "Docs",
         items: [
           {
-            label: "Tutorial",
-            to: "/docs/intro",
+            label: "Get started",
+            to: "/docs/get-started.md",
           },
         ],
       },
