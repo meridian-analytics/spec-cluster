@@ -2,11 +2,9 @@
 sidebar_position: 3
 title: Selection
 ---
-This module provides a context for managing the selection of `Spectrogram` objects in a React application.
+This module provides a context for managing the selection of `Spectrogram` objects in a React application. It enables components to track and manipulate a set of selected Spectrogram items based on their filenames, offering flexibility in handling bulk selections and updates.
 
-See `example-shape-visualization` for how it's implemented.
-
-### `Context`
+### Context API
 ```typescript
 export type Context = {
   selection: Set<Spectrogram["filename"]>
@@ -16,33 +14,35 @@ export type Context = {
 }
 ```
 Contains:
-- `selection`: A `Set` containing the filenames of selected spectrograms.
+- `selection`: A set containing the filenames of selected spectrograms.
 - `setSelection`: Function to set the selection directly.
 - `updateSelection`: Function to toggle the selection of multiple filenames.
 - `clearSelection`: Function to clear all selections.
 
-### `Provider` Component
+### Provider Component
+This provides the context to its children. It initializes the selection state with an empty set and provides methods to update and clear selections.
+
 ```typescript
 export const Provider = (props: ProviderProps) => { ... }
 ```
-This provides the `Context` to its children. It initializes the selection state with an empty `Set` and provides methods to update and clear selections.
 
-### Example Usage
+#### Usage
+Wrap the components where you want to access the selection context with the selection provider.
 ```jsx
 <Selection.Provider>
   <YourComponent />
 </Selection.Provider>
 ```
 
-### `useContext` Hook
+### useContext Hook
+The useContext custom hook allows functional components to access and interact with the selection context. 
 ```typescript
 export const useContext = () => {
   return React.useContext(Context)
 }
 ```
-A custom hook to access the selection context within functional components.
 
-### Example Usage
+#### Usage
 ```jsx
 const { selection, updateSelection, clearSelection } = useContext();
 ```
