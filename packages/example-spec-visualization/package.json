@@ -27,5 +27,8 @@
   "scripts": {
     "start": "bun run --bun vite dev",
     "tsc": "tsc"
+  },
+  "exports": {
+    ".": "./src/demo.tsx"
   }
 }
