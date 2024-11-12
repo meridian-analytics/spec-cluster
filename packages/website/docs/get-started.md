@@ -10,8 +10,8 @@ sidebar_position: 1
 
 This repo contains two example packages to demostrate various features and configurations of SpecCluster.
 
-* [Spec visualization](./examples/spec-visualization.md)
-* [Shape visualization](./examples/shape-visualization.md)
+* [Spec visualization](./examples/spec-visualization)
+* [Shape visualization](./examples/shape-visualization)
 
 
 To run the examples, change to the package's directory, install the dependecies, and run the `start` script.
