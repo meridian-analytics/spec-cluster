@@ -7,6 +7,18 @@ This example demonstrates how spectrogram data can be visualized as interactive 
 
 ![shape-demo](/img/shape-demo.png)
 
+import * as Demo from "@spec-cluster/example-shape-visualization"
+import BrowserOnly from "../../src/browser-only"
+import * as Reb from "react-error-boundary"
+
+<BrowserOnly fallback={<div>Loading...</div>}>
+  {url => 
+    <Reb.ErrorBoundary FallbackComponent={Demo.Fallback}>
+      <Demo.DemoApp />
+    </Reb.ErrorBoundary>
+  }
+</BrowserOnly>
+
 ## Key Features
 
 ### Selection Context
