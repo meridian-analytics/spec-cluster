@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom/client"
-import * as Reb from "react-error-boundary"
+import type * as Reb from "react-error-boundary"
 import {
   Configurator,
   Interface,
@@ -34,7 +34,7 @@ function parser(value: unknown) {
   throw new Error(result.error.message)
 }
 
-function Fallback(props: Reb.FallbackProps) {
+export function Fallback(props: Reb.FallbackProps) {
   React.useEffect(() => {
     console.error(props.error)
   }, [props.error])
@@ -51,7 +51,7 @@ function Fallback(props: Reb.FallbackProps) {
   )
 }
 
-function DemoApp() {
+export function DemoApp() {
   return (
     <UserData.Provider data={parser(data)}>
       <Configurator.Provider>
@@ -91,10 +91,3 @@ function DemoScene() {
     </>
   )
 }
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <Reb.ErrorBoundary FallbackComponent={Fallback}>
-      <DemoApp />
-    </Reb.ErrorBoundary>
-  </React.StrictMode>,
-)
