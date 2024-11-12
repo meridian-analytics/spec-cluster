@@ -50,13 +50,17 @@ function Fallback(props: Reb.FallbackProps) {
   )
 }
 
-function SpecDemoApp() {
+type SpecDemoAppProps = {
+  baseUrl?: string
+}
+
+export function SpecDemoApp(props: SpecDemoAppProps) {
   return (
     <UserData.Provider data={parser(data)}>
       <Configurator.Provider>
         <Selection.Provider>
           <Focus.Provider>
-            <DemoScene />
+            <DemoScene baseUrl={props.baseUrl} />
             <Interface />
           </Focus.Provider>
         </Selection.Provider>
@@ -65,7 +69,7 @@ function SpecDemoApp() {
   )
 }
 
-function DemoScene() {
+function DemoScene(props: SpecDemoAppProps) {
   const { spectrograms } = UserData.useContext()
   const { setFocusedItem } = Focus.useContext()
   return (
@@ -85,6 +89,7 @@ function DemoScene() {
         onSpecClick={point => {
           setFocusedItem(point)
         }}
+        baseUrl={props.baseUrl}
       />
     </>
   )
