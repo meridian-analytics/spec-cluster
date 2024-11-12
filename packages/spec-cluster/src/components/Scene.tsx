@@ -1,10 +1,10 @@
 import { OrbitControls, Select } from "@react-three/drei"
 import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
-import * as Configurator from "../contexts/Configurator.js"
-import * as Selection from "../contexts/Selection.js"
-import Shape, { type ShapeProps } from "./Shape.js"
-import Spec from "./Spec.js"
+import * as Configurator from "../contexts/Configurator"
+import * as Selection from "../contexts/Selection"
+import Shape, { type ShapeProps } from "./Shape"
+import Spec from "./Spec"
 
 export type Spectrogram = {
   filename: string
@@ -42,6 +42,7 @@ export type SceneProps = {
   dotColor?: ShapeProps["color"]
   onSpecClick?: (point: Spectrogram) => void
   renderMode: "image" | "dot"
+  baseUrl?: string
 }
 
 export default function Scene(props: SceneProps) {
@@ -67,7 +68,10 @@ export default function Scene(props: SceneProps) {
             props.spectrograms.map(point => (
               <Spec
                 key={point.filename}
-                url={`/spectrogram_plots/${point.filename}_spectrogram.png`}
+                url={`${props.baseUrl ?? ""}/${point.filename.replace(
+                  ".wav",
+                  "",
+                )}.png`}
                 position={[
                   point.dim1 * scaleX,
                   point.dim2 * scaleY,
