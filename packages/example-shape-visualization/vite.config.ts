@@ -5,4 +5,5 @@ import * as Vite from "vite"
 
 export default Vite.defineConfig({
   plugins: [ReactSWC()],
+  publicDir: "../website/static",
 })
