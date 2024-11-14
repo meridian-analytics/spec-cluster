@@ -52,7 +52,7 @@ export default function MultiSelectEditor() {
     <M.Stack
       sx={{
         position: "absolute",
-        top: "50%",
+        top: "55%",
         right: 0,
         transform: "translateY(-50%)",
         width: 250,
@@ -61,7 +61,7 @@ export default function MultiSelectEditor() {
         borderRadius: 2,
         p: 3,
         margin: 2,
-        zIndex: 1000,
+        zIndex: 10,
       }}
     >
       <M.FormLabel sx={{ color: "Black" }}>Editor</M.FormLabel>

@@ -11,12 +11,15 @@ The demo utilizes various contexts to manage interactivity, such as focusing on 
 import * as Demo from "@spec-cluster/example-spec-visualization"
 import BrowserOnly from "../../src/browser-only"
 import * as Reb from "react-error-boundary"
+import "../../static/example.css"
 
 <BrowserOnly fallback={<div>Loading...</div>}>
   {url => 
-    <Reb.ErrorBoundary FallbackComponent={Demo.Fallback}>
-      <Demo.SpecDemoApp baseUrl={url("/spectrogram_plots")}/>
-    </Reb.ErrorBoundary>
+   <div className="live-example-wrapper">
+      <Reb.ErrorBoundary FallbackComponent={Demo.Fallback}>
+        <Demo.SpecDemoApp baseUrl={url("/spectrogram_plots")} />
+      </Reb.ErrorBoundary>
+    </div>
   }
 </BrowserOnly>
 
@@ -39,7 +42,7 @@ The Focus context manages which spectrogram is in focus when the user interacts 
   const hasFocus: Context["hasFocus"] = focusedItem != null}
     ```
 
-- Once clicked, the spectrogram's details are displayed through a custom UI component, [<u>FocusModal</u>](#focus-modala).
+- Once clicked, the spectrogram's details are displayed through a custom UI component, [<u>FocusModal</u>](#focus-modal).
 
 
 ### Focus Modal
@@ -52,7 +55,7 @@ The Focus modal is a custom component created specifically for this demo. It dis
 
 The Scene component renders the spectrograms in 3D space and handles user interactions with the scene. In this demo, the spectrograms are displayed as images by setting `renderMode` to `image`.
 
-- **renderMode:** Set to `image` for this demo to render spectrograms visually as images. The `dot` mode is covered in the [Shape visualization example](shape-visualization.md).
+- **renderMode:** Set to `image` for this demo to render spectrograms visually as images. The `dot` mode is covered in the [Shape visualization example](shape-visualization).
 - **onSpecClick:** When a user clicks a spectrogram, this event is tied to the focus functionality, triggering the focus on the clicked item.
 - **controls:** Adjustable camera and navigation controls allow users to zoom, pan, and rotate the 3D view. These controls can be modified by altering the `controls` prop:
 
