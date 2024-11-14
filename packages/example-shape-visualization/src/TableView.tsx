@@ -16,11 +16,11 @@ export default function TableView() {
   return (
     <div
       style={{
-        position: "fixed",
+        position: "absolute",
         bottom: 0,
         left: 0,
         right: 0,
-        zIndex: 1000,
+        zIndex: 10,
       }}
     >
       <M.TableContainer component={M.Paper} style={{ maxHeight: "200px" }}>

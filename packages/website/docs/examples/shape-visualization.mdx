@@ -5,17 +5,18 @@ sidebar_position: 2
 
 This example demonstrates how spectrogram data can be visualized as interactive shapes, with spheres as the default, in a 3D space using the `spec-cluster` package. The user can select individual or multiple entities and interact with them through the custom UI components.
 
-![shape-demo](/img/shape-demo.png)
-
 import * as Demo from "@spec-cluster/example-shape-visualization"
 import BrowserOnly from "../../src/browser-only"
 import * as Reb from "react-error-boundary"
+import "../../static/example.css"
 
 <BrowserOnly fallback={<div>Loading...</div>}>
   {url => 
-    <Reb.ErrorBoundary FallbackComponent={Demo.Fallback}>
-      <Demo.DemoApp />
-    </Reb.ErrorBoundary>
+   <div className="live-example-wrapper">
+      <Reb.ErrorBoundary FallbackComponent={Demo.Fallback}>
+        <Demo.DemoApp />
+      </Reb.ErrorBoundary>
+    </div>
   }
 </BrowserOnly>
 
@@ -81,7 +82,7 @@ This gives users a comprehensive overview of all selected entities and their pro
 
 The Scene component renders the spectrograms as spheres (default shape) in a 3D space, using the `renderMode` prop set to `dot` for this demo.
 
-- **renderMode**: Set to `dot` to display spectrograms as spheres (default shape). The `image` mode is covered in the [Spec visualization example](./spec-visualization.md).
+- **renderMode**: Set to `dot` to display spectrograms as spheres (default shape). The `image` mode is covered in the [Spec visualization example](./spec-visualization).
 
 - **onSpecClick**: Handles entity selection by updating the `Selection` context. When an entity is clicked, its filename is added to or removed from the selection.
   

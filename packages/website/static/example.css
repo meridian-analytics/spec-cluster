@@ -1,0 +1,11 @@
+.live-example-wrapper {
+  max-width: 100%;
+  height: 900px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden; 
+}
