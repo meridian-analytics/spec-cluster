@@ -19,12 +19,16 @@
     "typescript": "5.4.3"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
   "imports": {
     "#util": "./src/util.ts"
   },
   "scripts": {
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "build": "vite build && tsc --project tsconfig.build.json"
   }
 }
