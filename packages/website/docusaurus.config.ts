@@ -90,5 +90,6 @@ const config: Config = {
   presets: [["classic", preset]],
   themeConfig,
   staticDirectories: ["static"],
+  trailingSlash: false,
 }
 export default config
