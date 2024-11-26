@@ -6,7 +6,6 @@ export default function FocusModal({ baseUrl }: { baseUrl: string }) {
   if (!focusedItem) {
     return null
   }
-
   //TODO need to define mui props similar to maipl.
   return (
     <M.Modal open={hasFocus} onClose={unsetFocus}>
@@ -41,10 +40,14 @@ export default function FocusModal({ baseUrl }: { baseUrl: string }) {
             borderRadius: "4px",
           }}
         >
-          {`filename: ${focusedItem.filename}
-dim1: ${focusedItem.dim1}
-dim2: ${focusedItem.dim2}
-dim3: ${focusedItem.dim3}`}
+          {focusedItem
+            ? Object.entries(focusedItem)
+                .filter(([key]) =>
+                  ["filename", "dim1", "dim2", "dim3"].includes(key),
+                )
+                .map(([key, value]) => `${key}: ${value ?? "N/A"}`)
+                .join("\n")
+            : "No data available"}
         </pre>
       </M.Box>
     </M.Modal>
