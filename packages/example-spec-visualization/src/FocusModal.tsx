@@ -1,11 +1,12 @@
 import * as M from "@mui/material"
 import { Focus } from "spec-cluster"
 
-export default function FocusModal() {
+export default function FocusModal({ baseUrl }: { baseUrl: string }) {
   const { focusedItem, hasFocus, unsetFocus } = Focus.useContext()
   if (!focusedItem) {
     return null
   }
+
   //TODO need to define mui props similar to maipl.
   return (
     <M.Modal open={hasFocus} onClose={unsetFocus}>
@@ -30,7 +31,7 @@ export default function FocusModal() {
         </M.Typography>
         <img
           alt={"spectrogram"}
-          src={`/spectrogram_plots/${focusedItem.filename}_spectrogram.png`}
+          src={`${baseUrl}/${focusedItem.filename.replace(".wav", "")}.png`}
           style={{ maxWidth: "100%", maxHeight: "300px", margin: "16px 0" }}
         />
         <pre

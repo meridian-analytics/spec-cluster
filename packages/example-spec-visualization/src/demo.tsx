@@ -73,7 +73,7 @@ function DemoScene(props: SpecDemoAppProps) {
   const { setFocusedItem } = Focus.useContext()
   return (
     <>
-      <FocusModal />
+      <FocusModal baseUrl={props.baseUrl ?? ""} />
       <Scene
         renderMode="image"
         spectrograms={Array.from(spectrograms.values())}
