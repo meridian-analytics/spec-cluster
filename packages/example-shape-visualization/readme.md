@@ -2,7 +2,7 @@
 
 This example demonstrates how spectrogram data can be visualized as interactive shapes, with spheres as the default, in a 3D space using the `spec-cluster` package. The user can select individual or multiple entities and interact with them through the custom UI components.
 
-![shape-demo](packages/example-png/shape-demo.png)
+![shape-demo](../example-png/shape-demo.png)
 
 ## Key Features
 
@@ -59,7 +59,7 @@ The **TableView** component is another local UI element that displays a list of 
 
 This gives users a comprehensive overview of all selected entities and their properties.
 
-![shape-demo-selected](packages/example-png/shape-demo-selected.png)
+![shape-demo-selected](../example-png/shape-demo-selected.png)
 
 
 ### Scene Component
