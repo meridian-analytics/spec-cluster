@@ -68,7 +68,7 @@ export function DemoApp() {
 
 function DemoScene() {
   const { spectrograms } = UserData.useContext()
-  const { selection, updateSelection } = Selection.useContext()
+  const { selection} = Selection.useContext()
   return (
     <>
       <TableView />
@@ -83,9 +83,6 @@ function DemoScene() {
           maxPolarAngle: Math.PI - Math.PI / 6,
           maxDistance: 120,
           minDistance: 5,
-        }}
-        onSpecClick={point => {
-          updateSelection([point.filename])
         }}
       />
     </>
