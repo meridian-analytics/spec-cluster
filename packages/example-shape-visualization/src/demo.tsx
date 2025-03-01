@@ -2,11 +2,11 @@ import * as React from "react"
 import * as ReactDOM from "react-dom/client"
 import type * as Reb from "react-error-boundary"
 import {
+  ClickMode,
   Configurator,
   Interface,
   Scene,
   Selection,
-  ClickMode,
   UserData,
 } from "spec-cluster"
 import * as Z from "zod"
@@ -68,7 +68,7 @@ export function DemoApp() {
 
 function DemoScene() {
   const { spectrograms } = UserData.useContext()
-  const { selection} = Selection.useContext()
+  const { selection } = Selection.useContext()
   return (
     <>
       <TableView />
