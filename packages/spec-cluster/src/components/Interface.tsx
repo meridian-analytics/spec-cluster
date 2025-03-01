@@ -3,6 +3,12 @@ import * as ConfigContext from "../contexts/Configurator"
 
 export type InterfaceProps = {
   sx?: M.StackProps["sx"]
+  xmax?: number
+  xmin?: number
+  ymax?: number
+  ymin?: number
+  zmax?: number
+  zmin?: number
 }
 
 export default function Interface(props: InterfaceProps) {
@@ -15,60 +21,67 @@ export default function Interface(props: InterfaceProps) {
         backgroundColor: M.colors.grey[800],
         borderRadius: 3,
         color: "white",
+        margin: 2,
         padding: 3,
         position: "absolute",
         right: 0,
         spacing: 3,
         top: 0,
-        margin: 2,
         ...props.sx,
       }}
     >
       <M.FormControl>
         <M.FormLabel sx={{ color: "white" }}>Scale Axes</M.FormLabel>
-        <M.Typography gutterBottom> x-axis</M.Typography>
-        <M.Slider
-          sx={{
-            width: "250px",
-          }}
-          min={1}
-          max={10}
-          size="small"
-          valueLabelDisplay="auto"
+        <M.Typography>x-axis</M.Typography>
+        <Slider
+          max={props.xmax}
+          min={props.xmin}
+          setValue={setScaleX}
           value={scaleX}
-          onChange={(_, value) =>
-            setScaleX(Array.isArray(value) ? value[0] : value)
-          }
         />
-        <M.Typography gutterBottom> y-axis</M.Typography>
-        <M.Slider
-          sx={{
-            width: "250px",
-          }}
-          min={1}
-          max={5}
-          size="small"
-          valueLabelDisplay="auto"
+        <M.Typography>y-axis</M.Typography>
+        <Slider
+          max={props.ymax}
+          min={props.ymin}
+          setValue={setScaleY}
           value={scaleY}
-          onChange={(_, value) =>
-            setScaleY(Array.isArray(value) ? value[0] : value)
-          }
         />
-        <M.Typography gutterBottom> z-axis</M.Typography>
-        <M.Slider
-          sx={{
-            width: "250px",
-          }}
-          min={1}
-          max={5}
-          size="small"
-          valueLabelDisplay="auto"
+        <M.Typography>z-axis</M.Typography>
+        <Slider
+          max={props.zmax}
+          min={props.zmin}
+          setValue={setScaleZ}
           value={scaleZ}
-          onChange={(_, value) =>
-            setScaleZ(Array.isArray(value) ? value[0] : value)
-          }
         />
       </M.FormControl>
     </M.Stack>
+  )
+}
+
+type SliderProps = {
+  max?: M.SliderProps["max"]
+  min?: M.SliderProps["min"]
+  setValue: (value: number) => void
+  sx?: M.SliderProps["sx"]
+  value: number
+}
+
+function Slider(props: SliderProps) {
+  return (
+    <M.Slider
+      sx={{
+        width: "250px",
+        ...props.sx,
+      }}
+      step={0.01}
+      min={props.min ?? 1}
+      max={props.max ?? 5}
+      size="small"
+      valueLabelDisplay="auto"
+      value={props.value}
+      onChange={(_, value) =>
+        props.setValue(Array.isArray(value) ? value[0] : value)
+      }
+    />
   )
 }
