@@ -1,5 +1,5 @@
 import * as M from "@mui/material"
-import * as ConfigContext from "../contexts/Configurator"
+import * as Configurator from "../contexts/Configurator"
 
 export type InterfaceProps = {
   sx?: M.StackProps["sx"]
@@ -12,9 +12,7 @@ export type InterfaceProps = {
 }
 
 export default function Interface(props: InterfaceProps) {
-  const { scaleX, setScaleX, scaleY, setScaleY, scaleZ, setScaleZ } =
-    ConfigContext.useContext()
-
+  const config = Configurator.useContext()
   return (
     <M.Stack
       sx={{
@@ -36,22 +34,22 @@ export default function Interface(props: InterfaceProps) {
         <Slider
           max={props.xmax}
           min={props.xmin}
-          setValue={setScaleX}
-          value={scaleX}
+          setValue={config.setScaleX}
+          value={config.scaleX}
         />
         <M.Typography>y-axis</M.Typography>
         <Slider
           max={props.ymax}
           min={props.ymin}
-          setValue={setScaleY}
-          value={scaleY}
+          setValue={config.setScaleY}
+          value={config.scaleY}
         />
         <M.Typography>z-axis</M.Typography>
         <Slider
           max={props.zmax}
           min={props.zmin}
-          setValue={setScaleZ}
-          value={scaleZ}
+          setValue={config.setScaleZ}
+          value={config.scaleZ}
         />
       </M.FormControl>
     </M.Stack>

@@ -70,14 +70,14 @@ export function SpecDemoApp(props: SpecDemoAppProps) {
 }
 
 function DemoScene(props: SpecDemoAppProps) {
-  const { spectrograms } = UserData.useContext()
-  const { setFocusedItem } = Focus.useContext()
+  const userData = UserData.useContext()
+  const focus = Focus.useContext()
   return (
     <>
       <FocusModal baseUrl={props.baseUrl ?? ""} />
       <Scene
         renderMode="image"
-        spectrograms={Array.from(spectrograms.values())}
+        spectrograms={Array.from(userData.spectrograms.values())}
         controls={{
           minAzimuthAngle: -Math.PI / 4,
           maxAzimuthAngle: Math.PI / 4,
@@ -87,7 +87,7 @@ function DemoScene(props: SpecDemoAppProps) {
           minDistance: 5,
         }}
         onSpecClick={point => {
-          setFocusedItem(point)
+          focus.setFocusedItem(point)
         }}
         baseUrl={props.baseUrl}
       />

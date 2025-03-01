@@ -3,12 +3,11 @@ import { Selection, ShapeType, UserData } from "spec-cluster"
 import * as Util from "spec-cluster-utils"
 
 export default function MultiSelectEditor() {
-  const { spectrograms, updateSpectrogram } = UserData.useContext()
-  const { selection } = Selection.useContext()
-  const selectedIds = Array.from(selection)
-
+  const userData = UserData.useContext()
+  const selection = Selection.useContext()
+  const selectedIds = Array.from(selection.selection)
   const selectedId = selectedIds[0]
-  const spectrogram = spectrograms.get(selectedId)
+  const spectrogram = userData.spectrograms.get(selectedId)
 
   if (spectrogram == null) {
     throw Error(
@@ -18,35 +17,53 @@ export default function MultiSelectEditor() {
 
   function setSize(newSize: number) {
     for (const id of selectedIds) {
-      updateSpectrogram(id, prev => ({ ...prev, size: newSize }))
+      userData.updateSpectrogram(id, prev => ({
+        ...prev,
+        size: newSize,
+      }))
     }
   }
 
   function setColor(newColor: string) {
     for (const id of selectedIds) {
-      updateSpectrogram(id, prev => ({ ...prev, color: newColor }))
+      userData.updateSpectrogram(id, prev => ({
+        ...prev,
+        color: newColor,
+      }))
     }
   }
 
   function setWidth(newWidth: number) {
     for (const id of selectedIds) {
-      updateSpectrogram(id, prev => ({ ...prev, width: newWidth }))
+      userData.updateSpectrogram(id, prev => ({
+        ...prev,
+        width: newWidth,
+      }))
     }
   }
   function setHeight(newHeight: number) {
     for (const id of selectedIds) {
-      updateSpectrogram(id, prev => ({ ...prev, height: newHeight }))
+      userData.updateSpectrogram(id, prev => ({
+        ...prev,
+        height: newHeight,
+      }))
     }
   }
   function setLabel(newLabel: string) {
     for (const id of selectedIds) {
-      updateSpectrogram(id, prev => ({ ...prev, label: newLabel }))
+      userData.updateSpectrogram(id, prev => ({
+        ...prev,
+        label: newLabel,
+      }))
     }
   }
   function setShape(newShape: string) {
     Util.invariantEnum(newShape, ShapeType, "ShapeType")
     for (const id of selectedIds) {
-      updateSpectrogram(id, prev => ({ ...prev, shape: newShape }))
+      userData.updateSpectrogram(id, prev => ({
+        ...prev,
+        shape: newShape,
+      }))
     }
   }
 

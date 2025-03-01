@@ -2,13 +2,13 @@ import * as M from "@mui/material"
 import { Focus } from "spec-cluster"
 
 export default function FocusModal({ baseUrl }: { baseUrl: string }) {
-  const { focusedItem, hasFocus, unsetFocus } = Focus.useContext()
-  if (!focusedItem) {
+  const focus = Focus.useContext()
+  if (!focus.focusedItem) {
     return null
   }
   //TODO need to define mui props similar to maipl.
   return (
-    <M.Modal open={hasFocus} onClose={unsetFocus}>
+    <M.Modal open={focus.hasFocus} onClose={focus.unsetFocus}>
       <M.Box
         component={"div"}
         sx={{
@@ -30,7 +30,7 @@ export default function FocusModal({ baseUrl }: { baseUrl: string }) {
         </M.Typography>
         <img
           alt={"spectrogram"}
-          src={`${baseUrl}/${focusedItem.filename.replace(".wav", "")}.png`}
+          src={`${baseUrl}/${focus.focusedItem.filename.replace(".wav", "")}.png`}
           style={{ maxWidth: "100%", maxHeight: "300px", margin: "16px 0" }}
         />
         <pre
@@ -40,8 +40,8 @@ export default function FocusModal({ baseUrl }: { baseUrl: string }) {
             borderRadius: "4px",
           }}
         >
-          {focusedItem
-            ? Object.entries(focusedItem)
+          {focus.focusedItem
+            ? Object.entries(focus.focusedItem)
                 .filter(([key]) =>
                   ["filename", "dim1", "dim2", "dim3"].includes(key),
                 )

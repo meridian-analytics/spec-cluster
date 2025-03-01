@@ -47,9 +47,9 @@ export const Provider = (props: ProviderProps) => {
   const [scaleX, setScaleX] = React.useState(defaultContext.scaleX)
   const [scaleY, setScaleY] = React.useState(defaultContext.scaleY)
   const [scaleZ, setScaleZ] = React.useState(defaultContext.scaleZ)
-
   return (
     <Context.Provider
+      children={props.children}
       value={{
         renderMode,
         setRenderMode: (value: number) => {
@@ -63,9 +63,7 @@ export const Provider = (props: ProviderProps) => {
         scaleZ,
         setScaleZ,
       }}
-    >
-      {props.children}
-    </Context.Provider>
+    />
   )
 }
 

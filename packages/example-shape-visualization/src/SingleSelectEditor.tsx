@@ -3,15 +3,17 @@ import { MuiColorInput } from "mui-color-input"
 import { Selection, UserData } from "spec-cluster"
 
 export default function SingleSelectEditor() {
-  const { spectrograms, updateSpectrogram } = UserData.useContext()
-  const { selection } = Selection.useContext()
-  const selectedIds = Array.from(selection)
+  const userData = UserData.useContext()
+  const selection = Selection.useContext()
+  const selectedIds = Array.from(selection.selection)
 
   if (selectedIds.length != 1) {
     throw Error("SingleSelectEditor expects selection size of 1")
   }
+
   const selectedId = selectedIds[0]
-  const spectrogram = spectrograms.get(selectedId)
+  const spectrogram = userData.spectrograms.get(selectedId)
+
   if (spectrogram == null) {
     throw Error(
       `SingleSelectEditor could not find spectrogram by id: ${selectedId}`,
@@ -19,29 +21,29 @@ export default function SingleSelectEditor() {
   }
 
   function setSize(newSize: number) {
-    updateSpectrogram(selectedId, prev => {
+    userData.updateSpectrogram(selectedId, prev => {
       return { ...prev, size: newSize }
     })
   }
 
   function setColor(newColor: string) {
-    updateSpectrogram(selectedId, prev => {
+    userData.updateSpectrogram(selectedId, prev => {
       return { ...prev, color: newColor }
     })
   }
 
   function setWidth(newWidth: number) {
-    updateSpectrogram(selectedId, prev => {
+    userData.updateSpectrogram(selectedId, prev => {
       return { ...prev, width: newWidth }
     })
   }
   function setHeight(newHeight: number) {
-    updateSpectrogram(selectedId, prev => {
+    userData.updateSpectrogram(selectedId, prev => {
       return { ...prev, height: newHeight }
     })
   }
   function setLabel(newLabel: string) {
-    updateSpectrogram(selectedId, prev => {
+    userData.updateSpectrogram(selectedId, prev => {
       return { ...prev, label: newLabel }
     })
   }

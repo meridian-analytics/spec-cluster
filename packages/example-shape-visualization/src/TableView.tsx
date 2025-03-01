@@ -1,13 +1,12 @@
 import * as M from "@mui/material"
-import * as React from "react"
 import { Selection, UserData } from "spec-cluster"
 
 export default function TableView() {
-  const { spectrograms } = UserData.useContext()
-  const { selection } = Selection.useContext()
-  const selectedIds = Array.from(selection)
+  const userData = UserData.useContext()
+  const selection = Selection.useContext()
+  const selectedIds = Array.from(selection.selection)
   const selectedId = selectedIds[0]
-  const spectrogram = spectrograms.get(selectedId)
+  const spectrogram = userData.spectrograms.get(selectedId)
 
   //need to refactor this error message
   // if (spectrogram == null) {
@@ -46,7 +45,7 @@ export default function TableView() {
               </M.TableRow>
             ) : (
               selectedIds.map(id => {
-                const spectrogram = spectrograms.get(id)
+                const spectrogram = userData.spectrograms.get(id)
                 return spectrogram ? (
                   <M.TableRow key={id}>
                     <M.TableCell>{spectrogram.filename}</M.TableCell>

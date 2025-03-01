@@ -47,13 +47,13 @@ export type SceneProps = {
 }
 
 export default function Scene(props: SceneProps) {
-  const { scaleX, scaleY, scaleZ } = Configurator.useContext()
-  const { selection, updateSelection, clearSelection } = Selection.useContext()
+  const config = Configurator.useContext()
+  const selection = Selection.useContext()
 
   return (
     <Three.Canvas
       camera={{ position: props.camera?.position ?? [0, 0, 100] }}
-      onPointerMissed={clearSelection}
+      onPointerMissed={selection.clearSelection}
     >
       <Suspense fallback={null}>
         <directionalLight position={props.light?.position ?? [0, 0, 2]} />
@@ -62,7 +62,9 @@ export default function Scene(props: SceneProps) {
           box
           multiple
           onChangePointerUp={meshes => {
-            updateSelection(meshes.map(mesh => mesh.userData.id ?? ""))
+            selection.updateSelection(
+              meshes.map(mesh => mesh.userData.id ?? ""),
+            )
           }}
         >
           {props.renderMode === "image" &&
@@ -74,14 +76,14 @@ export default function Scene(props: SceneProps) {
                   "",
                 )}.png`}
                 position={[
-                  point.dim1 * scaleX,
-                  point.dim2 * scaleY,
-                  point.dim3 * scaleZ,
+                  point.dim1 * config.scaleX,
+                  point.dim2 * config.scaleY,
+                  point.dim3 * config.scaleZ,
                 ]}
                 id={point.filename}
                 size={[point.width, point.height, 64, 64]}
                 label={point.label}
-                showID={selection.has(point.filename)}
+                showID={selection.selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}
               />
             ))}
@@ -90,18 +92,18 @@ export default function Scene(props: SceneProps) {
               <Shape
                 key={point.filename}
                 position={[
-                  point.dim1 * scaleX,
-                  point.dim2 * scaleY,
-                  point.dim3 * scaleZ,
+                  point.dim1 * config.scaleX,
+                  point.dim2 * config.scaleY,
+                  point.dim3 * config.scaleZ,
                 ]}
                 shape={point.shape}
                 size={point.size}
                 color={point.color}
                 label={point.label}
                 id={point.filename}
-                showID={selection.has(point.filename)}
+                showID={selection.selection.has(point.filename)}
                 onClick={() => props.onSpecClick?.(point)}
-                isSelected={selection.has(point.filename)}
+                isSelected={selection.selection.has(point.filename)}
               />
             ))}
         </Select>

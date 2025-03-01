@@ -36,15 +36,14 @@ export const Provider = (props: ProviderProps) => {
 
   return (
     <Context.Provider
+      children={props.children}
       value={{
         hasFocus,
         focusedItem,
         setFocusedItem,
         unsetFocus,
       }}
-    >
-      {props.children}
-    </Context.Provider>
+    />
   )
 }
 

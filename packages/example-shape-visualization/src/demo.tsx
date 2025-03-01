@@ -67,15 +67,15 @@ export function DemoApp() {
 }
 
 function DemoScene() {
-  const { spectrograms } = UserData.useContext()
-  const { selection } = Selection.useContext()
+  const userData = UserData.useContext()
+  const selection = Selection.useContext()
   return (
     <>
       <TableView />
-      {selection.size >= 1 && <MultiSelectEditor />}
+      {selection.selection.size >= 1 && <MultiSelectEditor />}
       <Scene
         renderMode="dot"
-        spectrograms={Array.from(spectrograms.values())}
+        spectrograms={Array.from(userData.spectrograms.values())}
         controls={{
           minAzimuthAngle: -Math.PI / 4,
           maxAzimuthAngle: Math.PI / 4,

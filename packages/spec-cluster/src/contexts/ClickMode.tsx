@@ -25,9 +25,9 @@ const Context = React.createContext(defaultContext)
 
 export const Provider = (props: ProviderProps) => {
   const [clickMode, setClickMode] = React.useState(defaultContext.clickMode)
-
   return (
     <Context.Provider
+      children={props.children}
       value={{
         clickMode,
         setClickMode: (value: string) => {
@@ -35,9 +35,7 @@ export const Provider = (props: ProviderProps) => {
           setClickMode(value)
         },
       }}
-    >
-      {props.children}
-    </Context.Provider>
+    />
   )
 }
 

@@ -47,17 +47,15 @@ export const Provider = (props: ProviderProps) => {
       return updatedSpectrograms
     })
   }
-
   return (
     <Context.Provider
+      children={props.children}
       value={{
         spectrograms,
         setSpectrograms,
         updateSpectrogram,
       }}
-    >
-      {props.children}
-    </Context.Provider>
+    />
   )
 }
 
