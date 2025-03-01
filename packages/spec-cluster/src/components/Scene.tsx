@@ -3,7 +3,8 @@ import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
 import * as Configurator from "../contexts/Configurator"
 import * as Selection from "../contexts/Selection"
-import Shape, { type ShapeProps } from "./Shape"
+import Shape from "./Shape"
+import type { ShapeProps, ShapeType } from "./Shape"
 import Spec from "./Spec"
 
 export type Spectrogram = {
@@ -19,7 +20,7 @@ export type Spectrogram = {
   height: number
   label: string
   flocation: string
-  shape: string
+  shape: ShapeType
 }
 
 export type SceneProps = {

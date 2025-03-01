@@ -6,6 +6,7 @@ import {
   Interface,
   Scene,
   Selection,
+  ShapeType,
   UserData,
 } from "spec-cluster"
 import * as Z from "zod"
@@ -23,7 +24,14 @@ const Spectrogram = Z.object({
   height: Z.number().optional().default(5),
   label: Z.string().optional().default(""),
   flocation: Z.string(),
-  shape: Z.string().optional().default("Sphere"),
+  shape: Z.string()
+    .optional()
+    .transform(v => {
+      if (v === "cube") return ShapeType.cube
+      if (v === "pyramid") return ShapeType.pyramid
+      if (v === "sphere") return ShapeType.sphere
+      return ShapeType.sphere
+    }),
 })
 
 function parser(value: unknown) {

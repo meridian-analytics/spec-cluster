@@ -1,15 +1,16 @@
 import { Html } from "@react-three/drei"
 import type * as ThreeFiber from "@react-three/fiber"
-import { BackSide, SphereGeometry } from "three"
+import { BackSide } from "three"
 
-export type ShapeGeometryProps =
-  | { type: "Sphere"; args: ThreeFiber.SphereGeometryProps["args"] }
-  | { type: "Box"; args: ThreeFiber.BoxGeometryProps["args"] }
-  | { type: "Cone"; args: ThreeFiber.ConeGeometryProps["args"] }
+export enum ShapeType {
+  cube = "cube",
+  pyramid = "pyramid",
+  sphere = "sphere",
+}
 
 export type ShapeProps = {
   position: ThreeFiber.MeshProps["position"]
-  shape: string
+  shape: ShapeType
   size: number
   color: ThreeFiber.MeshStandardMaterialProps["color"]
   id: string
@@ -19,14 +20,13 @@ export type ShapeProps = {
   isSelected?: boolean
 }
 
-function makeGeometry(shape: string, size: number): ShapeGeometryProps {
-  if (shape === "Cube")
-    return {
-      type: "Box",
-      args: [size * 1.5, size * 1.5, size * 1.5],
-    }
-  if (shape === "Pyramid") return { type: "Cone", args: [size, 2 * size, 4] }
-  if (shape === "Sphere") return { type: "Sphere", args: [size, 64, 32] }
+function makeGeometry(shape: ShapeType, size: number) {
+  if (shape === ShapeType.cube)
+    return <boxGeometry args={[size * 1.5, size * 1.5, size * 1.5]} />
+  if (shape === ShapeType.pyramid)
+    return <coneGeometry args={[size, 2 * size, 4]} />
+  if (shape === ShapeType.sphere)
+    return <sphereGeometry args={[size, 64, 32]} />
   throw Error(`Invalid shape type ${shape}`)
 }
 
@@ -37,24 +37,12 @@ export default function Shape(props: ShapeProps) {
     <group position={props.position} onClick={props.onClick}>
       {props.isSelected && (
         <mesh scale={[1.3, 1.3, 1.3]}>
-          {geometry.type === "Sphere" ? (
-            <sphereGeometry args={geometry.args} />
-          ) : geometry.type === "Box" ? (
-            <boxGeometry args={geometry.args} />
-          ) : geometry.type === "Cone" ? (
-            <coneGeometry args={geometry.args} />
-          ) : null}
+          {geometry}
           <meshBasicMaterial color="black" side={BackSide} />
         </mesh>
       )}
       <mesh userData={{ id: props.id }}>
-        {geometry.type === "Sphere" ? (
-          <sphereGeometry args={geometry.args} />
-        ) : geometry.type === "Box" ? (
-          <boxGeometry args={geometry.args} />
-        ) : geometry.type === "Cone" ? (
-          <coneGeometry args={geometry.args} />
-        ) : null}
+        {geometry}
         <meshStandardMaterial color={props.color} />
       </mesh>
       {props.showID && (

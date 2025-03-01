@@ -19,50 +19,31 @@ The Shape component accepts the following props:
 - `shape`: Defines the shape of the entity using the respective geometry.
 
 ```typescript
-export type ShapeProps = {
+enum ShapeType {
+  cube = "cube",
+  pyramid = "pyramid",
+  sphere = "sphere",
+}
+
+type ShapeProps = {
   position: ThreeFiber.MeshProps["position"]
-  size: ShapeGeometryProps
+  shape: ShapeType
+  size: number
   color: ThreeFiber.MeshStandardMaterialProps["color"]
   id: string
   onClick?: ThreeFiber.MeshProps["onClick"]
   showID?: boolean
   label: string
   isSelected?: boolean
-  shape: string
 }
 ```
 
-### ShapeGeometryProps
-Defines the different geometries for the shapes already provided by Three Fiber.
-
-```typescript
-export type ShapeGeometryProps =
-  | { type: "Sphere"; args: ThreeFiber.SphereGeometryProps["args"] }
-  | { type: "Box"; args: ThreeFiber.BoxGeometryProps["args"] }
-  | { type: "Cone"; args: ThreeFiber.ConeGeometryProps["args"] }
-```
-
 ### Component Structure
-* **Main Mesh**: Renders a geometric shape based on the `geometry.type` value, using **meshStandardMaterial** with the specified color.
-```javascript
-    <mesh userData={{ id: props.id }}>
-        { geometry.type === "Sphere" ? (<sphereGeometry args={geometry.args}/>) 
-        : geometry.type === "Box" ? (<boxGeometry args={geometry.args}/> ) 
-        : geometry.type === "Cone" ? (<coneGeometry args={geometry.args}/>) : null }
-        <meshStandardMaterial color={props.color} />
-    </mesh>
-```
-* **Selected Mesh**: Renders when `isSelected` is true, using a slightly larger scale and a black ring around the selected entity.
-```javascript
-    {props.isSelected && ( 
-      <mesh scale={[1.3, 1.3, 1.3]}>
-        { geometry.type === "Sphere" ? (<sphereGeometry args={geometry.args} />) 
-        : geometry.type === "Box" ? (<boxGeometry args={geometry.args} />) 
-        : geometry.type === "Cone" ? (<coneGeometry args={geometry.args} />) : null }
-      <meshBasicMaterial color="black" side={BackSide} />
-      </mesh>
-    )}
-```
+
+* **Main Mesh**: Renders a geometric shape based on the `geometry.type` value, using **meshStandardMaterial** with the specified `props.color`.
+
+* **Selected Mesh**: Renders when `props.isSelected` is true, using a slightly larger scale and a black ring around the selected entity.
+
 * Each entity can respond to click events via the `onClick` prop, allowing for user interaction.
 
 

@@ -15,6 +15,7 @@ export {
 
 export {
   type ShapeProps,
+  ShapeType,
   default as Shape,
 } from "./components/Shape"
 
