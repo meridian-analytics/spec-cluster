@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "check": "biome check --apply .",
+    "check": "biome check --write .",
     "format": "biome format --write .",
-    "lint": "biome lint --apply .",
+    "lint": "biome lint --write .",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
@@ -30,11 +30,11 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.1",
+    "@biomejs/biome": "1.9.4",
     "@docusaurus/module-type-aliases": "3.5.2",
     "@docusaurus/tsconfig": "3.5.2",
     "@docusaurus/types": "3.5.2",
-    "typescript": "~5.5.2"
+    "typescript": "~5.8.2"
   },
   "browserslist": {
     "production": [">0.5%", "not dead", "not op_mini all"],
