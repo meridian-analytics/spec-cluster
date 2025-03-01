@@ -1,5 +1,6 @@
 import * as M from "@mui/material"
 import { Selection, ShapeType, UserData } from "spec-cluster"
+import * as Util from "spec-cluster-utils"
 
 export default function MultiSelectEditor() {
   const { spectrograms, updateSpectrogram } = UserData.useContext()
@@ -43,14 +44,9 @@ export default function MultiSelectEditor() {
     }
   }
   function setShape(newShape: string) {
-    if (
-      newShape == ShapeType.cube ||
-      newShape == ShapeType.pyramid ||
-      newShape == ShapeType.sphere
-    ) {
-      for (const id of selectedIds) {
-        updateSpectrogram(id, prev => ({ ...prev, shape: newShape }))
-      }
+    Util.invariantEnum(newShape, ShapeType, "ShapeType")
+    for (const id of selectedIds) {
+      updateSpectrogram(id, prev => ({ ...prev, shape: newShape }))
     }
   }
 

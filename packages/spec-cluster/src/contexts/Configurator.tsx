@@ -1,5 +1,5 @@
 import * as React from "react"
-import * as Util from "#util"
+import * as Util from "spec-cluster-utils"
 
 export enum RenderMode {
   image = 0,

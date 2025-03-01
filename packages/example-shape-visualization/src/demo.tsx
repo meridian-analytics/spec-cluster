@@ -1,5 +1,4 @@
 import * as React from "react"
-import * as ReactDOM from "react-dom/client"
 import type * as Reb from "react-error-boundary"
 import {
   ClickMode,
@@ -26,14 +25,7 @@ const Spectrogram = Z.object({
   height: Z.number().optional().default(3),
   label: Z.string().optional().default(""),
   flocation: Z.string(),
-  shape: Z.string()
-    .optional()
-    .transform(v => {
-      if (v === "cube") return ShapeType.cube
-      if (v === "pyramid") return ShapeType.pyramid
-      if (v === "sphere") return ShapeType.sphere
-      return ShapeType.sphere
-    }),
+  shape: Z.nativeEnum(ShapeType).catch(() => ShapeType.sphere),
 })
 
 function parser(value: unknown) {

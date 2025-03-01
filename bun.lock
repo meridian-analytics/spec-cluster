@@ -18,6 +18,7 @@
         "react-dom": "^18.2.0",
         "react-error-boundary": "^4.0.13",
         "spec-cluster": "workspace:*",
+        "spec-cluster-utils": "workspace:*",
         "three": "^0.162.0",
         "zod": "^3.23.5",
       },
@@ -69,6 +70,7 @@
         "@react-three/fiber": "^8.15.19",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "spec-cluster-utils": "workspace:*",
         "three": "^0.162.0",
       },
       "devDependencies": {
@@ -76,6 +78,13 @@
         "@types/react": "^18.3.1",
         "@types/react-dom": "^18.3.0",
         "@types/three": "^0.162.0",
+        "typescript": "5.8.2",
+      },
+    },
+    "packages/utils": {
+      "name": "spec-cluster-utils",
+      "devDependencies": {
+        "@biomejs/biome": "1.9.4",
         "typescript": "5.8.2",
       },
     },
@@ -2181,6 +2190,8 @@
     "spdy-transport": ["spdy-transport@3.0.0", "", { "dependencies": { "debug": "^4.1.0", "detect-node": "^2.0.4", "hpack.js": "^2.1.6", "obuf": "^1.1.2", "readable-stream": "^3.0.6", "wbuf": "^1.7.3" } }, "sha512-hsLVFE5SjA6TCisWeJXFKniGGOpBgMLmerfO2aCyCU5s7nJ/rpAepqmFifv/GCbSbueEeAJJnmSQ2rKC/g8Fcw=="],
 
     "spec-cluster": ["spec-cluster@workspace:packages/spec-cluster"],
+
+    "spec-cluster-utils": ["spec-cluster-utils@workspace:packages/utils"],
 
     "sprintf-js": ["sprintf-js@1.0.3", "", {}, "sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g=="],
 
