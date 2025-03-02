@@ -1,72 +1,72 @@
 [
   {
-    "filename": "A_1019.wav",
+    "id": "A_1019",
     "dim1": "8.806847",
     "dim2": "7.8649745",
     "dim3": "-3.6867962",
-    "flocation": "mediterranean"
+    "properties": { "flocation": "mediterranean" }
   },
   {
-    "filename": "A_239.wav",
+    "id": "A_239",
     "dim1": "2.244459",
     "dim2": "-9.016553",
     "dim3": "-3.0456424",
-    "flocation": "mediterranean"
+    "properties": { "flocation": "mediterranean" }
   },
   {
-    "filename": "A_748.wav",
+    "id": "A_748",
     "dim1": "8.224354",
     "dim2": "8.291854",
     "dim3": "-4.2379107",
-    "flocation": "mediterranean"
+    "properties": { "flocation": "mediterranean" }
   },
   {
-    "filename": "A_530.wav",
+    "id": "A_530",
     "dim1": "0.27919412",
     "dim2": "13.747222",
     "dim3": "-0.5143788",
-    "flocation": "pacific"
+    "properties": { "flocation": "pacific" }
   },
   {
-    "filename": "A_1385.wav",
+    "id": "A_1385",
     "dim1": "6.5439515",
     "dim2": "7.1407275",
     "dim3": "-1.268021",
-    "flocation": "pacific"
+    "properties": { "flocation": "pacific" }
   },
   {
-    "filename": "A_100.wav",
+    "id": "A_100",
     "dim1": "6.350834",
     "dim2": "-1.6831475",
     "dim3": "-7.348477",
-    "flocation": "pacific"
+    "properties": { "flocation": "pacific" }
   },
   {
-    "filename": "A_385.wav",
+    "id": "A_385",
     "dim1": "-1.8902831",
     "dim2": "-10.495517",
     "dim3": "2.0196745",
-    "flocation": "pacific"
+    "properties": { "flocation": "pacific" }
   },
   {
-    "filename": "A_1156.wav",
+    "id": "A_1156",
     "dim1": "-8.455516",
     "dim2": "-9.71007",
     "dim3": "-0.16416316",
-    "flocation": "atlantic-ocean"
+    "properties": { "flocation": "atlantic-ocean" }
   },
   {
-    "filename": "A_877.wav",
+    "id": "A_877",
     "dim1": "9.780004",
     "dim2": "1.8381903",
     "dim3": "-2.1159284",
-    "flocation": "atlantic-ocean"
+    "properties": { "flocation": "atlantic-ocean" }
   },
   {
-    "filename": "A_697.wav",
+    "id": "A_697",
     "dim1": "11.868487",
     "dim2": "-0.5531068",
     "dim3": "-3.9780738",
-    "flocation": "atlantic-ocean"
+    "properties": { "flocation": "atlantic-ocean" }
   }
 ]

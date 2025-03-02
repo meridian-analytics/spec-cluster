@@ -9,16 +9,6 @@ export {
 } from "./components/Scene"
 
 export {
-  type SpecProps,
-  default as Spec,
-} from "./components/Spec"
-
-export {
-  type ShapeProps,
-  default as Shape,
-} from "./components/Shape"
-
-export {
   type Spectrogram,
   type SpectrogramProperties,
   RenderMode,
@@ -26,11 +16,7 @@ export {
 } from "./components/Spectrogram"
 
 export * as Configurator from "./contexts/Configurator"
-
 export * as Selection from "./contexts/Selection"
-
 export * as Focus from "./contexts/Focus"
-
 export * as ClickMode from "./contexts/ClickMode"
-
 export * as UserData from "./contexts/UserData"

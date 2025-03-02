@@ -1,8 +1,9 @@
 import * as M from "@mui/material"
 import { Selection, UserData } from "spec-cluster"
+import type { UserProperties } from "./demo"
 
 export default function TableView() {
-  const userData = UserData.useContext()
+  const userData = UserData.useContext<UserProperties>()
   const selection = Selection.useContext()
   const selectedIds = Array.from(selection.selection)
   const selectedId = selectedIds[0]
@@ -48,12 +49,14 @@ export default function TableView() {
                 const spectrogram = userData.spectrograms.get(id)
                 return spectrogram ? (
                   <M.TableRow key={id}>
-                    <M.TableCell>{spectrogram.filename}</M.TableCell>
+                    <M.TableCell>{spectrogram.id}</M.TableCell>
                     <M.TableCell>{spectrogram.dim1}</M.TableCell>
                     <M.TableCell>{spectrogram.dim2}</M.TableCell>
                     <M.TableCell>{spectrogram.dim3}</M.TableCell>
-                    <M.TableCell>{spectrogram.color}</M.TableCell>
-                    <M.TableCell>{spectrogram.flocation}</M.TableCell>
+                    <M.TableCell>{spectrogram.color ?? "blue"}</M.TableCell>
+                    <M.TableCell>
+                      {spectrogram.properties?.flocation ?? "unknown"}
+                    </M.TableCell>
                     <M.TableCell>{spectrogram.label}</M.TableCell>
                   </M.TableRow>
                 ) : (

@@ -112,7 +112,7 @@ export default function MultiSelectEditor() {
           type="number"
           variant="standard"
           sx={{ color: "white", marginTop: 2 }}
-          value={spectrogram.size.toFixed(2)}
+          value={(spectrogram.size ?? 0.9).toFixed(2)}
           onChange={e => setSize(Number.parseFloat(e.target.value))}
         />
       </M.FormControl>

@@ -7,33 +7,37 @@ import {
   RenderMode,
   Scene,
   Selection,
-  ShapeType,
   UserData,
 } from "spec-cluster"
+import type { Spectrogram } from "spec-cluster"
 import * as Z from "zod"
 import data from "../../data/small.json"
 import MultiSelectEditor from "./MultiSelectEditor"
 import TableView from "./TableView"
 
-const Spectrogram = Z.object({
-  filename: Z.string(),
+export type UserSpectrogram = Spectrogram<UserProperties>
+
+export type UserProperties = {
+  flocation: string
+}
+
+const JsonRow = Z.object({
+  id: Z.string(),
   dim1: Z.coerce.number(),
   dim2: Z.coerce.number(),
   dim3: Z.coerce.number(),
-  size: Z.number().optional().default(0.9),
-  color: Z.string().optional().default("Blue"),
-  width: Z.number().optional().default(3),
-  height: Z.number().optional().default(3),
-  label: Z.string().optional().default(""),
-  flocation: Z.string(),
-  shape: Z.nativeEnum(ShapeType).catch(() => ShapeType.sphere),
-})
+  properties: Z.object({
+    flocation: Z.string(),
+  }).optional(),
+}).transform(
+  (row): UserSpectrogram => ({
+    ...row,
+    image: `${row.id}.png`,
+    audio: `${row.id}.wav`,
+  }),
+)
 
-function parser(value: unknown) {
-  const result = Z.array(Spectrogram).safeParse(value)
-  if (result.success) return result.data
-  throw new Error(result.error.message)
-}
+const JsonData = Z.array(JsonRow)
 
 export function Fallback(props: Reb.FallbackProps) {
   React.useEffect(() => {
@@ -53,8 +57,9 @@ export function Fallback(props: Reb.FallbackProps) {
 }
 
 export function DemoApp() {
+  const parsedData = React.useMemo(() => JsonData.parse(data), [])
   return (
-    <UserData.Provider data={parser(data)}>
+    <UserData.Provider data={parsedData}>
       <Configurator.Provider renderMode={RenderMode.dot}>
         <Selection.Provider>
           <ClickMode.Provider>

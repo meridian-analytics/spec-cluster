@@ -1,9 +1,12 @@
 import * as React from "react"
-import type { Spectrogram } from "../components/Scene"
+import type {
+  Spectrogram,
+  SpectrogramProperties,
+} from "../components/Spectrogram"
 
-export type Context = {
-  focusedItem: Spectrogram | null
-  setFocusedItem: (point: Spectrogram | null) => void
+export type Context<T = SpectrogramProperties> = {
+  focusedItem: Spectrogram<T> | null
+  setFocusedItem: (point: Spectrogram<T> | null) => void
   unsetFocus: () => void
 }
 
@@ -42,6 +45,6 @@ export const Provider = (props: ProviderProps) => {
   )
 }
 
-export const useContext = () => {
-  return React.useContext(Context)
+export function useContext<T = SpectrogramProperties>() {
+  return React.useContext(Context) as Context<T>
 }

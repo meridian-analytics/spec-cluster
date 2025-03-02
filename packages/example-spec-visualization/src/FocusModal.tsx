@@ -1,7 +1,7 @@
 import * as M from "@mui/material"
 import { Focus } from "spec-cluster"
 import { UserData } from "spec-cluster"
-import type { UserFields } from "./demo"
+import type { UserProperties } from "./demo"
 
 export default function FocusModal() {
   const userData = UserData.useContext()
@@ -33,26 +33,35 @@ export default function FocusModal() {
         </M.Typography>
         <img
           alt={"spectrogram"}
-          src={`${userData.baseUrl}/${focus.focusedItem.filename.replace(".wav", "")}.png`}
+          src={`${userData.baseUrl}/${focus.focusedItem.image}`}
           style={{ maxWidth: "100%", maxHeight: "300px", margin: "16px 0" }}
         />
-        <pre
-          style={{
-            backgroundColor: "#f4f4f4",
-            padding: "16px",
-            borderRadius: "4px",
-          }}
-        >
-          {focus.focusedItem
-            ? Object.entries(focus.focusedItem)
-                .filter(([key]) =>
-                  ["filename", "dim1", "dim2", "dim3"].includes(key),
-                )
-                .map(([key, value]) => `${key}: ${value ?? "N/A"}`)
-                .join("\n")
-            : "No data available"}
-        </pre>
+        <FocusDetails />
       </M.Box>
     </M.Modal>
+  )
+}
+
+function FocusDetails() {
+  const focus = Focus.useContext<UserProperties>()
+  const spec = focus.focusedItem
+  if (spec == null) return "No data available"
+  return (
+    <pre
+      children={[
+        `id: ${spec.id}`,
+        `image: ${spec.image}`,
+        `audio: ${spec.audio ?? "none"}`,
+        `dim1: ${spec.dim1}`,
+        `dim2: ${spec.dim2}`,
+        `dim3: ${spec.dim3}`,
+        `flocation: ${spec.properties?.flocation ?? "unknown"}`,
+      ].join("\n")}
+      style={{
+        backgroundColor: "#f4f4f4",
+        padding: "16px",
+        borderRadius: "4px",
+      }}
+    />
   )
 }

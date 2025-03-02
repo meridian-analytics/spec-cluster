@@ -20,9 +20,11 @@ export default function SingleSelectEditor() {
     )
   }
 
-  function setSize(newSize: number) {
+  function setSize(newSize: string) {
+    const num = Number.parseFloat(newSize)
+    if (Number.isNaN(num)) return
     userData.updateSpectrogram(selectedId, prev => {
-      return { ...prev, size: newSize }
+      return { ...prev, size: num }
     })
   }
 
@@ -32,14 +34,18 @@ export default function SingleSelectEditor() {
     })
   }
 
-  function setWidth(newWidth: number) {
+  function setWidth(newWidth: string) {
+    const num = Number.parseFloat(newWidth)
+    if (Number.isNaN(num)) return
     userData.updateSpectrogram(selectedId, prev => {
-      return { ...prev, width: newWidth }
+      return { ...prev, width: num }
     })
   }
-  function setHeight(newHeight: number) {
+  function setHeight(newHeight: string) {
+    const num = Number.parseFloat(newHeight)
+    if (Number.isNaN(num)) return
     userData.updateSpectrogram(selectedId, prev => {
-      return { ...prev, height: newHeight }
+      return { ...prev, height: num }
     })
   }
   function setLabel(newLabel: string) {
@@ -67,7 +73,7 @@ export default function SingleSelectEditor() {
         <M.FormLabel sx={{ color: "white" }}>Editor</M.FormLabel>
         <MuiColorInput
           format="hex"
-          value={spectrogram.color}
+          value={spectrogram.color ?? "blue"}
           onChange={setColor}
           sx={{ marginTop: 1 }}
         />
@@ -95,8 +101,8 @@ export default function SingleSelectEditor() {
             type="number"
             variant="standard"
             sx={{ color: "white" }}
-            value={spectrogram.size.toFixed(2)}
-            onChange={e => setSize(Number.parseFloat(e.target.value))}
+            value={(spectrogram.size ?? 0.9).toFixed(2)}
+            onChange={e => setSize(e.target.value)}
           />
           <M.TextField
             id="standard-basic"
@@ -104,8 +110,8 @@ export default function SingleSelectEditor() {
             type="number"
             variant="standard"
             sx={{ color: "white" }}
-            value={spectrogram.height.toFixed(2)}
-            onChange={e => setHeight(Number.parseFloat(e.target.value))}
+            value={(spectrogram.height ?? 5).toFixed(2)}
+            onChange={e => setHeight(e.target.value)}
           />
           <M.TextField
             id="standard-basic"
@@ -113,8 +119,8 @@ export default function SingleSelectEditor() {
             type="number"
             variant="standard"
             sx={{ color: "white" }}
-            value={spectrogram.width.toFixed(2)}
-            onChange={e => setWidth(Number.parseFloat(e.target.value))}
+            value={(spectrogram.width ?? 5).toFixed(2)}
+            onChange={e => setWidth(e.target.value)}
           />
         </div>
       </M.FormControl>

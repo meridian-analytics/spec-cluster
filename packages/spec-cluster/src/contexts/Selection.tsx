@@ -1,10 +1,10 @@
 import * as React from "react"
-import type { Spectrogram } from "../components/Scene"
+import type { Spectrogram } from "../components/Spectrogram"
 
 export type Context = {
-  selection: Set<Spectrogram["filename"]>
-  setSelection: (value: Set<Spectrogram["filename"]>) => void
-  updateSelection: (value: Array<Spectrogram["filename"]>) => void
+  selection: Set<Spectrogram["id"]>
+  setSelection: (value: Set<Spectrogram["id"]>) => void
+  updateSelection: (value: Array<Spectrogram["id"]>) => void
   clearSelection: () => void
 }
 

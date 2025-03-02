@@ -1,14 +1,18 @@
 import * as React from "react"
-import type { Spectrogram } from "../components/Scene"
+import type {
+  Spectrogram,
+  SpectrogramProperties,
+} from "../components/Spectrogram"
 
-type SpecState = Map<Spectrogram["filename"], Spectrogram>
-type Updater = (spectrogram: Spectrogram) => Spectrogram
+type UpdaterFn<T = SpectrogramProperties> = (
+  spectrogram: Spectrogram<T>,
+) => Spectrogram<T>
 
-export type Context = {
+export type Context<T = SpectrogramProperties> = {
   baseUrl: string
-  spectrograms: SpecState
-  setSpectrograms: React.Dispatch<React.SetStateAction<SpecState>>
-  updateSpectrogram: (id: Spectrogram["filename"], updateFn: Updater) => void
+  spectrograms: Map<Spectrogram<T>["id"], Spectrogram<T>>
+  setSpectrograms: React.Dispatch<React.SetStateAction<Context["spectrograms"]>>
+  updateSpectrogram: (id: Spectrogram<T>["id"], updateFn: UpdaterFn<T>) => void
 }
 
 export type ProviderProps = {
@@ -32,9 +36,7 @@ const Context = React.createContext(defaultContext)
 
 export const Provider = (props: ProviderProps) => {
   const [spectrograms, setSpectrograms] = React.useState(
-    new Map(
-      props.data?.map(s => [s.filename, s]) ?? defaultContext.spectrograms,
-    ),
+    new Map(props.data?.map(s => [s.id, s]) ?? defaultContext.spectrograms),
   )
   const updateSpectrogram: Context["updateSpectrogram"] = (id, updateFn) => {
     setSpectrograms(prevSpectrograms => {
@@ -63,6 +65,6 @@ export const Provider = (props: ProviderProps) => {
   )
 }
 
-export const useContext = () => {
-  return React.useContext(Context)
+export function useContext<T = SpectrogramProperties>() {
+  return React.useContext(Context) as Context<T>
 }
