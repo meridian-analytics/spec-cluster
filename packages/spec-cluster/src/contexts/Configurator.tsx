@@ -15,6 +15,9 @@ export type Context = {
 
 export type ProviderProps = {
   renderMode?: RenderMode
+  scaleX?: number
+  scaleY?: number
+  scaleZ?: number
   children: React.ReactNode
 }
 
@@ -43,9 +46,15 @@ export const Provider = (props: ProviderProps) => {
   const [renderMode, _setRenderMode] = React.useState(
     props.renderMode ?? defaultContext.renderMode,
   )
-  const [scaleX, setScaleX] = React.useState(defaultContext.scaleX)
-  const [scaleY, setScaleY] = React.useState(defaultContext.scaleY)
-  const [scaleZ, setScaleZ] = React.useState(defaultContext.scaleZ)
+  const [scaleX, setScaleX] = React.useState(
+    props.scaleX ?? defaultContext.scaleX,
+  )
+  const [scaleY, setScaleY] = React.useState(
+    props.scaleY ?? defaultContext.scaleY,
+  )
+  const [scaleZ, setScaleZ] = React.useState(
+    props.scaleZ ?? defaultContext.scaleZ,
+  )
   const setRenderMode: Context["setRenderMode"] = React.useCallback(value => {
     Util.invariantEnum(value, RenderMode, "RenderMode")
     _setRenderMode(value)
