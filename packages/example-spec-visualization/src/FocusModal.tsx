@@ -3,12 +3,12 @@ import { Focus } from "spec-cluster"
 
 export default function FocusModal({ baseUrl }: { baseUrl: string }) {
   const focus = Focus.useContext()
-  if (!focus.focusedItem) {
+  if (focus.focusedItem == null) {
     return null
   }
   //TODO need to define mui props similar to maipl.
   return (
-    <M.Modal open={focus.hasFocus} onClose={focus.unsetFocus}>
+    <M.Modal open={true} onClose={focus.unsetFocus}>
       <M.Box
         component={"div"}
         sx={{
