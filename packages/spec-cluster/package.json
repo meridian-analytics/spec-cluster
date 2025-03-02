@@ -33,5 +33,6 @@
     "tsc": "tsc",
     "build": "vite build && tsc --project tsconfig.build.json"
   },
-  "trustedDependencies": ["@biomejs/biome"]
+  "trustedDependencies": ["@biomejs/biome"],
+  "type": "module"
 }

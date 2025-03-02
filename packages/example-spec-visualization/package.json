@@ -35,5 +35,6 @@
   "trustedDependencies": ["@biomejs/biome"],
   "exports": {
     ".": "./src/demo.tsx"
-  }
+  },
+  "type": "module"
 }
