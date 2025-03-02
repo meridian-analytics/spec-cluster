@@ -91,11 +91,11 @@ export default function MultiSelectEditor() {
           label="Color"
           onChange={e => setColor(e.target.value)}
         >
-          <M.MenuItem value={"Blue"}>Blue (default) </M.MenuItem>
-          <M.MenuItem value={"Green"}>Green</M.MenuItem>
-          <M.MenuItem value={"Red"}>Red</M.MenuItem>
-          <M.MenuItem value={"Yellow"}>Yellow</M.MenuItem>
-          <M.MenuItem value={"Brown"}>Brown</M.MenuItem>
+          <M.MenuItem value={"blue"}>Blue (default) </M.MenuItem>
+          <M.MenuItem value={"green"}>Green</M.MenuItem>
+          <M.MenuItem value={"red"}>Red</M.MenuItem>
+          <M.MenuItem value={"yellow"}>Yellow</M.MenuItem>
+          <M.MenuItem value={"brown"}>Brown</M.MenuItem>
         </M.Select>
         <M.TextField
           id="standard-basic"
@@ -123,9 +123,9 @@ export default function MultiSelectEditor() {
           label="Shape"
           onChange={e => setShape(e.target.value)}
         >
-          <M.MenuItem value={"Sphere"}>Sphere</M.MenuItem>
-          <M.MenuItem value={"Pyramid"}>Pyramid</M.MenuItem>
-          <M.MenuItem value={"Cube"}>Cube</M.MenuItem>
+          <M.MenuItem value={ShapeType.sphere}>Sphere</M.MenuItem>
+          <M.MenuItem value={ShapeType.pyramid}>Pyramid</M.MenuItem>
+          <M.MenuItem value={ShapeType.cube}>Cube</M.MenuItem>
         </M.Select>
       </M.FormControl>
     </M.Stack>
