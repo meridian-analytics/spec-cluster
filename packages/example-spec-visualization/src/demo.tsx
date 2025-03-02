@@ -56,11 +56,12 @@ type SpecDemoAppProps = {
 
 export function SpecDemoApp(props: SpecDemoAppProps) {
   return (
-    <UserData.Provider data={parser(data)}>
+    <UserData.Provider baseUrl={props.baseUrl} data={parser(data)}>
       <Configurator.Provider>
         <Selection.Provider>
           <Focus.Provider>
-            <DemoScene baseUrl={props.baseUrl} />
+            <FocusModal />
+            <DemoScene />
             <Interface />
           </Focus.Provider>
         </Selection.Provider>
@@ -69,25 +70,21 @@ export function SpecDemoApp(props: SpecDemoAppProps) {
   )
 }
 
-function DemoScene(props: SpecDemoAppProps) {
+function DemoScene() {
   const focus = Focus.useContext()
   return (
-    <>
-      <FocusModal baseUrl={props.baseUrl ?? ""} />
-      <Scene
-        controls={{
-          minAzimuthAngle: -Math.PI / 4,
-          maxAzimuthAngle: Math.PI / 4,
-          minPolarAngle: Math.PI / 6,
-          maxPolarAngle: Math.PI - Math.PI / 6,
-          maxDistance: 120,
-          minDistance: 5,
-        }}
-        onSpecClick={point => {
-          focus.setFocusedItem(point)
-        }}
-        baseUrl={props.baseUrl}
-      />
-    </>
+    <Scene
+      controls={{
+        minAzimuthAngle: -Math.PI / 4,
+        maxAzimuthAngle: Math.PI / 4,
+        minPolarAngle: Math.PI / 6,
+        maxPolarAngle: Math.PI - Math.PI / 6,
+        maxDistance: 120,
+        minDistance: 5,
+      }}
+      onSpecClick={point => {
+        focus.setFocusedItem(point)
+      }}
+    />
   )
 }

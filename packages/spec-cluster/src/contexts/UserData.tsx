@@ -5,17 +5,20 @@ type SpecState = Map<Spectrogram["filename"], Spectrogram>
 type Updater = (spectrogram: Spectrogram) => Spectrogram
 
 export type Context = {
+  baseUrl: string
   spectrograms: SpecState
   setSpectrograms: React.Dispatch<React.SetStateAction<SpecState>>
   updateSpectrogram: (id: Spectrogram["filename"], updateFn: Updater) => void
 }
 
 export type ProviderProps = {
+  baseUrl?: string
   children: React.ReactNode
   data?: Array<Spectrogram>
 }
 
 const defaultContext: Context = {
+  baseUrl: "",
   spectrograms: new Map(),
   setSpectrograms: () => {
     throw Error("setSpectrograms cannot be called out of context provider")
@@ -51,6 +54,7 @@ export const Provider = (props: ProviderProps) => {
     <Context.Provider
       children={props.children}
       value={{
+        baseUrl: props.baseUrl ?? defaultContext.baseUrl,
         spectrograms,
         setSpectrograms,
         updateSpectrogram,

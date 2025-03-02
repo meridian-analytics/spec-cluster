@@ -42,7 +42,6 @@ export type SceneProps = {
   renderDotSize?: ShapeProps["shape"]
   dotColor?: ShapeProps["color"]
   onSpecClick?: (point: Spectrogram) => void
-  baseUrl?: string
 }
 
 export default function Scene(props: SceneProps) {
@@ -70,7 +69,7 @@ export default function Scene(props: SceneProps) {
             userData.spectrograms.map(point => (
               <Spec
                 key={point.filename}
-                url={`${props.baseUrl ?? ""}/${point.filename.replace(
+                url={`${userData.baseUrl ?? ""}/${point.filename.replace(
                   ".wav",
                   "",
                 )}.png`}

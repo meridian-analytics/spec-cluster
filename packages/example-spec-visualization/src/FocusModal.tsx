@@ -1,7 +1,10 @@
 import * as M from "@mui/material"
 import { Focus } from "spec-cluster"
+import { UserData } from "spec-cluster"
+import type { UserFields } from "./demo"
 
-export default function FocusModal({ baseUrl }: { baseUrl: string }) {
+export default function FocusModal() {
+  const userData = UserData.useContext()
   const focus = Focus.useContext()
   if (focus.focusedItem == null) {
     return null
@@ -30,7 +33,7 @@ export default function FocusModal({ baseUrl }: { baseUrl: string }) {
         </M.Typography>
         <img
           alt={"spectrogram"}
-          src={`${baseUrl}/${focus.focusedItem.filename.replace(".wav", "")}.png`}
+          src={`${userData.baseUrl}/${focus.focusedItem.filename.replace(".wav", "")}.png`}
           style={{ maxWidth: "100%", maxHeight: "300px", margin: "16px 0" }}
         />
         <pre
