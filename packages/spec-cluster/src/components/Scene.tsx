@@ -42,7 +42,6 @@ export type SceneProps = {
   renderDotSize?: ShapeProps["shape"]
   dotColor?: ShapeProps["color"]
   onSpecClick?: (point: Spectrogram) => void
-  renderMode: "image" | "dot"
   baseUrl?: string
 }
 
@@ -67,7 +66,7 @@ export default function Scene(props: SceneProps) {
             )
           }}
         >
-          {props.renderMode === "image" &&
+          {config.renderMode === "image" &&
             props.spectrograms.map(point => (
               <Spec
                 key={point.filename}
@@ -87,7 +86,7 @@ export default function Scene(props: SceneProps) {
                 onClick={() => props.onSpecClick?.(point)}
               />
             ))}
-          {props.renderMode === "dot" &&
+          {config.renderMode === "dot" &&
             props.spectrograms.map(point => (
               <Shape
                 key={point.filename}

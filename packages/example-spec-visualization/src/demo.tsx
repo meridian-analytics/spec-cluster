@@ -76,7 +76,6 @@ function DemoScene(props: SpecDemoAppProps) {
     <>
       <FocusModal baseUrl={props.baseUrl ?? ""} />
       <Scene
-        renderMode="image"
         spectrograms={Array.from(userData.spectrograms.values())}
         controls={{
           minAzimuthAngle: -Math.PI / 4,

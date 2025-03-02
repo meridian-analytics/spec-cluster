@@ -1,10 +1,6 @@
 import * as React from "react"
 import * as Util from "spec-cluster-utils"
-
-export enum RenderMode {
-  image = 0,
-  dot = 1,
-}
+import { RenderMode } from "../components/Spectrogram"
 
 export type Context = {
   renderMode: RenderMode
@@ -18,6 +14,7 @@ export type Context = {
 }
 
 export type ProviderProps = {
+  renderMode?: RenderMode
   children: React.ReactNode
 }
 
@@ -43,19 +40,22 @@ const defaultContext: Context = {
 const Context = React.createContext(defaultContext)
 
 export const Provider = (props: ProviderProps) => {
-  const [renderMode, setRenderMode] = React.useState(defaultContext.renderMode)
+  const [renderMode, _setRenderMode] = React.useState(
+    props.renderMode ?? defaultContext.renderMode,
+  )
   const [scaleX, setScaleX] = React.useState(defaultContext.scaleX)
   const [scaleY, setScaleY] = React.useState(defaultContext.scaleY)
   const [scaleZ, setScaleZ] = React.useState(defaultContext.scaleZ)
+  const setRenderMode: Context["setRenderMode"] = React.useCallback(value => {
+    Util.invariantEnum(value, RenderMode, "RenderMode")
+    _setRenderMode(value)
+  }, [])
   return (
     <Context.Provider
       children={props.children}
       value={{
         renderMode,
-        setRenderMode: (value: number) => {
-          Util.invariantEnum(value, RenderMode, "RenderMode")
-          setRenderMode(value)
-        },
+        setRenderMode,
         scaleX,
         setScaleX,
         scaleY,

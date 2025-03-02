@@ -15,9 +15,15 @@ export {
 
 export {
   type ShapeProps,
-  ShapeType,
   default as Shape,
 } from "./components/Shape"
+
+export {
+  type Spectrogram,
+  type SpectrogramProperties,
+  RenderMode,
+  ShapeType,
+} from "./components/Spectrogram"
 
 export * as Configurator from "./contexts/Configurator"
 

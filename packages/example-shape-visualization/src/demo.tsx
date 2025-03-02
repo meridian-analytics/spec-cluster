@@ -4,6 +4,7 @@ import {
   ClickMode,
   Configurator,
   Interface,
+  RenderMode,
   Scene,
   Selection,
   ShapeType,
@@ -54,7 +55,7 @@ export function Fallback(props: Reb.FallbackProps) {
 export function DemoApp() {
   return (
     <UserData.Provider data={parser(data)}>
-      <Configurator.Provider>
+      <Configurator.Provider renderMode={RenderMode.dot}>
         <Selection.Provider>
           <ClickMode.Provider>
             <DemoScene />
@@ -74,7 +75,6 @@ function DemoScene() {
       <TableView />
       {selection.selection.size >= 1 && <MultiSelectEditor />}
       <Scene
-        renderMode="dot"
         spectrograms={Array.from(userData.spectrograms.values())}
         controls={{
           minAzimuthAngle: -Math.PI / 4,
