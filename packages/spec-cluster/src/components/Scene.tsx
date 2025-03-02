@@ -3,6 +3,7 @@ import * as Three from "@react-three/fiber"
 import { Suspense } from "react"
 import * as Configurator from "../contexts/Configurator"
 import * as Selection from "../contexts/Selection"
+import * as UserData from "../contexts/UserData"
 import Shape from "./Shape"
 import type { ShapeProps, ShapeType } from "./Shape"
 import Spec from "./Spec"
@@ -24,7 +25,6 @@ export type Spectrogram = {
 }
 
 export type SceneProps = {
-  spectrograms: Spectrogram[]
   camera?: {
     position?: Three.Vector3
   }
@@ -47,8 +47,8 @@ export type SceneProps = {
 
 export default function Scene(props: SceneProps) {
   const config = Configurator.useContext()
+  const userData = UserData.useContext()
   const selection = Selection.useContext()
-
   return (
     <Three.Canvas
       camera={{ position: props.camera?.position ?? [0, 0, 100] }}
@@ -67,7 +67,7 @@ export default function Scene(props: SceneProps) {
           }}
         >
           {config.renderMode === "image" &&
-            props.spectrograms.map(point => (
+            userData.spectrograms.map(point => (
               <Spec
                 key={point.filename}
                 url={`${props.baseUrl ?? ""}/${point.filename.replace(
@@ -87,7 +87,7 @@ export default function Scene(props: SceneProps) {
               />
             ))}
           {config.renderMode === "dot" &&
-            props.spectrograms.map(point => (
+            userData.spectrograms.map(point => (
               <Shape
                 key={point.filename}
                 position={[

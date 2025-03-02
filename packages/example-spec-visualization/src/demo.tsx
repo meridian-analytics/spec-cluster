@@ -70,13 +70,11 @@ export function SpecDemoApp(props: SpecDemoAppProps) {
 }
 
 function DemoScene(props: SpecDemoAppProps) {
-  const userData = UserData.useContext()
   const focus = Focus.useContext()
   return (
     <>
       <FocusModal baseUrl={props.baseUrl ?? ""} />
       <Scene
-        spectrograms={Array.from(userData.spectrograms.values())}
         controls={{
           minAzimuthAngle: -Math.PI / 4,
           maxAzimuthAngle: Math.PI / 4,
