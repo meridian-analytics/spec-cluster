@@ -55,7 +55,7 @@ export default function TableView() {
                     <M.TableCell>{spectrogram.dim3}</M.TableCell>
                     <M.TableCell>{spectrogram.color ?? "blue"}</M.TableCell>
                     <M.TableCell>
-                      {spectrogram.properties?.flocation ?? "unknown"}
+                      {spectrogram.properties.flocation}
                     </M.TableCell>
                     <M.TableCell>{spectrogram.label}</M.TableCell>
                   </M.TableRow>

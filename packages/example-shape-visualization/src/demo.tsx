@@ -34,6 +34,7 @@ const JsonRow = Z.object({
     ...row,
     image: `${row.id}.png`,
     audio: `${row.id}.wav`,
+    properties: row.properties ?? { flocation: "unknown" },
   }),
 )
 

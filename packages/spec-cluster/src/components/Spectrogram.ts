@@ -17,11 +17,11 @@ export type Spectrogram<T = SpectrogramProperties> = {
   dim2: number
   dim3: number
   image: File | string
+  properties: T
   audio?: File | string
   color?: string //ThreeFiber.MeshStandardMaterialProps["color"]
   height?: number
   label?: string
-  properties?: T
   shape?: ShapeType
   size?: number
   width?: number

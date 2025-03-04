@@ -55,7 +55,7 @@ function FocusDetails() {
         `dim1: ${spec.dim1}`,
         `dim2: ${spec.dim2}`,
         `dim3: ${spec.dim3}`,
-        `flocation: ${spec.properties?.flocation ?? "unknown"}`,
+        `flocation: ${spec.properties.flocation}`,
       ].join("\n")}
       style={{
         backgroundColor: "#f4f4f4",
